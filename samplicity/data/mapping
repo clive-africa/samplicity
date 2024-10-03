@@ -1,0 +1,24 @@
+import pandas as pd
+
+def data_mapping(data):
+
+    # Get the diversification field, this is the one we will need to repalce
+    div_level = data.scr.f_data("data", "data", "diversification_level").iloc[0]
+
+    # Get all of the divisions from division_detail
+    divisions = self.f_data("data", "data", "division_detail")
+    
+    # Remove the other fields, we don't need them
+    divisions=divisions[[div_level]]
+    divisions['str_column']=divisions[div_level].astype(str)
+    divisions = divisions.sort_values(by='str_column')
+    divisions['division_index']=[2**x for x in range(len(divisions))]
+
+    division_map=divisions.set_index(div_level)['division_index'].to_dict()
+    
+    # We now loop through all the different data set with a division mapping
+    # Need to repalce all of them
+    prem_res['level_1']=prem_res['level_1'].map(division_map)
+
+
+
