@@ -1,0 +1,1106 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SCR Class &mdash; samplicity 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=7ab3649f" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Class" href="data.html" />
+    <link rel="prev" title="Known Issues" href="knownissues.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            samplicity
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#further-reading">Further Reading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#class-documentation">Class Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#indices-and-tables">Indices and Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#data-inputs">Data Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-the-tool">Running the Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#data-extraction">Data Extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structure.html#main-classes">Main Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structure.html#scr">SCR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="structure.html#data">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="structure.html#risk-module-classes">Risk Module Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="structure.html#premres">PremRes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structure.html#natcat">NatCat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structure.html#factorcat">FactorCat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structure.html#manmade">ManMade</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structure.html#nonprop">NonProp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structure.html#market">Market</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structure.html#reinsurance">Reinsurance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structure.html#oprisk">OpRisk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="structure.html#how-the-classes-work-together">How the Classes work together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure.html#usage-example">Usage Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="knownissues.html">Known Issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="knownissues.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knownissues.html#premium-and-reserve-risk">Premium and Reserve Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knownissues.html#factor-based-catastrophe-risk">Factor Based Catastrophe Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knownissues.html#concentration-risk">Concentration Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knownissues.html#python-design">Python Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="knownissues.html#object-orientated-approach">Object Orientated Approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="knownissues.html#splitting-of-classes">Splitting of Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Class Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SCR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-samplicity.scr.scr">scr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#samplicity.scr.scr.SCR"><code class="docutils literal notranslate"><span class="pre">SCR</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.__init__"><code class="docutils literal notranslate"><span class="pre">SCR.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.calculation_steps"><code class="docutils literal notranslate"><span class="pre">SCR.calculation_steps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.classes"><code class="docutils literal notranslate"><span class="pre">SCR.classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.create_supporting"><code class="docutils literal notranslate"><span class="pre">SCR.create_supporting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.f_aggregation"><code class="docutils literal notranslate"><span class="pre">SCR.f_aggregation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.f_calculate"><code class="docutils literal notranslate"><span class="pre">SCR.f_calculate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.f_create_venv"><code class="docutils literal notranslate"><span class="pre">SCR.f_create_venv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.f_data"><code class="docutils literal notranslate"><span class="pre">SCR.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.f_diversification_calcs"><code class="docutils literal notranslate"><span class="pre">SCR.f_diversification_calcs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.f_error_count"><code class="docutils literal notranslate"><span class="pre">SCR.f_error_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.f_export_results"><code class="docutils literal notranslate"><span class="pre">SCR.f_export_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.f_import_data"><code class="docutils literal notranslate"><span class="pre">SCR.f_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.f_info"><code class="docutils literal notranslate"><span class="pre">SCR.f_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.f_save_pickle"><code class="docutils literal notranslate"><span class="pre">SCR.f_save_pickle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.f_shapely"><code class="docutils literal notranslate"><span class="pre">SCR.f_shapely()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.handle_calculation_error"><code class="docutils literal notranslate"><span class="pre">SCR.handle_calculation_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.handle_warning"><code class="docutils literal notranslate"><span class="pre">SCR.handle_warning()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.load_pickle"><code class="docutils literal notranslate"><span class="pre">SCR.load_pickle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.output"><code class="docutils literal notranslate"><span class="pre">SCR.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.output_errors"><code class="docutils literal notranslate"><span class="pre">SCR.output_errors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.scr.SCR.output_runtimes"><code class="docutils literal notranslate"><span class="pre">SCR.output_runtimes</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#support-modules">Support Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-samplicity.scr.aggregation">aggregation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-samplicity.scr.diversification">diversification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.diversification.shapely_calc"><code class="docutils literal notranslate"><span class="pre">shapely_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-samplicity.scr.info">info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.info.info"><code class="docutils literal notranslate"><span class="pre">info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-samplicity.scr.lacdt">lacdt</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#samplicity.scr.lacdt.f_lacdt_calculation"><code class="docutils literal notranslate"><span class="pre">f_lacdt_calculation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#solver">solver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data.html#module-samplicity.data.data">data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data.html#samplicity.data.data.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.f_data"><code class="docutils literal notranslate"><span class="pre">Data.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.f_export_results"><code class="docutils literal notranslate"><span class="pre">Data.f_export_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.f_import_data"><code class="docutils literal notranslate"><span class="pre">Data.f_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.output"><code class="docutils literal notranslate"><span class="pre">Data.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.scr"><code class="docutils literal notranslate"><span class="pre">Data.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data.html#access">access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-samplicity.data.data_models">data_models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.asset_data"><code class="docutils literal notranslate"><span class="pre">asset_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.asset_shocks"><code class="docutils literal notranslate"><span class="pre">asset_shocks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.convert_none_to_value"><code class="docutils literal notranslate"><span class="pre">convert_none_to_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.counterparty"><code class="docutils literal notranslate"><span class="pre">counterparty</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.division_detail"><code class="docutils literal notranslate"><span class="pre">division_detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.nat_cat_si"><code class="docutils literal notranslate"><span class="pre">nat_cat_si</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.prem_res"><code class="docutils literal notranslate"><span class="pre">prem_res</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.reinsurance"><code class="docutils literal notranslate"><span class="pre">reinsurance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.reinsurance_share"><code class="docutils literal notranslate"><span class="pre">reinsurance_share</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-samplicity.data.data_validation">data_validation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_validation.validate_data"><code class="docutils literal notranslate"><span class="pre">validate_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-samplicity.data.excel">excel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.excel.f_excel_export"><code class="docutils literal notranslate"><span class="pre">f_excel_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.excel.f_excel_import_data"><code class="docutils literal notranslate"><span class="pre">f_excel_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.excel.f_excel_import_pa_data"><code class="docutils literal notranslate"><span class="pre">f_excel_import_pa_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.excel.f_excel_import_range"><code class="docutils literal notranslate"><span class="pre">f_excel_import_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-samplicity.data.odbc">odbc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.odbc.chunker"><code class="docutils literal notranslate"><span class="pre">chunker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.odbc.f_odbc_export"><code class="docutils literal notranslate"><span class="pre">f_odbc_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.odbc.f_odbc_import"><code class="docutils literal notranslate"><span class="pre">f_odbc_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.odbc.f_odbc_table_import"><code class="docutils literal notranslate"><span class="pre">f_odbc_table_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.odbc.insert_with_progress"><code class="docutils literal notranslate"><span class="pre">insert_with_progress()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#validation">validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="premres.html">PremRes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="premres.html#samplicity.prem_res.PremRes"><code class="docutils literal notranslate"><span class="pre">PremRes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="premres.html#samplicity.prem_res.PremRes.__init__"><code class="docutils literal notranslate"><span class="pre">PremRes.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="premres.html#samplicity.prem_res.PremRes.f_calculate"><code class="docutils literal notranslate"><span class="pre">PremRes.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="premres.html#samplicity.prem_res.PremRes.f_data"><code class="docutils literal notranslate"><span class="pre">PremRes.f_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="natcat.html">NatCat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat"><code class="docutils literal notranslate"><span class="pre">NatCat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.__init__"><code class="docutils literal notranslate"><span class="pre">NatCat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.f_calculate"><code class="docutils literal notranslate"><span class="pre">NatCat.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.f_cat_calculation"><code class="docutils literal notranslate"><span class="pre">NatCat.f_cat_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.f_data"><code class="docutils literal notranslate"><span class="pre">NatCat.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.f_data_aggregation"><code class="docutils literal notranslate"><span class="pre">NatCat.f_data_aggregation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.output"><code class="docutils literal notranslate"><span class="pre">NatCat.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.scr"><code class="docutils literal notranslate"><span class="pre">NatCat.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="factorcat.html">FactorCat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat"><code class="docutils literal notranslate"><span class="pre">FactorCat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.__init__"><code class="docutils literal notranslate"><span class="pre">FactorCat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.f_calculate"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.f_data"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.f_indv_calculation"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_indv_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.output"><code class="docutils literal notranslate"><span class="pre">FactorCat.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.scr"><code class="docutils literal notranslate"><span class="pre">FactorCat.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nonprop.html">NonProp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp"><code class="docutils literal notranslate"><span class="pre">NonProp</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.__init__"><code class="docutils literal notranslate"><span class="pre">NonProp.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.f_calculate"><code class="docutils literal notranslate"><span class="pre">NonProp.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.f_data"><code class="docutils literal notranslate"><span class="pre">NonProp.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.f_indv_calculation"><code class="docutils literal notranslate"><span class="pre">NonProp.f_indv_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.output"><code class="docutils literal notranslate"><span class="pre">NonProp.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.scr"><code class="docutils literal notranslate"><span class="pre">NonProp.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manmade.html">ManMade</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade"><code class="docutils literal notranslate"><span class="pre">ManMade</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.__init__"><code class="docutils literal notranslate"><span class="pre">ManMade.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.f_calculate"><code class="docutils literal notranslate"><span class="pre">ManMade.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.f_data"><code class="docutils literal notranslate"><span class="pre">ManMade.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.f_gross_event"><code class="docutils literal notranslate"><span class="pre">ManMade.f_gross_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.output"><code class="docutils literal notranslate"><span class="pre">ManMade.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.scr"><code class="docutils literal notranslate"><span class="pre">ManMade.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reinsurance.html">Reinsurnace</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reinsurance.html#module-samplicity.reinsurance.reinsurance">reinsurance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance"><code class="docutils literal notranslate"><span class="pre">Reinsurance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.__init__"><code class="docutils literal notranslate"><span class="pre">Reinsurance.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_calculate_net_events"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_calculate_net_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_calculate_recoveries"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_calculate_recoveries()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_data"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.output"><code class="docutils literal notranslate"><span class="pre">Reinsurance.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.scr"><code class="docutils literal notranslate"><span class="pre">Reinsurance.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reinsurance.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reinsurance.html#module-samplicity.reinsurance.ri_man_made">ri_man_made</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.ri_man_made.f_man_made"><code class="docutils literal notranslate"><span class="pre">f_man_made()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reinsurance.html#module-samplicity.reinsurance.ri_prog">ri_prog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.ri_prog.f_apply_reinsurance"><code class="docutils literal notranslate"><span class="pre">f_apply_reinsurance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.ri_prog.f_apply_ri_prog"><code class="docutils literal notranslate"><span class="pre">f_apply_ri_prog()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="market.html">Market</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="market.html#module-samplicity.market.market">market</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="market.html#samplicity.market.market.Market"><code class="docutils literal notranslate"><span class="pre">Market</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.__init__"><code class="docutils literal notranslate"><span class="pre">Market.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.class_data"><code class="docutils literal notranslate"><span class="pre">Market.class_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.f_aggregate_charges"><code class="docutils literal notranslate"><span class="pre">Market.f_aggregate_charges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.f_calc_impairment"><code class="docutils literal notranslate"><span class="pre">Market.f_calc_impairment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.f_data"><code class="docutils literal notranslate"><span class="pre">Market.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.f_market_risk"><code class="docutils literal notranslate"><span class="pre">Market.f_market_risk()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.f_spread_interest"><code class="docutils literal notranslate"><span class="pre">Market.f_spread_interest()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.output"><code class="docutils literal notranslate"><span class="pre">Market.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.scr"><code class="docutils literal notranslate"><span class="pre">Market.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="market.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="market.html#module-samplicity.market.aggregate">aggregate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.aggregate.f_aggregate_market"><code class="docutils literal notranslate"><span class="pre">f_aggregate_market()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="market.html#module-samplicity.market.bond">bond</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.bond.BOND_VAL"><code class="docutils literal notranslate"><span class="pre">BOND_VAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.bond.f_fixed"><code class="docutils literal notranslate"><span class="pre">f_fixed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.bond.f_floating"><code class="docutils literal notranslate"><span class="pre">f_floating()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.bond.f_newton_calc"><code class="docutils literal notranslate"><span class="pre">f_newton_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="market.html#module-samplicity.market.conc">conc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.conc.f_concentration_risk"><code class="docutils literal notranslate"><span class="pre">f_concentration_risk()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="market.html#module-samplicity.market.credit">credit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.credit.calculate_u_matrix_entry"><code class="docutils literal notranslate"><span class="pre">calculate_u_matrix_entry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.credit.f_credit_type_1"><code class="docutils literal notranslate"><span class="pre">f_credit_type_1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.credit.f_impairment"><code class="docutils literal notranslate"><span class="pre">f_impairment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.credit.f_u_matrix"><code class="docutils literal notranslate"><span class="pre">f_u_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.credit.f_v_vector"><code class="docutils literal notranslate"><span class="pre">f_v_vector()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bondval.html">BOND VAL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bondval.html#samplicity.market.bond.BOND_VAL"><code class="docutils literal notranslate"><span class="pre">BOND_VAL</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bondval.html#samplicity.market.bond.BOND_VAL.__init__"><code class="docutils literal notranslate"><span class="pre">BOND_VAL.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bondval.html#samplicity.market.bond.BOND_VAL.f_calculate"><code class="docutils literal notranslate"><span class="pre">BOND_VAL.f_calculate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bondval.html#samplicity.market.bond.f_fixed"><code class="docutils literal notranslate"><span class="pre">f_fixed()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bondval.html#samplicity.market.bond.f_floating"><code class="docutils literal notranslate"><span class="pre">f_floating()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bondval.html#samplicity.market.bond.f_newton_calc"><code class="docutils literal notranslate"><span class="pre">f_newton_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="oprisk.html">OpRisk</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="oprisk.html#samplicity.op_risk.OpRisk"><code class="docutils literal notranslate"><span class="pre">OpRisk</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="oprisk.html#samplicity.op_risk.OpRisk.__init__"><code class="docutils literal notranslate"><span class="pre">OpRisk.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="oprisk.html#samplicity.op_risk.OpRisk.f_calculate"><code class="docutils literal notranslate"><span class="pre">OpRisk.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="oprisk.html#samplicity.op_risk.OpRisk.f_data"><code class="docutils literal notranslate"><span class="pre">OpRisk.f_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Helper Code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="helper.html">Helper Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.allocation_matrix"><code class="docutils literal notranslate"><span class="pre">allocation_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.check_tuple"><code class="docutils literal notranslate"><span class="pre">check_tuple()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.combins_df_col"><code class="docutils literal notranslate"><span class="pre">combins_df_col()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_accummulate_figures"><code class="docutils literal notranslate"><span class="pre">f_accummulate_figures()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_best_join"><code class="docutils literal notranslate"><span class="pre">f_best_join()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_best_match"><code class="docutils literal notranslate"><span class="pre">f_best_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_best_match_new"><code class="docutils literal notranslate"><span class="pre">f_best_match_new()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_div_match"><code class="docutils literal notranslate"><span class="pre">f_div_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_fast_join"><code class="docutils literal notranslate"><span class="pre">f_fast_join()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_fast_match_element"><code class="docutils literal notranslate"><span class="pre">f_fast_match_element()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_get_total_row"><code class="docutils literal notranslate"><span class="pre">f_get_total_row()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_new_match_element"><code class="docutils literal notranslate"><span class="pre">f_new_match_element()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_new_match_idx"><code class="docutils literal notranslate"><span class="pre">f_new_match_idx()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.log_decorator"><code class="docutils literal notranslate"><span class="pre">log_decorator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Main Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main.html#samplicity.main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#samplicity.main.run_excel"><code class="docutils literal notranslate"><span class="pre">run_excel()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#samplicity.main.run_ms_access"><code class="docutils literal notranslate"><span class="pre">run_ms_access()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#samplicity.main.test_runs"><code class="docutils literal notranslate"><span class="pre">test_runs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">samplicity</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SCR Class</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/scr.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-samplicity.scr">
+<span id="scr-class"></span><h1>SCR Class<a class="headerlink" href="#module-samplicity.scr" title="Link to this heading"></a></h1>
+<p>A class to calculate the Solvency Capital Requirement (SCR) for a non-life insurer using the SAM standard formula.</p>
+<p>This class serves as the main orchestrator for the SCR calculation process, coordinating various risk modules
+and aggregating results. It handles data import, calculation steps, and result export.</p>
+<dl class="simple">
+<dt>The class is split out across a couple different modules:</dt><dd><ul class="simple">
+<li><p><strong>scr.py:</strong> The main class file</p></li>
+<li><p><strong>aggregation.py:</strong> Aggregation functions for the SCR class</p></li>
+<li><p><strong>lacdt.py:</strong> Loss Absorbing Capacity of Deferred Tax (LACDT) calculations</p></li>
+<li><p><strong>diversification.py:</strong> Diversification calculations</p></li>
+<li><p><strong>info.py:</strong> Information functions for the SCR class</p></li>
+<li><p><strong>solver.py:</strong> Solver functions for the SCR class, currently under development</p></li>
+</ul>
+</dd>
+</dl>
+<section id="module-samplicity.scr.scr">
+<span id="scr"></span><h2>scr<a class="headerlink" href="#module-samplicity.scr.scr" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SCR</span></span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>SCR is the main class of the samplicity package.</p>
+<p>The class represents and calculates the SAM SCR for a non-life insurer.</p>
+<p>This class serves as the main coordinator for SCR calculations, managing various
+risk modules and aggregating results to produce the final SCR figure.</p>
+<p>At a high level these are the variable acessible from the class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>classes</strong> (<em>dict</em>) – A dictionary of all the supporting classes used by the main SCR class.</p></li>
+<li><p><strong>output</strong> (<em>dict</em>) – A dictionary of all output values generated by the SCR class.</p></li>
+<li><p><strong>output_runtimes</strong> (<em>list</em>) – A list of dictionaries containing runtime information for various sections.</p></li>
+<li><p><strong>output_errors</strong> (<em>list</em>) – A list of dictionaries containing error and warning information.</p></li>
+<li><p><strong>calculation_steps</strong> (<em>list</em>) – A list of tuples containing calculation step names and corresponding methods.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class follows specific naming conventions:</p>
+<ul class="simple">
+<li><p>output_*: Outputs as a result of calculations within the class.</p></li>
+<li><p>f_*: Functions that are used in the calculation.</p></li>
+<li><p>_f_*: Functions that are used internally and not directly called by the user.</p></li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>The class does not currently support lapse risk calculations.</p></li>
+<li><p>Life insurance risk is not included in the SCR calculation.</p></li>
+<li><p>Man-made catastrophe perils must be populated manually.</p></li>
+<li><p>The diversification calculation uses an approximation for man-made catastrophe risk.</p></li>
+<li><p>LACDT (Loss-Absorbing Capacity of Deferred Taxes) allowance may be inaccurate for certain combinations of products.</p></li>
+<li><p>Market risk calculations do not account for the risk margin on assets.</p></li>
+<li><p>The class assumes a non-life insurer and may not be suitable for life or composite insurers.</p></li>
+<li><p>Liability shocks are not currently incorporated into the calculations.</p></li>
+</ul>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the SCR class.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.calculation_steps">
+<span class="sig-name descname"><span class="pre">calculation_steps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#samplicity.scr.scr.SCR.calculation_steps" title="Link to this definition"></a></dt>
+<dd><p>Contains all the default calculation steps to be run.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.classes">
+<span class="sig-name descname"><span class="pre">classes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#samplicity.scr.scr.SCR.classes" title="Link to this definition"></a></dt>
+<dd><p>Stores the classes that support the SCR class and calculation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.create_supporting">
+<span class="sig-name descname"><span class="pre">create_supporting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">class_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.create_supporting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.create_supporting" title="Link to this definition"></a></dt>
+<dd><p>Create and initialize a supporting risk module class.</p>
+<p>This function acts as a factory method to create various risk module objects
+used in the SCR calculation. It allows for flexible instantiation of different
+risk modules based on the provided class type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>class_type</strong> (<em>str</em>) – The type of risk module to create. Must be one of: [“diversification”, “prem_res”, “nat_cat”, “factor_cat”, “man_made_cat”, “non_prop_cat”, “reinsurance”, “op_risk”, “market_risk”, or “aggregation”].</p></li>
+<li><p><strong>class_name</strong> (<em>str</em><em>, </em><em>optional</em>) – The name to assign to the created class instance. If not provided,
+it defaults to the value of <cite>class_type</cite>.</p></li>
+<li><p><strong>calculate</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the specified risk module class.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="source/premres.html#samplicity.prem_res.PremRes" title="samplicity.prem_res.PremRes">PremRes</a>, <a class="reference internal" href="source/natcat.html#samplicity.nat_cat.NatCat" title="samplicity.nat_cat.NatCat">NatCat</a>, <a class="reference internal" href="source/factorcat.html#samplicity.factor_cat.FactorCat" title="samplicity.factor_cat.FactorCat">FactorCat</a>, <a class="reference internal" href="source/manmade.html#samplicity.man_made.ManMade" title="samplicity.man_made.ManMade">ManMade</a>, <a class="reference internal" href="source/nonprop.html#samplicity.non_prop.NonProp" title="samplicity.non_prop.NonProp">NonProp</a>, <a class="reference internal" href="source/reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance" title="samplicity.reinsurance.reinsurance.Reinsurance">Reinsurance</a>, <a class="reference internal" href="source/oprisk.html#samplicity.op_risk.OpRisk" title="samplicity.op_risk.OpRisk">OpRisk</a>, <a class="reference internal" href="source/market.html#samplicity.market.market.Market" title="samplicity.market.market.Market">Market</a>]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an unsupported class type is provided.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sam_scr</span> <span class="o">=</span> <span class="n">SCR</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prem_res_module</span> <span class="o">=</span> <span class="n">sam_scr</span><span class="o">.</span><span class="n">create_supporting</span><span class="p">(</span><span class="s2">&quot;prem_res&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">market_risk_module</span> <span class="o">=</span> <span class="n">sam_scr</span><span class="o">.</span><span class="n">create_supporting</span><span class="p">(</span><span class="s2">&quot;market_risk&quot;</span><span class="p">,</span> <span class="s2">&quot;custom_market&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default, all created instances are initialized with <cite>calculate=True</cite>, meaning
+their respective calculation methods will be called upon creation.</p>
+<p>Ensure that the necessary data and configurations are set up in the SCR
+instance before calling this method, as the created modules may immediately
+start their calculations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.f_aggregation">
+<span class="sig-name descname"><span class="pre">f_aggregation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.f_aggregation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.f_aggregation" title="Link to this definition"></a></dt>
+<dd><p>Aggregate the Solvency Capital Requirement (SCR) results.</p>
+<p>This method performs the final aggregation step in the SCR calculation process.
+It calls a supporting function, contained in <strong>aggregation.py</strong>, to perform the actual aggregation and stores
+the results in the SCR object’s output dictionary. The LACDT calcualtion occurs here.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The aggregated SCR results are stored in <cite>self.output[“scr”]</cite>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This method assumes that all prerequisite calculations have been performed
+and that the necessary data is available for aggregation.</p>
+</div>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Raises:</dt><dd><dl class="simple">
+<dt>Exception: Any exception raised during the aggregation process will be handled</dt><dd><p>by the <cite>handle_calculation_error</cite> method.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.f_calculate">
+<span class="sig-name descname"><span class="pre">f_calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps_to_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.f_calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.f_calculate" title="Link to this definition"></a></dt>
+<dd><p>Perform the various calculation steps as required by the SCR class.</p>
+<p>This will call the diversification and aggregate from the SCR class
+as well as all of the supporting calculation classes PremRes, NatCat,
+FactorCat, ManMade, NonProp, Reinsurance, OpRisk, Market.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>steps_to_run</strong> (<em>List</em><em>[</em><em>str</em><em>] or </em><em>None</em><em>, </em><em>optional</em>) – List of calculation steps to run. If None, all steps are run.
+Allowed values are (full names or short names):
+- “Diversification calculations” or “diversification”
+- “Premium and Reserve Risk” or “prem_res”
+- “Natural Catastrophe Risk” or “nat_cat”
+- “Factor Catastrophe Risk” or “factor_cat”
+- “Man-Made Catastrophe Risk” or “man_made_cat”
+- “Non-Proportional Reinsurance Risk” or “non_prop_cat”
+- “Reinsurance Risk” or “reinsurance”
+- “Operational Risk” or “op_risk”
+- “Market Risk” or “market_risk”
+- “Aggregation” or “aggregation”</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The data import stesp are not shown here.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sam_scr</span> <span class="o">=</span> <span class="n">SCR</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Perform all calculation steps.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sam_scr</span><span class="o">.</span><span class="n">f_calculate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Perform 3 of the calculation steps.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sam_scr</span><span class="o">.</span><span class="n">f_calculate</span><span class="p">([</span><span class="s1">&#39;diversification&#39;</span><span class="p">,</span> <span class="s1">&#39;prem_res&#39;</span><span class="p">,</span> <span class="s1">&#39;Natural Catastrophe Risk&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.f_create_venv">
+<span class="sig-name descname"><span class="pre">f_create_venv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.f_create_venv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.f_create_venv" title="Link to this definition"></a></dt>
+<dd><p>Create a virtual environment for the Samplicity package.</p>
+<p>This method creates a new virtual environment, activates it, and installs
+the Samplicity package along with its dependencies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>location</strong> (<em>str</em><em>, </em><em>optional</em>) – The directory where the virtual environment should be created.
+If not provided, a default location will be used.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>OSError</strong> – If there’s an error creating the directory or the virtual environment.</p></li>
+<li><p><strong>subprocess.CalledProcessError</strong> – If there’s an error running pip or activating the environment.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If no location is provided, the virtual environment will be created in
+the user’s home directory under a folder named ‘samplicity_venv’.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This method requires internet access to install packages from PyPI and Bitbucket.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.f_data">
+<span class="sig-name descname"><span class="pre">f_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.f_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.f_data" title="Link to this definition"></a></dt>
+<dd><p>Retrieve data from the SCR (and supporting) classes.</p>
+<p>This method provides a unified interface to access various data components
+within the SCR object and its supporting classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>str</em>) – The module name to retrieve data from.</p></li>
+<li><p><strong>data</strong> (<em>str</em>) – The specific data name to retrieve.</p></li>
+<li><p><strong>sub_data</strong> (<em>str</em><em>, </em><em>optional</em>) – The sub-data name, if applicable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The retrieved data as a pandas DataFrame or None if not found.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[pd.DataFrame, None]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the requested data cannot be found or accessed.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All input strings are converted to lowercase and stripped of leading/trailing spaces
+to improve user experience and reduce errors due to case sensitivity or whitespace.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This method uses a complex series of conditional statements to handle various
+data retrieval scenarios. Careful consideration should be given when modifying
+or extending this method to ensure all cases are properly handled.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.f_diversification_calcs">
+<span class="sig-name descname"><span class="pre">f_diversification_calcs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.f_diversification_calcs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.f_diversification_calcs" title="Link to this definition"></a></dt>
+<dd><p>Calculate all the calculation combinations for diversification benefits.</p>
+<p>This method enables the SCR classes to be used to calculate diversification
+benefits. It retrieves the diversification level and calculation level from
+the data, and then generates combinations based on these levels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the diversification level is not one of “level_1”, “level_2”, or “level_3”.</p></li>
+<li><p><strong>ValueError</strong> – If the calculation level is not one of “diversification”, “individual”, or “overall”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The results of the calculation are stored in <cite>self.output[“list_combinations”]</cite>
+as a pandas DataFrame.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This method assumes that the necessary data has been loaded and is accessible
+through the <cite>f_data</cite> method.</p>
+</div>
+<dl>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scr_instance</span> <span class="o">=</span> <span class="n">SCR</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scr_instance</span><span class="o">.</span><span class="n">f_diversification_calcs</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scr_instance</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;list_combinations&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.f_error_count">
+<span class="sig-name descname"><span class="pre">f_error_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exclude_warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.f_error_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.f_error_count" title="Link to this definition"></a></dt>
+<dd><p>Count the number of errors and warnings in the output.</p>
+<p>This method counts the number of errors and warnings stored in the <cite>output_errors</cite> list.
+It provides a quick summary of the issues encountered during the SCR calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The total number of errors and warnings.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sam_scr</span> <span class="o">=</span> <span class="n">SCR</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sam_scr</span><span class="o">.</span><span class="n">f_calculate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">error_count</span> <span class="o">=</span> <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_error_count</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total errors and warnings: </span><span class="si">{</span><span class="n">error_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.f_export_results">
+<span class="sig-name descname"><span class="pre">f_export_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">export_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conn_string</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.f_export_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.f_export_results" title="Link to this definition"></a></dt>
+<dd><p>Export the various results of the SCR class.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>export_file (str): The file path to export the results to.
+process_id (int, optional): The process ID. Defaults to None.
+conn_string (str, optional): The connection string. Defaults to None.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>export_file</strong> (<em>str</em>)</p></li>
+<li><p><strong>process_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>conn_string</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.f_import_data">
+<span class="sig-name descname"><span class="pre">f_import_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">risk_free_rates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetric_adjustment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conn_string</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">import_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_detail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.f_import_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.f_import_data" title="Link to this definition"></a></dt>
+<dd><p>Import data from Excel or an ODBC connection.</p>
+<section id="args">
+<h3>Args<a class="headerlink" href="#args" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>metadata_file (str): The path to the metadata file.
+risk_free_rates (str): The path to the risk-free rates file.
+symmetric_adjustment (str): The path to the symmetric adjustment file.
+data_file (str, optional): The path to the data file. Defaults to None.
+conn_string (str, optional): The ODBC connection string. Defaults to None.
+import_table (str, optional): The import table name. Defaults to None.
+export_table (str, optional): The export table name. Defaults to None.
+log_detail (str, optional): The log detail level. Defaults to None.</p>
+</div></blockquote>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>bool: True if the data import is successful.</p>
+</div></blockquote>
+</section>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>risk_free_rates</strong> (<em>str</em>)</p></li>
+<li><p><strong>symmetric_adjustment</strong> (<em>str</em>)</p></li>
+<li><p><strong>data_file</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>conn_string</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>import_table</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>export_table</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>log_detail</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>metadata_file</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.f_info">
+<span class="sig-name descname"><span class="pre">f_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.f_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.f_info" title="Link to this definition"></a></dt>
+<dd><p>Retrieve information about hwat information is availabel within the SCR class - and all the supporting classes.</p>
+<p>A DataFrame is generated showing all the information that can be returned with an indictation of the amount of data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A DataFrame containing information about the SCR object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TypeError</strong> – If the <cite>info</cite> function doesn’t return a pandas DataFrame.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sam_scr</span> <span class="o">=</span> <span class="n">SCR</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info_df</span> <span class="o">=</span> <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_info</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">info_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.f_save_pickle">
+<span class="sig-name descname"><span class="pre">f_save_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.f_save_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.f_save_pickle" title="Link to this definition"></a></dt>
+<dd><p>Save the current SCR instance to a pickle file.</p>
+<p>This method serializes the entire SCR object, including all its attributes and
+calculated results, to a pickle file. The file is saved with a timestamp in its name
+for easy identification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>location</strong> (<em>str</em>) – Optional directory path where the pickle file should be saved.
+If not provided, the method uses a default location based on the
+input data file’s directory.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>IOError</strong> – If there’s an error writing the file.</p></li>
+<li><p><strong>AttributeError</strong> – If required data attributes are missing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scr_instance</span> <span class="o">=</span> <span class="n">SCR</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scr_instance</span><span class="o">.</span><span class="n">f_calculate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scr_instance</span><span class="o">.</span><span class="n">f_save_pickle</span><span class="p">()</span>
+<span class="go">Results saved to /path/to/output/results_20230615_120101.p</span>
+</pre></div>
+</div>
+<p>The saved pickle file can be later loaded using the <cite>load_pickle</cite> class method.</p>
+<p>Pickle files can pose a security risk if loaded from untrusted sources.
+Ensure you only load pickle files that you have created.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.f_shapely">
+<span class="sig-name descname"><span class="pre">f_shapely</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.f_shapely"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.f_shapely" title="Link to this definition"></a></dt>
+<dd><p>Calculate Shapley values for diversification effects in the SCR.</p>
+<p>This method computes Shapley values to quantify the contribution of each
+risk component to the overall diversification benefit in the SCR calculation.
+It’s only performed if the diversification level is set to “diversification”.</p>
+<p>The Shapley values are calculated for four different SCR views:
+- Gross SCR
+- Net SCR
+- SCR with impairment
+- Gross return SCR</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>AttributeError</strong> – If required data or output structures are missing.</p></li>
+<li><p><strong>ValueError</strong> – If the shapely_calc function encounters invalid input.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scr_instance</span> <span class="o">=</span> <span class="n">SCR</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scr_instance</span><span class="o">.</span><span class="n">f_calculate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scr_instance</span><span class="o">.</span><span class="n">f_shapely</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scr_instance</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;diversification&quot;</span><span class="p">][</span><span class="s2">&quot;gross&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The results are stored in <cite>self.output[“diversification”]</cite> dictionary,
+with keys ‘gross’, ‘net’, ‘impairment’, and ‘gross_return’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.handle_calculation_error">
+<span class="sig-name descname"><span class="pre">handle_calculation_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">halt_on_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.handle_calculation_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.handle_calculation_error" title="Link to this definition"></a></dt>
+<dd><p>Handle errors that occur during calculation steps, with an option to halt execution.</p>
+<p>This method processes errors that occur during the SCR calculation steps.
+It logs the error details, adds them to the <cite>output_errors</cite> list, and
+optionally halts the execution by re-raising the exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>step_name</strong> (<em>str</em>) – The name of the calculation step where the error occurred.</p></li>
+<li><p><strong>error</strong> (<em>Exception</em>) – The exception that was raised during the calculation step.</p></li>
+<li><p><strong>halt_on_error</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, re-raises the exception to halt execution. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – Re-raises the original exception if halt_on_error is True.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">perform_calculation_step</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="bp">self</span><span class="o">.</span><span class="n">handle_calculation_error</span><span class="p">(</span><span class="s2">&quot;Market Risk Calculation&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">halt_on_error</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When halt_on_error is False, this method collects error information
+for later processing or reporting without interrupting the calculation flow.</p>
+<p>Setting halt_on_error to True will immediately stop the calculation process.
+Use this option judiciously, typically for critical errors that invalidate
+the entire calculation.</p>
+<p>The error details captured include:</p>
+<ul class="simple">
+<li><p>Error type (always “error” for this method)</p></li>
+<li><p>Step name where the error occurred</p></li>
+<li><p>Error type (class name of the exception)</p></li>
+<li><p>Error message</p></li>
+<li><p>Full traceback of the error</p></li>
+</ul>
+<p>These details are stored as a dictionary in the <cite>output_errors</cite> list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.handle_warning">
+<span class="sig-name descname"><span class="pre">handle_warning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning_detail</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.handle_warning"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.handle_warning" title="Link to this definition"></a></dt>
+<dd><p>Handle errors that occur during calculation steps. It logs the error details, adds them to the <cite>output_errors</cite> list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>step_name</strong> (<em>str</em>) – The name of the calculation step where the error occurred.</p></li>
+<li><p><strong>warning_message</strong> (<em>str</em>) – A high-level warning message.</p></li>
+<li><p><strong>warning_detail</strong> (<em>str</em>) – Detail of the warning generated.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.load_pickle">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/scr.html#SCR.load_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.scr.SCR.load_pickle" title="Link to this definition"></a></dt>
+<dd><p>Load SCR results from a pickle file.</p>
+<p>This class method deserializes a previously saved SCR object from a pickle file.
+It allows for easy restoration of SCR calculations and results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – The path to the pickle file containing the saved SCR object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the SCR class with all its attributes and data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="source/scr.html#samplicity.scr.scr.SCR" title="samplicity.scr.scr.SCR">SCR</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If the specified file does not exist.</p></li>
+<li><p><strong>pickle.UnpicklingError</strong> – If the file is not a valid pickle file or cannot be unpickled.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scr</span> <span class="o">=</span> <span class="n">SCR</span><span class="o">.</span><span class="n">load_pickle</span><span class="p">(</span><span class="s2">&quot;scr_results_20230615.pkl&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scr</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;scr&quot;</span><span class="p">][</span><span class="s2">&quot;gross&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Ensure that the pickle file was created with a compatible version of the SCR class.
+Loading pickles from untrusted sources can be a security risk.</p>
+<p>This method will fail if the class structure has changed significantly since the pickle was created.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.output">
+<span class="sig-name descname"><span class="pre">output</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#samplicity.scr.scr.SCR.output" title="Link to this definition"></a></dt>
+<dd><p>All the outputs for the class with the various results.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.output_errors">
+<span class="sig-name descname"><span class="pre">output_errors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#samplicity.scr.scr.SCR.output_errors" title="Link to this definition"></a></dt>
+<dd><p>Stores any errors or warnings that result at runtime.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="samplicity.scr.scr.SCR.output_runtimes">
+<span class="sig-name descname"><span class="pre">output_runtimes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#samplicity.scr.scr.SCR.output_runtimes" title="Link to this definition"></a></dt>
+<dd><p>Stores the runtimes of the different sections of code.
+Used to help with code performance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="support-modules">
+<h2>Support Modules<a class="headerlink" href="#support-modules" title="Link to this heading"></a></h2>
+<p>Detailed below are the various supporting modeuls (and functions) for the SCr class detail in the module scr.</p>
+<section id="module-samplicity.scr.aggregation">
+<span id="aggregation"></span><h3>aggregation<a class="headerlink" href="#module-samplicity.scr.aggregation" title="Link to this heading"></a></h3>
+</section>
+<section id="module-samplicity.scr.diversification">
+<span id="diversification"></span><h3>diversification<a class="headerlink" href="#module-samplicity.scr.diversification" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="samplicity.scr.diversification.shapely_calc">
+<span class="sig-name descname"><span class="pre">shapely_calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/diversification.html#shapely_calc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.diversification.shapely_calc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-samplicity.scr.info">
+<span id="info"></span><h3>info<a class="headerlink" href="#module-samplicity.scr.info" title="Link to this heading"></a></h3>
+<p>SCR Info Module</p>
+<p>This module provides functionality to extract and organize information about the
+structure and content of an SCR (Solvency Capital Requirement) object.</p>
+<p>The module contains functions to recursively extract information from nested
+dictionaries and compile it into a pandas DataFrame for easy analysis.</p>
+<dl class="simple">
+<dt>Functions:</dt><dd><p>extract_dict_info: Recursively extracts information from nested dictionaries.
+info: Compiles information about an SCR object into a DataFrame.</p>
+</dd>
+<dt>Dependencies:</dt><dd><p>pandas
+numpy</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="samplicity.scr.info.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sam_scr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/info.html#info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.info.info" title="Link to this definition"></a></dt>
+<dd><p>Compile information about an SCR object into a DataFrame.</p>
+<p>This function extracts information from the ‘classes’ and ‘output’ attributes
+of an SCR object and compiles it into a pandas DataFrame for easy analysis.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>sam_scr (Any): An SCR object containing ‘classes’ and ‘output’ attributes.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A DataFrame containing information about the structure and
+content of the SCR object. The DataFrame has the following columns:
+[“Module”, “Dictionary”, “Level”, “Object Type”, “Rows”, “Columns”, “Size”]</p>
+</dd>
+<dt>Raises:</dt><dd><p>AttributeError: If the input object doesn’t have the expected attributes.
+TypeError: If the ‘classes’ attribute is not a dictionary.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sam_scr</strong> (<em>Any</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>DataFrame</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-samplicity.scr.lacdt">
+<span id="lacdt"></span><h3>lacdt<a class="headerlink" href="#module-samplicity.scr.lacdt" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="samplicity.scr.lacdt.f_lacdt_calculation">
+<span class="sig-name descname"><span class="pre">f_lacdt_calculation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sam_scr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_scr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/samplicity/scr/lacdt.html#f_lacdt_calculation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#samplicity.scr.lacdt.f_lacdt_calculation" title="Link to this definition"></a></dt>
+<dd><p>Aggregate the lacdt amounts.</p>
+</dd></dl>
+
+</section>
+<section id="solver">
+<h3>solver<a class="headerlink" href="#solver" title="Link to this heading"></a></h3>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="knownissues.html" class="btn btn-neutral float-left" title="Known Issues" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="data.html" class="btn btn-neutral float-right" title="Data Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Clive Hogarth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

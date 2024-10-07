@@ -1,0 +1,723 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samplicity.reinsurance.ri_man_made &mdash; samplicity 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=7ab3649f" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            samplicity
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction.html#further-reading">Further Reading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction.html#class-documentation">Class Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction.html#indices-and-tables">Indices and Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#data-inputs">Data Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#running-the-tool">Running the Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#data-extraction">Data Extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../structure.html#main-classes">Main Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../structure.html#scr">SCR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../structure.html#data">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../structure.html#risk-module-classes">Risk Module Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#premres">PremRes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#natcat">NatCat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#factorcat">FactorCat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#manmade">ManMade</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#nonprop">NonProp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#market">Market</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#reinsurance">Reinsurance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#oprisk">OpRisk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../structure.html#how-the-classes-work-together">How the Classes work together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../structure.html#usage-example">Usage Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../knownissues.html">Known Issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../knownissues.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../knownissues.html#premium-and-reserve-risk">Premium and Reserve Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../knownissues.html#factor-based-catastrophe-risk">Factor Based Catastrophe Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../knownissues.html#concentration-risk">Concentration Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../knownissues.html#python-design">Python Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../knownissues.html#object-orientated-approach">Object Orientated Approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../knownissues.html#splitting-of-classes">Splitting of Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Class Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../scr.html">SCR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../scr.html#module-samplicity.scr.scr">scr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR"><code class="docutils literal notranslate"><span class="pre">SCR</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.__init__"><code class="docutils literal notranslate"><span class="pre">SCR.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.calculation_steps"><code class="docutils literal notranslate"><span class="pre">SCR.calculation_steps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.classes"><code class="docutils literal notranslate"><span class="pre">SCR.classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.create_supporting"><code class="docutils literal notranslate"><span class="pre">SCR.create_supporting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_aggregation"><code class="docutils literal notranslate"><span class="pre">SCR.f_aggregation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_calculate"><code class="docutils literal notranslate"><span class="pre">SCR.f_calculate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_create_venv"><code class="docutils literal notranslate"><span class="pre">SCR.f_create_venv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_data"><code class="docutils literal notranslate"><span class="pre">SCR.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_diversification_calcs"><code class="docutils literal notranslate"><span class="pre">SCR.f_diversification_calcs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_error_count"><code class="docutils literal notranslate"><span class="pre">SCR.f_error_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_export_results"><code class="docutils literal notranslate"><span class="pre">SCR.f_export_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_import_data"><code class="docutils literal notranslate"><span class="pre">SCR.f_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_info"><code class="docutils literal notranslate"><span class="pre">SCR.f_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_save_pickle"><code class="docutils literal notranslate"><span class="pre">SCR.f_save_pickle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_shapely"><code class="docutils literal notranslate"><span class="pre">SCR.f_shapely()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.handle_calculation_error"><code class="docutils literal notranslate"><span class="pre">SCR.handle_calculation_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.handle_warning"><code class="docutils literal notranslate"><span class="pre">SCR.handle_warning()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.load_pickle"><code class="docutils literal notranslate"><span class="pre">SCR.load_pickle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.output"><code class="docutils literal notranslate"><span class="pre">SCR.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.output_errors"><code class="docutils literal notranslate"><span class="pre">SCR.output_errors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.output_runtimes"><code class="docutils literal notranslate"><span class="pre">SCR.output_runtimes</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scr.html#support-modules">Support Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#module-samplicity.scr.aggregation">aggregation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#module-samplicity.scr.diversification">diversification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.diversification.shapely_calc"><code class="docutils literal notranslate"><span class="pre">shapely_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#module-samplicity.scr.info">info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.info.info"><code class="docutils literal notranslate"><span class="pre">info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#module-samplicity.scr.lacdt">lacdt</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.lacdt.f_lacdt_calculation"><code class="docutils literal notranslate"><span class="pre">f_lacdt_calculation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#solver">solver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../data.html#module-samplicity.data.data">data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.f_data"><code class="docutils literal notranslate"><span class="pre">Data.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.f_export_results"><code class="docutils literal notranslate"><span class="pre">Data.f_export_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.f_import_data"><code class="docutils literal notranslate"><span class="pre">Data.f_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.output"><code class="docutils literal notranslate"><span class="pre">Data.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.scr"><code class="docutils literal notranslate"><span class="pre">Data.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../data.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#access">access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#module-samplicity.data.data_models">data_models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.asset_data"><code class="docutils literal notranslate"><span class="pre">asset_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.asset_shocks"><code class="docutils literal notranslate"><span class="pre">asset_shocks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.convert_none_to_value"><code class="docutils literal notranslate"><span class="pre">convert_none_to_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.counterparty"><code class="docutils literal notranslate"><span class="pre">counterparty</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.division_detail"><code class="docutils literal notranslate"><span class="pre">division_detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.nat_cat_si"><code class="docutils literal notranslate"><span class="pre">nat_cat_si</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.prem_res"><code class="docutils literal notranslate"><span class="pre">prem_res</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.reinsurance"><code class="docutils literal notranslate"><span class="pre">reinsurance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.reinsurance_share"><code class="docutils literal notranslate"><span class="pre">reinsurance_share</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#module-samplicity.data.data_validation">data_validation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_validation.validate_data"><code class="docutils literal notranslate"><span class="pre">validate_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#module-samplicity.data.excel">excel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.excel.f_excel_export"><code class="docutils literal notranslate"><span class="pre">f_excel_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.excel.f_excel_import_data"><code class="docutils literal notranslate"><span class="pre">f_excel_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.excel.f_excel_import_pa_data"><code class="docutils literal notranslate"><span class="pre">f_excel_import_pa_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.excel.f_excel_import_range"><code class="docutils literal notranslate"><span class="pre">f_excel_import_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#module-samplicity.data.odbc">odbc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.odbc.chunker"><code class="docutils literal notranslate"><span class="pre">chunker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.odbc.f_odbc_export"><code class="docutils literal notranslate"><span class="pre">f_odbc_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.odbc.f_odbc_import"><code class="docutils literal notranslate"><span class="pre">f_odbc_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.odbc.f_odbc_table_import"><code class="docutils literal notranslate"><span class="pre">f_odbc_table_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.odbc.insert_with_progress"><code class="docutils literal notranslate"><span class="pre">insert_with_progress()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#validation">validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../premres.html">PremRes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../premres.html#samplicity.prem_res.PremRes"><code class="docutils literal notranslate"><span class="pre">PremRes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../premres.html#samplicity.prem_res.PremRes.__init__"><code class="docutils literal notranslate"><span class="pre">PremRes.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../premres.html#samplicity.prem_res.PremRes.f_calculate"><code class="docutils literal notranslate"><span class="pre">PremRes.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../premres.html#samplicity.prem_res.PremRes.f_data"><code class="docutils literal notranslate"><span class="pre">PremRes.f_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../natcat.html">NatCat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat"><code class="docutils literal notranslate"><span class="pre">NatCat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.__init__"><code class="docutils literal notranslate"><span class="pre">NatCat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.f_calculate"><code class="docutils literal notranslate"><span class="pre">NatCat.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.f_cat_calculation"><code class="docutils literal notranslate"><span class="pre">NatCat.f_cat_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.f_data"><code class="docutils literal notranslate"><span class="pre">NatCat.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.f_data_aggregation"><code class="docutils literal notranslate"><span class="pre">NatCat.f_data_aggregation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.output"><code class="docutils literal notranslate"><span class="pre">NatCat.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.scr"><code class="docutils literal notranslate"><span class="pre">NatCat.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../factorcat.html">FactorCat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat"><code class="docutils literal notranslate"><span class="pre">FactorCat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.__init__"><code class="docutils literal notranslate"><span class="pre">FactorCat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.f_calculate"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.f_data"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.f_indv_calculation"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_indv_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.output"><code class="docutils literal notranslate"><span class="pre">FactorCat.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.scr"><code class="docutils literal notranslate"><span class="pre">FactorCat.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nonprop.html">NonProp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp"><code class="docutils literal notranslate"><span class="pre">NonProp</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.__init__"><code class="docutils literal notranslate"><span class="pre">NonProp.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.f_calculate"><code class="docutils literal notranslate"><span class="pre">NonProp.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.f_data"><code class="docutils literal notranslate"><span class="pre">NonProp.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.f_indv_calculation"><code class="docutils literal notranslate"><span class="pre">NonProp.f_indv_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.output"><code class="docutils literal notranslate"><span class="pre">NonProp.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.scr"><code class="docutils literal notranslate"><span class="pre">NonProp.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../manmade.html">ManMade</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade"><code class="docutils literal notranslate"><span class="pre">ManMade</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.__init__"><code class="docutils literal notranslate"><span class="pre">ManMade.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.f_calculate"><code class="docutils literal notranslate"><span class="pre">ManMade.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.f_data"><code class="docutils literal notranslate"><span class="pre">ManMade.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.f_gross_event"><code class="docutils literal notranslate"><span class="pre">ManMade.f_gross_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.output"><code class="docutils literal notranslate"><span class="pre">ManMade.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.scr"><code class="docutils literal notranslate"><span class="pre">ManMade.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reinsurance.html">Reinsurnace</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../reinsurance.html#module-samplicity.reinsurance.reinsurance">reinsurance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance"><code class="docutils literal notranslate"><span class="pre">Reinsurance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.__init__"><code class="docutils literal notranslate"><span class="pre">Reinsurance.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_calculate_net_events"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_calculate_net_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_calculate_recoveries"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_calculate_recoveries()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_data"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.output"><code class="docutils literal notranslate"><span class="pre">Reinsurance.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.scr"><code class="docutils literal notranslate"><span class="pre">Reinsurance.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reinsurance.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../reinsurance.html#module-samplicity.reinsurance.ri_man_made">ri_man_made</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.ri_man_made.f_man_made"><code class="docutils literal notranslate"><span class="pre">f_man_made()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reinsurance.html#module-samplicity.reinsurance.ri_prog">ri_prog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.ri_prog.f_apply_reinsurance"><code class="docutils literal notranslate"><span class="pre">f_apply_reinsurance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.ri_prog.f_apply_ri_prog"><code class="docutils literal notranslate"><span class="pre">f_apply_ri_prog()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../market.html">Market</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../market.html#module-samplicity.market.market">market</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market"><code class="docutils literal notranslate"><span class="pre">Market</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.__init__"><code class="docutils literal notranslate"><span class="pre">Market.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.class_data"><code class="docutils literal notranslate"><span class="pre">Market.class_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.f_aggregate_charges"><code class="docutils literal notranslate"><span class="pre">Market.f_aggregate_charges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.f_calc_impairment"><code class="docutils literal notranslate"><span class="pre">Market.f_calc_impairment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.f_data"><code class="docutils literal notranslate"><span class="pre">Market.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.f_market_risk"><code class="docutils literal notranslate"><span class="pre">Market.f_market_risk()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.f_spread_interest"><code class="docutils literal notranslate"><span class="pre">Market.f_spread_interest()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.output"><code class="docutils literal notranslate"><span class="pre">Market.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.scr"><code class="docutils literal notranslate"><span class="pre">Market.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../market.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../market.html#module-samplicity.market.aggregate">aggregate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.aggregate.f_aggregate_market"><code class="docutils literal notranslate"><span class="pre">f_aggregate_market()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../market.html#module-samplicity.market.bond">bond</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.bond.BOND_VAL"><code class="docutils literal notranslate"><span class="pre">BOND_VAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.bond.f_fixed"><code class="docutils literal notranslate"><span class="pre">f_fixed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.bond.f_floating"><code class="docutils literal notranslate"><span class="pre">f_floating()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.bond.f_newton_calc"><code class="docutils literal notranslate"><span class="pre">f_newton_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../market.html#module-samplicity.market.conc">conc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.conc.f_concentration_risk"><code class="docutils literal notranslate"><span class="pre">f_concentration_risk()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../market.html#module-samplicity.market.credit">credit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.credit.calculate_u_matrix_entry"><code class="docutils literal notranslate"><span class="pre">calculate_u_matrix_entry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.credit.f_credit_type_1"><code class="docutils literal notranslate"><span class="pre">f_credit_type_1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.credit.f_impairment"><code class="docutils literal notranslate"><span class="pre">f_impairment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.credit.f_u_matrix"><code class="docutils literal notranslate"><span class="pre">f_u_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.credit.f_v_vector"><code class="docutils literal notranslate"><span class="pre">f_v_vector()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bondval.html">BOND VAL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.BOND_VAL"><code class="docutils literal notranslate"><span class="pre">BOND_VAL</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.BOND_VAL.__init__"><code class="docutils literal notranslate"><span class="pre">BOND_VAL.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.BOND_VAL.f_calculate"><code class="docutils literal notranslate"><span class="pre">BOND_VAL.f_calculate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.f_fixed"><code class="docutils literal notranslate"><span class="pre">f_fixed()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.f_floating"><code class="docutils literal notranslate"><span class="pre">f_floating()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.f_newton_calc"><code class="docutils literal notranslate"><span class="pre">f_newton_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../oprisk.html">OpRisk</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../oprisk.html#samplicity.op_risk.OpRisk"><code class="docutils literal notranslate"><span class="pre">OpRisk</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../oprisk.html#samplicity.op_risk.OpRisk.__init__"><code class="docutils literal notranslate"><span class="pre">OpRisk.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../oprisk.html#samplicity.op_risk.OpRisk.f_calculate"><code class="docutils literal notranslate"><span class="pre">OpRisk.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../oprisk.html#samplicity.op_risk.OpRisk.f_data"><code class="docutils literal notranslate"><span class="pre">OpRisk.f_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Helper Code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../helper.html">Helper Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.allocation_matrix"><code class="docutils literal notranslate"><span class="pre">allocation_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.check_tuple"><code class="docutils literal notranslate"><span class="pre">check_tuple()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.combins_df_col"><code class="docutils literal notranslate"><span class="pre">combins_df_col()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_accummulate_figures"><code class="docutils literal notranslate"><span class="pre">f_accummulate_figures()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_best_join"><code class="docutils literal notranslate"><span class="pre">f_best_join()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_best_match"><code class="docutils literal notranslate"><span class="pre">f_best_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_best_match_new"><code class="docutils literal notranslate"><span class="pre">f_best_match_new()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_div_match"><code class="docutils literal notranslate"><span class="pre">f_div_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_fast_join"><code class="docutils literal notranslate"><span class="pre">f_fast_join()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_fast_match_element"><code class="docutils literal notranslate"><span class="pre">f_fast_match_element()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_get_total_row"><code class="docutils literal notranslate"><span class="pre">f_get_total_row()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_new_match_element"><code class="docutils literal notranslate"><span class="pre">f_new_match_element()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_new_match_idx"><code class="docutils literal notranslate"><span class="pre">f_new_match_idx()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.log_decorator"><code class="docutils literal notranslate"><span class="pre">log_decorator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">Main Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../main.html#samplicity.main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../main.html#samplicity.main.run_excel"><code class="docutils literal notranslate"><span class="pre">run_excel()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../main.html#samplicity.main.run_ms_access"><code class="docutils literal notranslate"><span class="pre">run_ms_access()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../main.html#samplicity.main.test_runs"><code class="docutils literal notranslate"><span class="pre">test_runs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">samplicity</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">samplicity.reinsurance.ri_man_made</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for samplicity.reinsurance.ri_man_made</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.ri_prog</span> <span class="kn">import</span> <span class="n">f_apply_ri_prog</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="f_man_made">
+<a class="viewcode-back" href="../../../source/reinsurance.html#samplicity.reinsurance.ri_man_made.f_man_made">[docs]</a>
+<span class="k">def</span> <span class="nf">f_man_made</span><span class="p">(</span><span class="n">rein</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the man-made reinsurance recoveries.&quot;&quot;&quot;</span>
+    <span class="c1">#logger.debug(&quot;Function start&quot;)</span>
+
+    <span class="c1"># GET DATA</span>
+
+    <span class="c1"># Get the data needed by the function</span>
+
+    <span class="c1"># The list of complete man-made events</span>
+    <span class="n">man_made_perils</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;mm_motor&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mm_fire_property&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mm_marine&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mm_aviation&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mm_liability&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mm_credit_guarantee&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mm_terrorism&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mm_accident_health&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="c1"># The list of division combinations</span>
+    <span class="n">div_list</span> <span class="o">=</span> <span class="n">rein</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;scr&quot;</span><span class="p">,</span> <span class="s2">&quot;list_combinations&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="c1"># Teh field used for the diversification calculation</span>
+    <span class="n">div_field</span> <span class="o">=</span> <span class="n">rein</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;diversification_level&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># The overall gross event for the entire entity</span>
+    <span class="n">mm_overall</span> <span class="o">=</span> <span class="n">rein</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;man_made_overall&quot;</span><span class="p">)</span>
+    <span class="c1"># Get the perils in the order the apply.</span>
+    <span class="c1"># man_made_perils = mm_overall.index.tolist()</span>
+
+    <span class="c1"># The invidual man-made events per division</span>
+    <span class="n">mm_events</span> <span class="o">=</span> <span class="n">rein</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;man_made_division_event&quot;</span><span class="p">)</span>
+    <span class="c1"># Drop all additional divisional fields,</span>
+    <span class="c1"># Mainly to ensure teh order comes trhough correctly</span>
+    <span class="n">mm_events</span> <span class="o">=</span> <span class="n">mm_events</span><span class="p">[[</span><span class="n">div_field</span><span class="p">]</span> <span class="o">+</span> <span class="n">man_made_perils</span><span class="p">]</span>
+
+    <span class="c1"># The applicable reinsurance structures</span>
+    <span class="c1"># These are the names of the structures that msut be applied to event event</span>
+    <span class="n">reinsurance</span> <span class="o">=</span> <span class="n">rein</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;man_made_division_reinsurance&quot;</span><span class="p">)</span>
+    <span class="n">reinsurance</span> <span class="o">=</span> <span class="n">reinsurance</span><span class="p">[[</span><span class="n">div_field</span><span class="p">]</span> <span class="o">+</span> <span class="n">man_made_perils</span><span class="p">]</span>
+
+    <span class="c1"># DATA CHECKS</span>
+
+    <span class="n">max_element</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">div_list</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">max_element</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">max_element</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_element</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;reinsurance&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;f_calculate_net_events&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Diversification listing is incorrect&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># THE OVERALL EVENT</span>
+    <span class="c1"># We identify this as the one with all the divisions</span>
+    <span class="n">overall_index</span> <span class="o">=</span> <span class="n">div_list</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">div_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># We remove all entries where there is no reinsurance</span>
+    <span class="n">filtered_mm_overall</span> <span class="o">=</span> <span class="n">mm_overall</span><span class="p">[</span>
+        <span class="n">mm_overall</span><span class="p">[</span><span class="s2">&quot;ri_structure&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;none&quot;</span>
+    <span class="p">]</span>
+
+    <span class="c1"># We use this later to populate the dictionaires with the skipped events</span>
+    <span class="n">skip_mm_overall</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">mm</span> <span class="k">for</span> <span class="n">mm</span> <span class="ow">in</span> <span class="n">man_made_perils</span> <span class="k">if</span> <span class="n">mm</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">filtered_mm_overall</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Create a balank dataframe that will append our different events to</span>
+    <span class="c1"># Thsi si doen in the loop below</span>
+    <span class="n">mm_overall_net_event</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">mm_overall_recoveries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="c1"># We loop through each row here</span>
+    <span class="c1"># Could use apply functtion but the speed improvement will be minimla</span>
+    <span class="c1"># Complicates teh calcualtion a lot</span>
+    <span class="c1"># We don&#39;t immediately copy the results to the dictioanry as some</span>
+    <span class="c1"># more manipulation is required</span>
+    <span class="c1"># We are calcualting the recoveries for each event</span>
+    <span class="c1"># at an overall basis.</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">filtered_mm_overall</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+        <span class="n">event_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">gross_event</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">ri_structure</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">Index</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">net</span><span class="p">,</span> <span class="n">rec</span><span class="p">,</span> <span class="n">rec_struct</span> <span class="o">=</span> <span class="n">rein</span><span class="o">.</span><span class="n">f_calculate_recoveries</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">Index</span><span class="p">,</span> <span class="n">event_set</span><span class="p">)</span>
+        <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;event&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">Index</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)</span>
+        <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">ri_structure</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)</span>
+        <span class="c1"># Deals with the first case where the dataframe will be blank</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mm_overall_net_event</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">mm_overall_net_event</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">mm_overall_net_event</span><span class="p">,</span> <span class="n">net</span><span class="p">])</span>
+            <span class="n">mm_overall_recoveries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">mm_overall_recoveries</span><span class="p">,</span> <span class="n">rec</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mm_overall_net_event</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">mm_overall_recoveries</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># IT is jsut the recoveries that we need to add with 0 recoveries</span>
+    <span class="c1"># for mm in skip_mm_overall:</span>
+    <span class="c1">#    rec[event]</span>
+
+    <span class="c1"># Populate the gross events and populate zeros where needed</span>
+    <span class="n">mm_overall</span><span class="p">[</span><span class="s2">&quot;net_event&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mm_overall</span><span class="p">[</span><span class="s2">&quot;gross_event&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Overwrite where we have net events - these will have reinsurance</span>
+    <span class="n">mm_overall</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mm_overall_net_event</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;net_event&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mm_overall_net_event</span><span class="p">[</span>
+        <span class="s2">&quot;__total__&quot;</span>
+    <span class="p">]</span>
+    <span class="c1"># Need to poplate the event with ehte index</span>
+    <span class="n">mm_overall</span><span class="p">[</span><span class="s2">&quot;event&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mm_overall</span><span class="o">.</span><span class="n">index</span>
+
+    <span class="c1"># Add the divsion for the &#39;total&#39; event</span>
+    <span class="n">mm_overall</span><span class="p">[</span><span class="s2">&quot;div&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">overall_index</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">mm_overall</span><span class="p">)</span>
+
+    <span class="n">mm_overall_recoveries</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">mm_overall_recoveries</span><span class="p">[</span><span class="s2">&quot;div&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">overall_index</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">mm_overall_recoveries</span><span class="p">)</span>
+
+    <span class="c1"># INDIVIDUAL DIVISION EVENTS</span>
+
+    <span class="c1"># IT is too complicated to potentially consider the impact of all the different</span>
+    <span class="c1"># combinations of events that could occur. We sue a simple sum approach.</span>
+
+    <span class="c1"># We normalise our data</span>
+    <span class="n">mm_events</span> <span class="o">=</span> <span class="n">mm_events</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span>
+        <span class="n">id_vars</span><span class="o">=</span><span class="n">div_field</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s2">&quot;event&quot;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s2">&quot;gross_event&quot;</span>
+    <span class="p">)</span>
+    <span class="n">reinsurance</span> <span class="o">=</span> <span class="n">reinsurance</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span>
+        <span class="n">id_vars</span><span class="o">=</span><span class="n">div_field</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s2">&quot;event&quot;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s2">&quot;ri_structure&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># Create a single dataset with all the gross events and the reinsurance</span>
+    <span class="c1"># We need to do all the calculations to allow for cases where a</span>
+    <span class="c1"># higher gross event migth be netted down</span>
+    <span class="n">mm_events</span> <span class="o">=</span> <span class="n">mm_events</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+        <span class="n">reinsurance</span><span class="p">,</span>
+        <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+        <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="n">div_field</span><span class="p">,</span> <span class="s2">&quot;event&quot;</span><span class="p">],</span>
+        <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="n">div_field</span><span class="p">,</span> <span class="s2">&quot;event&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="c1"># Remove the null events</span>
+    <span class="n">mm_events</span> <span class="o">=</span> <span class="n">mm_events</span><span class="p">[</span><span class="o">-</span><span class="n">mm_events</span><span class="p">[</span><span class="s2">&quot;gross_event&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span>
+    <span class="c1"># Remove events with no reinsurace</span>
+    <span class="n">filtered_mm_events</span> <span class="o">=</span> <span class="n">mm_events</span><span class="p">[</span><span class="n">mm_events</span><span class="p">[</span><span class="s2">&quot;ri_structure&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;none&quot;</span><span class="p">]</span>
+
+    <span class="n">mm_net_event</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">mm_recoveries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">filtered_mm_events</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+        <span class="n">event_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">gross_event</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">ri_structure</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">Index</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">net</span><span class="p">,</span> <span class="n">rec</span><span class="p">,</span> <span class="n">rec_struct</span> <span class="o">=</span> <span class="n">rein</span><span class="o">.</span><span class="n">f_calculate_recoveries</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">Index</span><span class="p">,</span> <span class="n">event_set</span><span class="p">)</span>
+        <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;event&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">event</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)</span>
+        <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;div_field&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">div_field</span><span class="p">)]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)</span>
+        <span class="c1"># Added for the detailed recoveried</span>
+        <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="s1">&#39;ri_structure&#39;</span><span class="p">)]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">rec</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mm_net_event</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">mm_net_event</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">mm_net_event</span><span class="p">,</span> <span class="n">net</span><span class="p">])</span>
+            <span class="n">mm_recoveries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">mm_recoveries</span><span class="p">,</span> <span class="n">rec</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mm_net_event</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">mm_recoveries</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Teh counterparty is sitting in the index</span>
+    <span class="n">mm_recoveries</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Copy the gross event across</span>
+    <span class="n">mm_events</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;net_event&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mm_events</span><span class="p">[</span><span class="s2">&quot;gross_event&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Only replace the gross event where we have a cauculated net event</span>
+    <span class="n">mm_events</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mm_net_event</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;net_event&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mm_net_event</span><span class="p">[</span><span class="s2">&quot;__total__&quot;</span><span class="p">]</span>
+
+    <span class="c1"># AT this stage we have the the events per division</span>
+    <span class="c1"># We now need to calcualte for all the different combinations</span>
+    <span class="c1"># We get a list of all the divisions that make up the different combinations</span>
+    <span class="n">mm_agg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">div_list</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">div_list</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">mm_agg</span> <span class="o">=</span> <span class="n">mm_agg</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;div_field&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">mm_agg</span><span class="p">[</span><span class="s2">&quot;div&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mm_agg</span><span class="o">.</span><span class="n">index</span>
+
+    <span class="c1"># We are creating a normalised view to allow us to join to the data</span>
+    <span class="c1"># stored in the diversification table.</span>
+
+    <span class="c1"># Join all the divison net events with the different</span>
+    <span class="c1"># division combinations</span>
+    <span class="n">mm_agg_event</span> <span class="o">=</span> <span class="n">mm_agg</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+        <span class="n">mm_events</span><span class="p">[[</span><span class="s2">&quot;net_event&quot;</span><span class="p">,</span> <span class="n">div_field</span><span class="p">,</span> <span class="s2">&quot;event&quot;</span><span class="p">]],</span>
+        <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;div_field&quot;</span><span class="p">,</span>
+        <span class="n">right_on</span><span class="o">=</span><span class="n">div_field</span><span class="p">,</span>
+        <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Do the same with the reinsurance rercoveries</span>
+    <span class="n">mm_agg_recoveries</span> <span class="o">=</span> <span class="n">mm_agg</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+        <span class="n">mm_recoveries</span><span class="p">[[</span><span class="s2">&quot;cparty_recov&quot;</span><span class="p">,</span> <span class="s2">&quot;counterparty_id&quot;</span><span class="p">,</span> <span class="s2">&quot;event&quot;</span><span class="p">,</span> <span class="s2">&quot;div_field&quot;</span><span class="p">,</span> <span class="s2">&quot;structure&quot;</span><span class="p">]],</span>
+        <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;div_field&quot;</span><span class="p">,</span>
+        <span class="n">right_on</span><span class="o">=</span><span class="s2">&quot;div_field&quot;</span><span class="p">,</span>
+        <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># At this stage we will have divisions with no events</span>
+    <span class="c1"># Changed this with an inner join</span>
+
+    <span class="c1"># W eno longer have a use for the division field</span>
+    <span class="n">mm_agg_event</span> <span class="o">=</span> <span class="n">mm_agg_event</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;div_field&quot;</span><span class="p">,</span> <span class="n">div_field</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">mm_agg_recoveries</span> <span class="o">=</span> <span class="n">mm_agg_recoveries</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;div_field&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+    <span class="c1"># We do the same with our recoveries</span>
+    <span class="n">detail_recoveries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">mm_agg_recoveries</span><span class="p">[[</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="s2">&quot;cparty_recov&quot;</span><span class="p">,</span> <span class="s2">&quot;counterparty_id&quot;</span><span class="p">,</span> <span class="s2">&quot;structure&quot;</span><span class="p">,</span> <span class="s2">&quot;event&quot;</span><span class="p">]],</span>
+            <span class="n">mm_overall_recoveries</span><span class="p">[[</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="s2">&quot;cparty_recov&quot;</span><span class="p">,</span> <span class="s2">&quot;counterparty_id&quot;</span><span class="p">,</span> <span class="s2">&quot;structure&quot;</span><span class="p">,</span><span class="s2">&quot;event&quot;</span><span class="p">]],</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">detail</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">counterparty</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">detail_recoveries</span><span class="p">[</span><span class="s2">&quot;event&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+        <span class="c1"># Get the entires we need</span>
+        <span class="c1"># Added the fiedls here &#39;div&#39; and &#39;structure&#39;</span>
+        <span class="c1"># This could be wrong</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">detail_recoveries</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+            <span class="n">detail_recoveries</span><span class="p">[</span><span class="s2">&quot;event&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">event</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;div&quot;</span><span class="p">,</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">,</span> <span class="s2">&quot;structure&quot;</span><span class="p">,</span><span class="s2">&quot;cparty_recov&quot;</span><span class="p">]</span>
+        <span class="p">]</span>
+        <span class="n">tmp</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;division&quot;</span><span class="p">,</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">,</span><span class="s2">&quot;structure&quot;</span><span class="p">,</span><span class="s2">&quot;recovery&quot;</span><span class="p">]</span>
+        <span class="c1"># MAke counterparty_di the index</span>
+        <span class="c1">#tmp.index = tmp[&quot;counterparty_id&quot;]</span>
+        <span class="c1">#tmp.drop(columns=[&quot;counterparty_id&quot;], inplace=True)</span>
+
+        <span class="c1"># Now get the counterparty summary</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">detail_recoveries</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">detail_recoveries</span><span class="p">[</span><span class="s2">&quot;event&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">event</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="s2">&quot;counterparty_id&quot;</span><span class="p">,</span> <span class="s2">&quot;cparty_recov&quot;</span><span class="p">]]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="s2">&quot;counterparty_id&quot;</span><span class="p">],</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;div&quot;</span><span class="p">]</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;div&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cparty_recov&quot;</span><span class="p">:</span> <span class="s2">&quot;recovery&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Add to the dictionary</span>
+        <span class="c1"># The recoveries by reinsurer for each event</span>
+        <span class="c1"># This is repeated for each division combinatons</span>
+        <span class="n">detail</span><span class="p">[</span><span class="n">event</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+        <span class="c1"># Teh same as above but with the division ID for each</span>
+        <span class="n">counterparty</span><span class="p">[</span><span class="n">event</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
+        <span class="c1"># print(detail.keys())</span>
+
+    <span class="c1"># The vlaues we pass to net_evetn should be the recoveries for the</span>
+    <span class="c1"># Total with the reinsurance columns at the top</span>
+    <span class="c1"># Teh should also be a total column</span>
+
+    <span class="c1"># Teh values we pass for recoveries should be the recoveries by</span>
+    <span class="c1"># reinsurance counterparty and event</span>
+    <span class="n">recoveries</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">event_list</span> <span class="o">=</span> <span class="n">mm_overall_recoveries</span><span class="p">[</span><span class="s2">&quot;event&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">event_list</span><span class="p">:</span>
+        <span class="c1"># Get the entires we need</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">mm_overall_recoveries</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+            <span class="n">mm_overall_recoveries</span><span class="p">[</span><span class="s2">&quot;event&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">event</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">,</span> <span class="s2">&quot;cparty_recov&quot;</span><span class="p">],</span>
+        <span class="p">]</span>
+        <span class="c1"># MAke counterparty_di the index</span>
+        <span class="n">tmp</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">]</span>
+        <span class="n">tmp</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># Add to the dictionary</span>
+        <span class="n">recoveries</span><span class="p">[</span><span class="n">event</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+
+    <span class="c1">#</span>
+
+    <span class="c1"># Now we need just to oder the overall net event</span>
+    <span class="n">net_event</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">mm_overall_net_event</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">mm_overall_net_event</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="n">idx</span><span class="p">]]</span>
+        <span class="n">row</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="n">cols</span><span class="p">[</span><span class="n">cols</span> <span class="o">!=</span> <span class="s2">&quot;__total__&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="n">net_event</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[[</span><span class="o">*</span><span class="n">cols</span><span class="p">,</span> <span class="s2">&quot;__total__&quot;</span><span class="p">]]</span>
+
+    <span class="c1"># Need to add the missing perils to our data</span>
+    <span class="c1"># We add them as None and 0.</span>
+    <span class="c1"># Thsi ensures that we don&#39;t have any error.</span>
+    <span class="k">for</span> <span class="n">mm</span> <span class="ow">in</span> <span class="n">skip_mm_overall</span><span class="p">:</span>
+        <span class="n">net_event</span><span class="p">[</span><span class="n">mm</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">mm_overall</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">mm</span><span class="p">,</span> <span class="s2">&quot;gross_event&quot;</span><span class="p">])</span>
+        <span class="n">recoveries</span><span class="p">[</span><span class="n">mm</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">counterparty</span><span class="p">[</span><span class="n">mm</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">detail</span><span class="p">[</span><span class="n">mm</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#TODO: The foramt of the data of detail si differenet whn comapred to nat cat</span>
+    <span class="c1"># Nat cat has: division	counterparty_id	structure	recovery</span>
+    <span class="c1"># MM has: counterparty_id, recovery</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">net_event</span><span class="p">,</span> <span class="n">recoveries</span><span class="p">,</span> <span class="n">counterparty</span><span class="p">,</span> <span class="n">detail</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Clive Hogarth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,534 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samplicity Strcuture &mdash; samplicity 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=7ab3649f" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Known Issues" href="knownissues.html" />
+    <link rel="prev" title="Samplicity Quick Start Guide" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            samplicity
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#further-reading">Further Reading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#class-documentation">Class Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#indices-and-tables">Indices and Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#data-inputs">Data Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-the-tool">Running the Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#data-extraction">Data Extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main-classes">Main Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scr">SCR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#risk-module-classes">Risk Module Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#premres">PremRes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#natcat">NatCat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#factorcat">FactorCat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manmade">ManMade</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nonprop">NonProp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#market">Market</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reinsurance">Reinsurance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oprisk">OpRisk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#how-the-classes-work-together">How the Classes work together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="knownissues.html">Known Issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="knownissues.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knownissues.html#premium-and-reserve-risk">Premium and Reserve Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knownissues.html#factor-based-catastrophe-risk">Factor Based Catastrophe Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knownissues.html#concentration-risk">Concentration Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="knownissues.html#python-design">Python Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="knownissues.html#object-orientated-approach">Object Orientated Approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="knownissues.html#splitting-of-classes">Splitting of Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Class Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scr.html">SCR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scr.html#module-samplicity.scr.scr">scr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR"><code class="docutils literal notranslate"><span class="pre">SCR</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.__init__"><code class="docutils literal notranslate"><span class="pre">SCR.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.calculation_steps"><code class="docutils literal notranslate"><span class="pre">SCR.calculation_steps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.classes"><code class="docutils literal notranslate"><span class="pre">SCR.classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.create_supporting"><code class="docutils literal notranslate"><span class="pre">SCR.create_supporting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.f_aggregation"><code class="docutils literal notranslate"><span class="pre">SCR.f_aggregation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.f_calculate"><code class="docutils literal notranslate"><span class="pre">SCR.f_calculate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.f_create_venv"><code class="docutils literal notranslate"><span class="pre">SCR.f_create_venv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.f_data"><code class="docutils literal notranslate"><span class="pre">SCR.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.f_diversification_calcs"><code class="docutils literal notranslate"><span class="pre">SCR.f_diversification_calcs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.f_error_count"><code class="docutils literal notranslate"><span class="pre">SCR.f_error_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.f_export_results"><code class="docutils literal notranslate"><span class="pre">SCR.f_export_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.f_import_data"><code class="docutils literal notranslate"><span class="pre">SCR.f_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.f_info"><code class="docutils literal notranslate"><span class="pre">SCR.f_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.f_save_pickle"><code class="docutils literal notranslate"><span class="pre">SCR.f_save_pickle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.f_shapely"><code class="docutils literal notranslate"><span class="pre">SCR.f_shapely()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.handle_calculation_error"><code class="docutils literal notranslate"><span class="pre">SCR.handle_calculation_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.handle_warning"><code class="docutils literal notranslate"><span class="pre">SCR.handle_warning()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.load_pickle"><code class="docutils literal notranslate"><span class="pre">SCR.load_pickle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.output"><code class="docutils literal notranslate"><span class="pre">SCR.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.output_errors"><code class="docutils literal notranslate"><span class="pre">SCR.output_errors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.scr.SCR.output_runtimes"><code class="docutils literal notranslate"><span class="pre">SCR.output_runtimes</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scr.html#support-modules">Support Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scr.html#module-samplicity.scr.aggregation">aggregation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scr.html#module-samplicity.scr.diversification">diversification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.diversification.shapely_calc"><code class="docutils literal notranslate"><span class="pre">shapely_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scr.html#module-samplicity.scr.info">info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.info.info"><code class="docutils literal notranslate"><span class="pre">info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scr.html#module-samplicity.scr.lacdt">lacdt</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scr.html#samplicity.scr.lacdt.f_lacdt_calculation"><code class="docutils literal notranslate"><span class="pre">f_lacdt_calculation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scr.html#solver">solver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data.html#module-samplicity.data.data">data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data.html#samplicity.data.data.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.f_data"><code class="docutils literal notranslate"><span class="pre">Data.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.f_export_results"><code class="docutils literal notranslate"><span class="pre">Data.f_export_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.f_import_data"><code class="docutils literal notranslate"><span class="pre">Data.f_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.output"><code class="docutils literal notranslate"><span class="pre">Data.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data.Data.scr"><code class="docutils literal notranslate"><span class="pre">Data.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data.html#access">access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-samplicity.data.data_models">data_models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.asset_data"><code class="docutils literal notranslate"><span class="pre">asset_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.asset_shocks"><code class="docutils literal notranslate"><span class="pre">asset_shocks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.convert_none_to_value"><code class="docutils literal notranslate"><span class="pre">convert_none_to_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.counterparty"><code class="docutils literal notranslate"><span class="pre">counterparty</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.division_detail"><code class="docutils literal notranslate"><span class="pre">division_detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.nat_cat_si"><code class="docutils literal notranslate"><span class="pre">nat_cat_si</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.prem_res"><code class="docutils literal notranslate"><span class="pre">prem_res</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.reinsurance"><code class="docutils literal notranslate"><span class="pre">reinsurance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_models.reinsurance_share"><code class="docutils literal notranslate"><span class="pre">reinsurance_share</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-samplicity.data.data_validation">data_validation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.data_validation.validate_data"><code class="docutils literal notranslate"><span class="pre">validate_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-samplicity.data.excel">excel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.excel.f_excel_export"><code class="docutils literal notranslate"><span class="pre">f_excel_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.excel.f_excel_import_data"><code class="docutils literal notranslate"><span class="pre">f_excel_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.excel.f_excel_import_pa_data"><code class="docutils literal notranslate"><span class="pre">f_excel_import_pa_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.excel.f_excel_import_range"><code class="docutils literal notranslate"><span class="pre">f_excel_import_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#module-samplicity.data.odbc">odbc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.odbc.chunker"><code class="docutils literal notranslate"><span class="pre">chunker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.odbc.f_odbc_export"><code class="docutils literal notranslate"><span class="pre">f_odbc_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.odbc.f_odbc_import"><code class="docutils literal notranslate"><span class="pre">f_odbc_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.odbc.f_odbc_table_import"><code class="docutils literal notranslate"><span class="pre">f_odbc_table_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data.html#samplicity.data.odbc.insert_with_progress"><code class="docutils literal notranslate"><span class="pre">insert_with_progress()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data.html#validation">validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="premres.html">PremRes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="premres.html#samplicity.prem_res.PremRes"><code class="docutils literal notranslate"><span class="pre">PremRes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="premres.html#samplicity.prem_res.PremRes.__init__"><code class="docutils literal notranslate"><span class="pre">PremRes.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="premres.html#samplicity.prem_res.PremRes.f_calculate"><code class="docutils literal notranslate"><span class="pre">PremRes.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="premres.html#samplicity.prem_res.PremRes.f_data"><code class="docutils literal notranslate"><span class="pre">PremRes.f_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="natcat.html">NatCat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat"><code class="docutils literal notranslate"><span class="pre">NatCat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.__init__"><code class="docutils literal notranslate"><span class="pre">NatCat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.f_calculate"><code class="docutils literal notranslate"><span class="pre">NatCat.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.f_cat_calculation"><code class="docutils literal notranslate"><span class="pre">NatCat.f_cat_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.f_data"><code class="docutils literal notranslate"><span class="pre">NatCat.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.f_data_aggregation"><code class="docutils literal notranslate"><span class="pre">NatCat.f_data_aggregation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.output"><code class="docutils literal notranslate"><span class="pre">NatCat.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="natcat.html#samplicity.nat_cat.NatCat.scr"><code class="docutils literal notranslate"><span class="pre">NatCat.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="factorcat.html">FactorCat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat"><code class="docutils literal notranslate"><span class="pre">FactorCat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.__init__"><code class="docutils literal notranslate"><span class="pre">FactorCat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.f_calculate"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.f_data"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.f_indv_calculation"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_indv_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.output"><code class="docutils literal notranslate"><span class="pre">FactorCat.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="factorcat.html#samplicity.factor_cat.FactorCat.scr"><code class="docutils literal notranslate"><span class="pre">FactorCat.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nonprop.html">NonProp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp"><code class="docutils literal notranslate"><span class="pre">NonProp</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.__init__"><code class="docutils literal notranslate"><span class="pre">NonProp.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.f_calculate"><code class="docutils literal notranslate"><span class="pre">NonProp.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.f_data"><code class="docutils literal notranslate"><span class="pre">NonProp.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.f_indv_calculation"><code class="docutils literal notranslate"><span class="pre">NonProp.f_indv_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.output"><code class="docutils literal notranslate"><span class="pre">NonProp.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nonprop.html#samplicity.non_prop.NonProp.scr"><code class="docutils literal notranslate"><span class="pre">NonProp.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manmade.html">ManMade</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade"><code class="docutils literal notranslate"><span class="pre">ManMade</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.__init__"><code class="docutils literal notranslate"><span class="pre">ManMade.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.f_calculate"><code class="docutils literal notranslate"><span class="pre">ManMade.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.f_data"><code class="docutils literal notranslate"><span class="pre">ManMade.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.f_gross_event"><code class="docutils literal notranslate"><span class="pre">ManMade.f_gross_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.output"><code class="docutils literal notranslate"><span class="pre">ManMade.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="manmade.html#samplicity.man_made.ManMade.scr"><code class="docutils literal notranslate"><span class="pre">ManMade.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reinsurance.html">Reinsurnace</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reinsurance.html#module-samplicity.reinsurance.reinsurance">reinsurance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance"><code class="docutils literal notranslate"><span class="pre">Reinsurance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.__init__"><code class="docutils literal notranslate"><span class="pre">Reinsurance.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_calculate_net_events"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_calculate_net_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_calculate_recoveries"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_calculate_recoveries()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_data"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.output"><code class="docutils literal notranslate"><span class="pre">Reinsurance.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.scr"><code class="docutils literal notranslate"><span class="pre">Reinsurance.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reinsurance.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reinsurance.html#module-samplicity.reinsurance.ri_man_made">ri_man_made</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.ri_man_made.f_man_made"><code class="docutils literal notranslate"><span class="pre">f_man_made()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reinsurance.html#module-samplicity.reinsurance.ri_prog">ri_prog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.ri_prog.f_apply_reinsurance"><code class="docutils literal notranslate"><span class="pre">f_apply_reinsurance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="reinsurance.html#samplicity.reinsurance.ri_prog.f_apply_ri_prog"><code class="docutils literal notranslate"><span class="pre">f_apply_ri_prog()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="market.html">Market</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="market.html#module-samplicity.market.market">market</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="market.html#samplicity.market.market.Market"><code class="docutils literal notranslate"><span class="pre">Market</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.__init__"><code class="docutils literal notranslate"><span class="pre">Market.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.class_data"><code class="docutils literal notranslate"><span class="pre">Market.class_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.f_aggregate_charges"><code class="docutils literal notranslate"><span class="pre">Market.f_aggregate_charges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.f_calc_impairment"><code class="docutils literal notranslate"><span class="pre">Market.f_calc_impairment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.f_data"><code class="docutils literal notranslate"><span class="pre">Market.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.f_market_risk"><code class="docutils literal notranslate"><span class="pre">Market.f_market_risk()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.f_spread_interest"><code class="docutils literal notranslate"><span class="pre">Market.f_spread_interest()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.output"><code class="docutils literal notranslate"><span class="pre">Market.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.market.Market.scr"><code class="docutils literal notranslate"><span class="pre">Market.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="market.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="market.html#module-samplicity.market.aggregate">aggregate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.aggregate.f_aggregate_market"><code class="docutils literal notranslate"><span class="pre">f_aggregate_market()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="market.html#module-samplicity.market.bond">bond</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.bond.BOND_VAL"><code class="docutils literal notranslate"><span class="pre">BOND_VAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.bond.f_fixed"><code class="docutils literal notranslate"><span class="pre">f_fixed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.bond.f_floating"><code class="docutils literal notranslate"><span class="pre">f_floating()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.bond.f_newton_calc"><code class="docutils literal notranslate"><span class="pre">f_newton_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="market.html#module-samplicity.market.conc">conc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.conc.f_concentration_risk"><code class="docutils literal notranslate"><span class="pre">f_concentration_risk()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="market.html#module-samplicity.market.credit">credit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.credit.calculate_u_matrix_entry"><code class="docutils literal notranslate"><span class="pre">calculate_u_matrix_entry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.credit.f_credit_type_1"><code class="docutils literal notranslate"><span class="pre">f_credit_type_1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.credit.f_impairment"><code class="docutils literal notranslate"><span class="pre">f_impairment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.credit.f_u_matrix"><code class="docutils literal notranslate"><span class="pre">f_u_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="market.html#samplicity.market.credit.f_v_vector"><code class="docutils literal notranslate"><span class="pre">f_v_vector()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bondval.html">BOND VAL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bondval.html#samplicity.market.bond.BOND_VAL"><code class="docutils literal notranslate"><span class="pre">BOND_VAL</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bondval.html#samplicity.market.bond.BOND_VAL.__init__"><code class="docutils literal notranslate"><span class="pre">BOND_VAL.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="bondval.html#samplicity.market.bond.BOND_VAL.f_calculate"><code class="docutils literal notranslate"><span class="pre">BOND_VAL.f_calculate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bondval.html#samplicity.market.bond.f_fixed"><code class="docutils literal notranslate"><span class="pre">f_fixed()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bondval.html#samplicity.market.bond.f_floating"><code class="docutils literal notranslate"><span class="pre">f_floating()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bondval.html#samplicity.market.bond.f_newton_calc"><code class="docutils literal notranslate"><span class="pre">f_newton_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="oprisk.html">OpRisk</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="oprisk.html#samplicity.op_risk.OpRisk"><code class="docutils literal notranslate"><span class="pre">OpRisk</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="oprisk.html#samplicity.op_risk.OpRisk.__init__"><code class="docutils literal notranslate"><span class="pre">OpRisk.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="oprisk.html#samplicity.op_risk.OpRisk.f_calculate"><code class="docutils literal notranslate"><span class="pre">OpRisk.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="oprisk.html#samplicity.op_risk.OpRisk.f_data"><code class="docutils literal notranslate"><span class="pre">OpRisk.f_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Helper Code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="helper.html">Helper Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.allocation_matrix"><code class="docutils literal notranslate"><span class="pre">allocation_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.check_tuple"><code class="docutils literal notranslate"><span class="pre">check_tuple()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.combins_df_col"><code class="docutils literal notranslate"><span class="pre">combins_df_col()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_accummulate_figures"><code class="docutils literal notranslate"><span class="pre">f_accummulate_figures()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_best_join"><code class="docutils literal notranslate"><span class="pre">f_best_join()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_best_match"><code class="docutils literal notranslate"><span class="pre">f_best_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_best_match_new"><code class="docutils literal notranslate"><span class="pre">f_best_match_new()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_div_match"><code class="docutils literal notranslate"><span class="pre">f_div_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_fast_join"><code class="docutils literal notranslate"><span class="pre">f_fast_join()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_fast_match_element"><code class="docutils literal notranslate"><span class="pre">f_fast_match_element()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_get_total_row"><code class="docutils literal notranslate"><span class="pre">f_get_total_row()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_new_match_element"><code class="docutils literal notranslate"><span class="pre">f_new_match_element()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.f_new_match_idx"><code class="docutils literal notranslate"><span class="pre">f_new_match_idx()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper.html#samplicity.helper.log_decorator"><code class="docutils literal notranslate"><span class="pre">log_decorator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Main Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main.html#samplicity.main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#samplicity.main.run_excel"><code class="docutils literal notranslate"><span class="pre">run_excel()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#samplicity.main.run_ms_access"><code class="docutils literal notranslate"><span class="pre">run_ms_access()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#samplicity.main.test_runs"><code class="docutils literal notranslate"><span class="pre">test_runs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">samplicity</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Samplicity Strcuture</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/structure.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samplicity-strcuture">
+<h1>Samplicity Strcuture<a class="headerlink" href="#samplicity-strcuture" title="Link to this heading"></a></h1>
+<p>The Samplicity package is designed to calculate the Solvency Assessment and Management (SAM) Solvency Capital Requirement (SCR) for non-life insurers.
+It consists of several interconnected classes that work together to perform various aspects of the calculation.</p>
+<section id="main-classes">
+<h2>Main Classes<a class="headerlink" href="#main-classes" title="Link to this heading"></a></h2>
+<section id="scr">
+<h3>SCR<a class="headerlink" href="#scr" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">SCR</span></code> class is the central class of the Samplicity package. It orchestrates the entire SCR calculation process and manages the interaction between other classes.</p>
+<p>Key responsibilities:
+- Initializing and managing other classes
+- Coordinating the calculation steps
+- Aggregating results from various risk modules
+- Handling data import and export</p>
+</section>
+<section id="data">
+<h3>Data<a class="headerlink" href="#data" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Data</span></code> class is responsible for importing, managing, and exporting data used in the SCR calculations.</p>
+<p>Key responsibilities:
+- Importing data from Excel or databases
+- Validating and preprocessing input data
+- Exporting calculation results</p>
+</section>
+<section id="risk-module-classes">
+<h3>Risk Module Classes<a class="headerlink" href="#risk-module-classes" title="Link to this heading"></a></h3>
+<section id="premres">
+<h4>PremRes<a class="headerlink" href="#premres" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">PremRes</span></code> class calculates the premium and reserve risk component of the SCR.</p>
+</section>
+<section id="natcat">
+<h4>NatCat<a class="headerlink" href="#natcat" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">NatCat</span></code> class handles the natural catastrophe risk calculations.</p>
+</section>
+<section id="factorcat">
+<h4>FactorCat<a class="headerlink" href="#factorcat" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">FactorCat</span></code> class computes the factor-based catastrophe risk.</p>
+</section>
+<section id="manmade">
+<h4>ManMade<a class="headerlink" href="#manmade" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">ManMade</span></code> class calculates the man-made catastrophe risk component.</p>
+</section>
+<section id="nonprop">
+<h4>NonProp<a class="headerlink" href="#nonprop" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">NonProp</span></code> class handles the non-proportional reinsurance risk calculations.</p>
+</section>
+<section id="market">
+<h4>Market<a class="headerlink" href="#market" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">Market</span></code> class computes various market risk components, including interest rate, equity, property, spread, and concentration risks.</p>
+</section>
+<section id="reinsurance">
+<h4>Reinsurance<a class="headerlink" href="#reinsurance" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">Reinsurance</span></code> class calculates reinsurance recoveries and net risk charges.</p>
+</section>
+<section id="oprisk">
+<h4>OpRisk<a class="headerlink" href="#oprisk" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">OpRisk</span></code> class computes the operational risk component of the SCR.</p>
+</section>
+</section>
+</section>
+<section id="how-the-classes-work-together">
+<h2>How the Classes work together<a class="headerlink" href="#how-the-classes-work-together" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">SCR</span></code> class initializes all other classes and stores them in its <cite>classes</cite> dictionary.</p></li>
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">Data</span></code> class the necessary input data, PA data metadata and is imported and stored in the respective <cite>data</cite>, <cite>pa_data</cite> and <cite>metadata</cite> dictionaries.</p></li>
+<li><p>During the calculation process, the <code class="docutils literal notranslate"><span class="pre">SCR</span></code> class calls methods from each risk module class in a specific order:</p>
+<ol class="loweralpha simple">
+<li><p>Premium and Reserve Risk (<code class="docutils literal notranslate"><span class="pre">PremRes</span></code>)</p></li>
+<li><p>Natural Catastrophe Risk (<code class="docutils literal notranslate"><span class="pre">NatCat</span></code>)</p></li>
+<li><p>Factor Catastrophe Risk (<code class="docutils literal notranslate"><span class="pre">FactorCat</span></code>)</p></li>
+<li><p>Man-Made Catastrophe Risk (<code class="docutils literal notranslate"><span class="pre">ManMade</span></code>)</p></li>
+<li><p>Non-Proportional Reinsurance Risk (<code class="docutils literal notranslate"><span class="pre">NonProp</span></code>)</p></li>
+<li><p>Reinsurance Risk (<code class="docutils literal notranslate"><span class="pre">Reinsurance</span></code>)</p></li>
+<li><p>Operational Risk (<code class="docutils literal notranslate"><span class="pre">OpRisk</span></code>)</p></li>
+<li><p>Market Risk (<code class="docutils literal notranslate"><span class="pre">Market</span></code>)</p></li>
+</ol>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Data</span></code> class is used throughout the process to provide input data and store calculation results.</p></li>
+<li><p>After individual risk modules complete their calculations, the <code class="docutils literal notranslate"><span class="pre">SCR</span></code> class aggregates the results using correlation matrices and diversification effects.</p></li>
+<li><p>Finally, the <code class="docutils literal notranslate"><span class="pre">SCR</span></code> class computes the overall Solvency Capital Requirement - allowing for LACDT - and stores the results.</p></li>
+</ol>
+</section>
+<section id="usage-example">
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">samplicity</span> <span class="k">as</span> <span class="nn">sam</span>
+
+<span class="c1"># Create an SCR instance</span>
+<span class="n">sam_scr</span> <span class="o">=</span> <span class="n">sam</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">SCR</span><span class="p">()</span>
+
+<span class="c1"># Import data</span>
+<span class="n">sam_scr</span><span class="o">.</span><span class="n">f_import_data</span><span class="p">(</span>
+    <span class="n">risk_free_rates</span><span class="o">=</span><span class="s2">&quot;path/to/risk_free_rates.xlsx&quot;</span><span class="p">,</span>
+    <span class="n">symmetric_adjustment</span><span class="o">=</span><span class="s2">&quot;path/to/symmetric_adjustment.xlsx&quot;</span><span class="p">,</span>
+    <span class="n">data_file</span><span class="o">=</span><span class="s2">&quot;path/to/input_data.xlsx&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Perform SCR calculation</span>
+<span class="n">sam_scr</span><span class="o">.</span><span class="n">f_calculate</span><span class="p">()</span>
+
+<span class="c1"># Export results</span>
+<span class="n">sam_scr</span><span class="o">.</span><span class="n">f_export_results</span><span class="p">(</span><span class="s2">&quot;path/to/output.xlsx&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This structure allows for a modular and extensible approach to SCR calculations, making it easier to maintain and update individual risk components as regulatory requirements change.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Samplicity Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="knownissues.html" class="btn btn-neutral float-right" title="Known Issues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Clive Hogarth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

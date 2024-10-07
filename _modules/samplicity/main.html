@@ -1,0 +1,712 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samplicity.main &mdash; samplicity 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=7ab3649f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            samplicity
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html#further-reading">Further Reading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html#class-documentation">Class Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html#indices-and-tables">Indices and Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#data-inputs">Data Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#running-the-tool">Running the Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#data-extraction">Data Extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../structure.html">Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../structure.html#main-classes">Main Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../structure.html#scr">SCR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../structure.html#data">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../structure.html#risk-module-classes">Risk Module Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../structure.html#premres">PremRes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../structure.html#natcat">NatCat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../structure.html#factorcat">FactorCat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../structure.html#manmade">ManMade</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../structure.html#nonprop">NonProp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../structure.html#market">Market</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../structure.html#reinsurance">Reinsurance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../structure.html#oprisk">OpRisk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure.html#how-the-classes-work-together">How the Classes work together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../structure.html#usage-example">Usage Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../knownissues.html">Known Issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../knownissues.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../knownissues.html#premium-and-reserve-risk">Premium and Reserve Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../knownissues.html#factor-based-catastrophe-risk">Factor Based Catastrophe Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../knownissues.html#concentration-risk">Concentration Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../knownissues.html#python-design">Python Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../knownissues.html#object-orientated-approach">Object Orientated Approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../knownissues.html#splitting-of-classes">Splitting of Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Class Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scr.html">SCR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../scr.html#module-samplicity.scr.scr">scr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR"><code class="docutils literal notranslate"><span class="pre">SCR</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.__init__"><code class="docutils literal notranslate"><span class="pre">SCR.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.calculation_steps"><code class="docutils literal notranslate"><span class="pre">SCR.calculation_steps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.classes"><code class="docutils literal notranslate"><span class="pre">SCR.classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.create_supporting"><code class="docutils literal notranslate"><span class="pre">SCR.create_supporting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.f_aggregation"><code class="docutils literal notranslate"><span class="pre">SCR.f_aggregation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.f_calculate"><code class="docutils literal notranslate"><span class="pre">SCR.f_calculate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.f_create_venv"><code class="docutils literal notranslate"><span class="pre">SCR.f_create_venv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.f_data"><code class="docutils literal notranslate"><span class="pre">SCR.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.f_diversification_calcs"><code class="docutils literal notranslate"><span class="pre">SCR.f_diversification_calcs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.f_error_count"><code class="docutils literal notranslate"><span class="pre">SCR.f_error_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.f_export_results"><code class="docutils literal notranslate"><span class="pre">SCR.f_export_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.f_import_data"><code class="docutils literal notranslate"><span class="pre">SCR.f_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.f_info"><code class="docutils literal notranslate"><span class="pre">SCR.f_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.f_save_pickle"><code class="docutils literal notranslate"><span class="pre">SCR.f_save_pickle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.f_shapely"><code class="docutils literal notranslate"><span class="pre">SCR.f_shapely()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.handle_calculation_error"><code class="docutils literal notranslate"><span class="pre">SCR.handle_calculation_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.handle_warning"><code class="docutils literal notranslate"><span class="pre">SCR.handle_warning()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.load_pickle"><code class="docutils literal notranslate"><span class="pre">SCR.load_pickle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.output"><code class="docutils literal notranslate"><span class="pre">SCR.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.output_errors"><code class="docutils literal notranslate"><span class="pre">SCR.output_errors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.scr.SCR.output_runtimes"><code class="docutils literal notranslate"><span class="pre">SCR.output_runtimes</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../scr.html#support-modules">Support Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../scr.html#module-samplicity.scr.aggregation">aggregation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scr.html#module-samplicity.scr.diversification">diversification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.diversification.shapely_calc"><code class="docutils literal notranslate"><span class="pre">shapely_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../scr.html#module-samplicity.scr.info">info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.info.info"><code class="docutils literal notranslate"><span class="pre">info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../scr.html#module-samplicity.scr.lacdt">lacdt</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../scr.html#samplicity.scr.lacdt.f_lacdt_calculation"><code class="docutils literal notranslate"><span class="pre">f_lacdt_calculation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../scr.html#solver">solver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../data.html#module-samplicity.data.data">data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../data.html#samplicity.data.data.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data.Data.f_data"><code class="docutils literal notranslate"><span class="pre">Data.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data.Data.f_export_results"><code class="docutils literal notranslate"><span class="pre">Data.f_export_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data.Data.f_import_data"><code class="docutils literal notranslate"><span class="pre">Data.f_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data.Data.output"><code class="docutils literal notranslate"><span class="pre">Data.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data.Data.scr"><code class="docutils literal notranslate"><span class="pre">Data.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../data.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../data.html#access">access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../data.html#module-samplicity.data.data_models">data_models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data_models.asset_data"><code class="docutils literal notranslate"><span class="pre">asset_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data_models.asset_shocks"><code class="docutils literal notranslate"><span class="pre">asset_shocks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data_models.convert_none_to_value"><code class="docutils literal notranslate"><span class="pre">convert_none_to_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data_models.counterparty"><code class="docutils literal notranslate"><span class="pre">counterparty</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data_models.division_detail"><code class="docutils literal notranslate"><span class="pre">division_detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data_models.nat_cat_si"><code class="docutils literal notranslate"><span class="pre">nat_cat_si</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data_models.prem_res"><code class="docutils literal notranslate"><span class="pre">prem_res</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data_models.reinsurance"><code class="docutils literal notranslate"><span class="pre">reinsurance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data_models.reinsurance_share"><code class="docutils literal notranslate"><span class="pre">reinsurance_share</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../data.html#module-samplicity.data.data_validation">data_validation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.data_validation.validate_data"><code class="docutils literal notranslate"><span class="pre">validate_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../data.html#module-samplicity.data.excel">excel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.excel.f_excel_export"><code class="docutils literal notranslate"><span class="pre">f_excel_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.excel.f_excel_import_data"><code class="docutils literal notranslate"><span class="pre">f_excel_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.excel.f_excel_import_pa_data"><code class="docutils literal notranslate"><span class="pre">f_excel_import_pa_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.excel.f_excel_import_range"><code class="docutils literal notranslate"><span class="pre">f_excel_import_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../data.html#module-samplicity.data.odbc">odbc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.odbc.chunker"><code class="docutils literal notranslate"><span class="pre">chunker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.odbc.f_odbc_export"><code class="docutils literal notranslate"><span class="pre">f_odbc_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.odbc.f_odbc_import"><code class="docutils literal notranslate"><span class="pre">f_odbc_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.odbc.f_odbc_table_import"><code class="docutils literal notranslate"><span class="pre">f_odbc_table_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../data.html#samplicity.data.odbc.insert_with_progress"><code class="docutils literal notranslate"><span class="pre">insert_with_progress()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../data.html#validation">validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../premres.html">PremRes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../premres.html#samplicity.prem_res.PremRes"><code class="docutils literal notranslate"><span class="pre">PremRes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../premres.html#samplicity.prem_res.PremRes.__init__"><code class="docutils literal notranslate"><span class="pre">PremRes.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../premres.html#samplicity.prem_res.PremRes.f_calculate"><code class="docutils literal notranslate"><span class="pre">PremRes.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../premres.html#samplicity.prem_res.PremRes.f_data"><code class="docutils literal notranslate"><span class="pre">PremRes.f_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../natcat.html">NatCat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../natcat.html#samplicity.nat_cat.NatCat"><code class="docutils literal notranslate"><span class="pre">NatCat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../natcat.html#samplicity.nat_cat.NatCat.__init__"><code class="docutils literal notranslate"><span class="pre">NatCat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../natcat.html#samplicity.nat_cat.NatCat.f_calculate"><code class="docutils literal notranslate"><span class="pre">NatCat.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../natcat.html#samplicity.nat_cat.NatCat.f_cat_calculation"><code class="docutils literal notranslate"><span class="pre">NatCat.f_cat_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../natcat.html#samplicity.nat_cat.NatCat.f_data"><code class="docutils literal notranslate"><span class="pre">NatCat.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../natcat.html#samplicity.nat_cat.NatCat.f_data_aggregation"><code class="docutils literal notranslate"><span class="pre">NatCat.f_data_aggregation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../natcat.html#samplicity.nat_cat.NatCat.output"><code class="docutils literal notranslate"><span class="pre">NatCat.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../natcat.html#samplicity.nat_cat.NatCat.scr"><code class="docutils literal notranslate"><span class="pre">NatCat.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../factorcat.html">FactorCat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../factorcat.html#samplicity.factor_cat.FactorCat"><code class="docutils literal notranslate"><span class="pre">FactorCat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../factorcat.html#samplicity.factor_cat.FactorCat.__init__"><code class="docutils literal notranslate"><span class="pre">FactorCat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../factorcat.html#samplicity.factor_cat.FactorCat.f_calculate"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../factorcat.html#samplicity.factor_cat.FactorCat.f_data"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../factorcat.html#samplicity.factor_cat.FactorCat.f_indv_calculation"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_indv_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../factorcat.html#samplicity.factor_cat.FactorCat.output"><code class="docutils literal notranslate"><span class="pre">FactorCat.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../factorcat.html#samplicity.factor_cat.FactorCat.scr"><code class="docutils literal notranslate"><span class="pre">FactorCat.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../nonprop.html">NonProp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../nonprop.html#samplicity.non_prop.NonProp"><code class="docutils literal notranslate"><span class="pre">NonProp</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../nonprop.html#samplicity.non_prop.NonProp.__init__"><code class="docutils literal notranslate"><span class="pre">NonProp.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nonprop.html#samplicity.non_prop.NonProp.f_calculate"><code class="docutils literal notranslate"><span class="pre">NonProp.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nonprop.html#samplicity.non_prop.NonProp.f_data"><code class="docutils literal notranslate"><span class="pre">NonProp.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nonprop.html#samplicity.non_prop.NonProp.f_indv_calculation"><code class="docutils literal notranslate"><span class="pre">NonProp.f_indv_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nonprop.html#samplicity.non_prop.NonProp.output"><code class="docutils literal notranslate"><span class="pre">NonProp.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nonprop.html#samplicity.non_prop.NonProp.scr"><code class="docutils literal notranslate"><span class="pre">NonProp.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../manmade.html">ManMade</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../manmade.html#samplicity.man_made.ManMade"><code class="docutils literal notranslate"><span class="pre">ManMade</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../manmade.html#samplicity.man_made.ManMade.__init__"><code class="docutils literal notranslate"><span class="pre">ManMade.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manmade.html#samplicity.man_made.ManMade.f_calculate"><code class="docutils literal notranslate"><span class="pre">ManMade.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manmade.html#samplicity.man_made.ManMade.f_data"><code class="docutils literal notranslate"><span class="pre">ManMade.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manmade.html#samplicity.man_made.ManMade.f_gross_event"><code class="docutils literal notranslate"><span class="pre">ManMade.f_gross_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manmade.html#samplicity.man_made.ManMade.output"><code class="docutils literal notranslate"><span class="pre">ManMade.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manmade.html#samplicity.man_made.ManMade.scr"><code class="docutils literal notranslate"><span class="pre">ManMade.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reinsurance.html">Reinsurnace</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reinsurance.html#module-samplicity.reinsurance.reinsurance">reinsurance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance"><code class="docutils literal notranslate"><span class="pre">Reinsurance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.__init__"><code class="docutils literal notranslate"><span class="pre">Reinsurance.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_calculate_net_events"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_calculate_net_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_calculate_recoveries"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_calculate_recoveries()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_data"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.output"><code class="docutils literal notranslate"><span class="pre">Reinsurance.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.scr"><code class="docutils literal notranslate"><span class="pre">Reinsurance.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../reinsurance.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reinsurance.html#module-samplicity.reinsurance.ri_man_made">ri_man_made</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reinsurance.html#samplicity.reinsurance.ri_man_made.f_man_made"><code class="docutils literal notranslate"><span class="pre">f_man_made()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reinsurance.html#module-samplicity.reinsurance.ri_prog">ri_prog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reinsurance.html#samplicity.reinsurance.ri_prog.f_apply_reinsurance"><code class="docutils literal notranslate"><span class="pre">f_apply_reinsurance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reinsurance.html#samplicity.reinsurance.ri_prog.f_apply_ri_prog"><code class="docutils literal notranslate"><span class="pre">f_apply_ri_prog()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../market.html">Market</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../market.html#module-samplicity.market.market">market</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../market.html#samplicity.market.market.Market"><code class="docutils literal notranslate"><span class="pre">Market</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.market.Market.__init__"><code class="docutils literal notranslate"><span class="pre">Market.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.market.Market.class_data"><code class="docutils literal notranslate"><span class="pre">Market.class_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.market.Market.f_aggregate_charges"><code class="docutils literal notranslate"><span class="pre">Market.f_aggregate_charges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.market.Market.f_calc_impairment"><code class="docutils literal notranslate"><span class="pre">Market.f_calc_impairment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.market.Market.f_data"><code class="docutils literal notranslate"><span class="pre">Market.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.market.Market.f_market_risk"><code class="docutils literal notranslate"><span class="pre">Market.f_market_risk()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.market.Market.f_spread_interest"><code class="docutils literal notranslate"><span class="pre">Market.f_spread_interest()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.market.Market.output"><code class="docutils literal notranslate"><span class="pre">Market.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.market.Market.scr"><code class="docutils literal notranslate"><span class="pre">Market.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../market.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../market.html#module-samplicity.market.aggregate">aggregate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.aggregate.f_aggregate_market"><code class="docutils literal notranslate"><span class="pre">f_aggregate_market()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../market.html#module-samplicity.market.bond">bond</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.bond.BOND_VAL"><code class="docutils literal notranslate"><span class="pre">BOND_VAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.bond.f_fixed"><code class="docutils literal notranslate"><span class="pre">f_fixed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.bond.f_floating"><code class="docutils literal notranslate"><span class="pre">f_floating()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.bond.f_newton_calc"><code class="docutils literal notranslate"><span class="pre">f_newton_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../market.html#module-samplicity.market.conc">conc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.conc.f_concentration_risk"><code class="docutils literal notranslate"><span class="pre">f_concentration_risk()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../market.html#module-samplicity.market.credit">credit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.credit.calculate_u_matrix_entry"><code class="docutils literal notranslate"><span class="pre">calculate_u_matrix_entry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.credit.f_credit_type_1"><code class="docutils literal notranslate"><span class="pre">f_credit_type_1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.credit.f_impairment"><code class="docutils literal notranslate"><span class="pre">f_impairment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.credit.f_u_matrix"><code class="docutils literal notranslate"><span class="pre">f_u_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../market.html#samplicity.market.credit.f_v_vector"><code class="docutils literal notranslate"><span class="pre">f_v_vector()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bondval.html">BOND VAL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../bondval.html#samplicity.market.bond.BOND_VAL"><code class="docutils literal notranslate"><span class="pre">BOND_VAL</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../bondval.html#samplicity.market.bond.BOND_VAL.__init__"><code class="docutils literal notranslate"><span class="pre">BOND_VAL.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../bondval.html#samplicity.market.bond.BOND_VAL.f_calculate"><code class="docutils literal notranslate"><span class="pre">BOND_VAL.f_calculate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bondval.html#samplicity.market.bond.f_fixed"><code class="docutils literal notranslate"><span class="pre">f_fixed()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bondval.html#samplicity.market.bond.f_floating"><code class="docutils literal notranslate"><span class="pre">f_floating()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bondval.html#samplicity.market.bond.f_newton_calc"><code class="docutils literal notranslate"><span class="pre">f_newton_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../oprisk.html">OpRisk</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../oprisk.html#samplicity.op_risk.OpRisk"><code class="docutils literal notranslate"><span class="pre">OpRisk</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../oprisk.html#samplicity.op_risk.OpRisk.__init__"><code class="docutils literal notranslate"><span class="pre">OpRisk.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../oprisk.html#samplicity.op_risk.OpRisk.f_calculate"><code class="docutils literal notranslate"><span class="pre">OpRisk.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../oprisk.html#samplicity.op_risk.OpRisk.f_data"><code class="docutils literal notranslate"><span class="pre">OpRisk.f_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Helper Code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../helper.html">Helper Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.allocation_matrix"><code class="docutils literal notranslate"><span class="pre">allocation_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.check_tuple"><code class="docutils literal notranslate"><span class="pre">check_tuple()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.combins_df_col"><code class="docutils literal notranslate"><span class="pre">combins_df_col()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.f_accummulate_figures"><code class="docutils literal notranslate"><span class="pre">f_accummulate_figures()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.f_best_join"><code class="docutils literal notranslate"><span class="pre">f_best_join()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.f_best_match"><code class="docutils literal notranslate"><span class="pre">f_best_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.f_best_match_new"><code class="docutils literal notranslate"><span class="pre">f_best_match_new()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.f_div_match"><code class="docutils literal notranslate"><span class="pre">f_div_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.f_fast_join"><code class="docutils literal notranslate"><span class="pre">f_fast_join()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.f_fast_match_element"><code class="docutils literal notranslate"><span class="pre">f_fast_match_element()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.f_get_total_row"><code class="docutils literal notranslate"><span class="pre">f_get_total_row()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.f_new_match_element"><code class="docutils literal notranslate"><span class="pre">f_new_match_element()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.f_new_match_idx"><code class="docutils literal notranslate"><span class="pre">f_new_match_idx()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../helper.html#samplicity.helper.log_decorator"><code class="docutils literal notranslate"><span class="pre">log_decorator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">Main Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../main.html#samplicity.main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../main.html#samplicity.main.run_excel"><code class="docutils literal notranslate"><span class="pre">run_excel()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../main.html#samplicity.main.run_ms_access"><code class="docutils literal notranslate"><span class="pre">run_ms_access()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../main.html#samplicity.main.test_runs"><code class="docutils literal notranslate"><span class="pre">test_runs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">samplicity</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">samplicity.main</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for samplicity.main</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">main.</span>
+
+<span class="sd">Supporting code for the SCR class.</span>
+<span class="sd">Designed to help execution from various environments.</span>
+
+<span class="sd">@author: chogarth</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span> <span class="k">as</span> <span class="n">StringBuffer</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">.scr.scr</span> <span class="kn">import</span> <span class="n">SCR</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../source/main.html#samplicity.main.main">[docs]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The functionality called from the command line.&quot;&quot;&quot;</span></div>
+
+
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+    <span class="n">prog</span><span class="o">=</span><span class="s2">&quot;Samplicity&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Python calculation of the SAM non-life SCR.&quot;</span><span class="p">,</span>
+    <span class="n">epilog</span><span class="o">=</span><span class="s2">&quot;Text at the bottom of help&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s2">&quot;ms_access_file&quot;</span><span class="p">,</span>
+    <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;acces_file&quot;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;location of the MS Access database&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s2">&quot;import_table&quot;</span><span class="p">,</span>
+    <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;import_table&quot;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+    <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;name of table defining the imports&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="run_excel">
+<a class="viewcode-back" href="../../source/main.html#samplicity.main.run_excel">[docs]</a>
+<span class="k">def</span> <span class="nf">run_excel</span><span class="p">(</span>
+    <span class="n">import_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">risk_free_rates</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">symmetric_adjustment</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">export_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">log_detail</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">process_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simplify the CMD call, where data is populated in Excel.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Set the logging configuration</span>
+    <span class="n">message_format</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> - </span><span class="si">%(levelname)s</span><span class="s2"> - </span><span class="si">%(name)s</span><span class="s2"> - </span><span class="si">%(funcName)s</span><span class="s2">() - </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># Thsi will capture teh logs to a string variable</span>
+    <span class="n">log_capture_string</span> <span class="o">=</span> <span class="n">StringBuffer</span><span class="p">()</span>
+    <span class="n">ch</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">log_capture_string</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Function start&quot;</span><span class="p">)</span>
+    <span class="n">sam_scr</span> <span class="o">=</span> <span class="n">SCR</span><span class="p">()</span>
+    <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_import_data</span><span class="p">(</span>
+        <span class="n">metadata_file</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">risk_free_rates</span><span class="o">=</span><span class="n">risk_free_rates</span><span class="p">,</span>
+        <span class="n">symmetric_adjustment</span><span class="o">=</span><span class="n">symmetric_adjustment</span><span class="p">,</span>
+        <span class="n">data_file</span><span class="o">=</span><span class="n">import_file</span><span class="p">,</span>
+        <span class="n">connection_string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">import_table</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">export_table</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">log_detail</span><span class="o">=</span><span class="n">log_detail</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_calculate</span><span class="p">()</span>
+    <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_export_results</span><span class="p">(</span><span class="n">export_file</span><span class="p">,</span> <span class="n">process_id</span><span class="o">=</span><span class="n">process_id</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="run_ms_access">
+<a class="viewcode-back" href="../../source/main.html#samplicity.main.run_ms_access">[docs]</a>
+<span class="k">def</span> <span class="nf">run_ms_access</span><span class="p">(</span>
+    <span class="n">ms_access_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">import_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">export_table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">risk_free_rates</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">symmetric_adjustment</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">run_id</span><span class="p">,</span>
+    <span class="n">valuation_id</span><span class="p">,</span>
+    <span class="n">valuation_date</span><span class="p">,</span>
+    <span class="n">log_detail</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simplify the CMD call, where data is populated in a database.&quot;&quot;&quot;</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Function start&quot;</span><span class="p">)</span>
+    <span class="c1"># Create a connection string here, MS Access specific.</span>
+    <span class="n">conn_string</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=&quot;&#39;</span>
+        <span class="o">+</span> <span class="n">ms_access_file</span>
+        <span class="o">+</span> <span class="s1">&#39;&quot;;&#39;</span>
+    <span class="p">)</span>
+
+    <span class="n">dict_param</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;pRun&quot;</span><span class="p">:</span> <span class="n">run_id</span><span class="p">,</span> <span class="s2">&quot;pValuation&quot;</span><span class="p">:</span> <span class="n">valuation_id</span><span class="p">,</span> <span class="s2">&quot;pDate&quot;</span><span class="p">:</span> <span class="n">valuation_date</span><span class="p">}</span>
+
+    <span class="n">sam_scr</span> <span class="o">=</span> <span class="n">scr</span><span class="o">.</span><span class="n">SCR</span><span class="p">()</span>
+    <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_import_data</span><span class="p">(</span>
+        <span class="n">metadata_file</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">risk_free_rates</span><span class="o">=</span><span class="n">risk_free_rates</span><span class="p">,</span>
+        <span class="n">symmetric_adjustment</span><span class="o">=</span><span class="n">symmetric_adjustment</span><span class="p">,</span>
+        <span class="n">data_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">result_export</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">conn_string</span><span class="o">=</span><span class="n">conn_string</span><span class="p">,</span>
+        <span class="n">import_table</span><span class="o">=</span><span class="n">import_table</span><span class="p">,</span>
+        <span class="n">export_table</span><span class="o">=</span><span class="n">export_table</span><span class="p">,</span>
+        <span class="n">dict_param</span><span class="o">=</span><span class="n">dict_param</span><span class="p">,</span>
+        <span class="n">log_detail</span><span class="o">=</span><span class="n">log_detail</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_calculate</span><span class="p">()</span>
+    <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_export_results</span><span class="p">(</span>
+        <span class="n">export_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">process_id</span><span class="o">=</span><span class="n">run_id</span><span class="p">,</span> <span class="n">conn_string</span><span class="o">=</span><span class="n">conn_string</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Testing code</span>
+
+<span class="sd">This code is used to test the module that we are creating.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="test_runs">
+<a class="viewcode-back" href="../../source/main.html#samplicity.main.test_runs">[docs]</a>
+<span class="k">def</span> <span class="nf">test_runs</span><span class="p">(</span><span class="n">stop_at</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">export</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">custom_warning_handler</span><span class="p">(</span>
+        <span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DeprecatedWarning: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stack_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Register the custom warning handler</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">showwarning</span> <span class="o">=</span> <span class="n">custom_warning_handler</span>
+
+    <span class="c1"># Set the logging configuration</span>
+    <span class="n">message_format</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> - </span><span class="si">%(levelname)s</span><span class="s2"> - </span><span class="si">%(name)s</span><span class="s2"> - </span><span class="si">%(funcName)s</span><span class="s2">() - </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># Thsi will capture teh logs to a string variable</span>
+    <span class="n">log_capture_string</span> <span class="o">=</span> <span class="n">StringBuffer</span><span class="p">()</span>
+    <span class="n">ch</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">log_capture_string</span><span class="p">)</span>
+
+    <span class="c1"># Specify the fromat that will be capture din the string varibale</span>
+    <span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="n">message_format</span><span class="p">)</span>
+    <span class="n">ch</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+
+    <span class="c1"># We need to remvoe all the handler before we can use basicCOnfig</span>
+    <span class="c1"># BasicConfig only adds handlers</span>
+    <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">logging</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">handlers</span><span class="p">[:]:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+        <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">message_format</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;log2&quot;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+
+    <span class="c1"># The import file</span>
+    <span class="c1"># This will contian all of our imputs and out metadata</span>
+    <span class="n">import_file</span> <span class="o">=</span> <span class="s2">&quot;C:/Work/sam_scr/input/sam_input.xlsm&quot;</span>
+
+    <span class="n">risk_free_rates</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;C:/Work/sam_scr/input/12 SAM - Risk Free Rates  (30 December 2022).xlsx&quot;</span>
+    <span class="p">)</span>
+    <span class="n">symmetric_adjustment</span> <span class="o">=</span> <span class="s2">&quot;C:/Work/sam_scr/input/12 SAM - Equity Symmetric Adjustment (30 December 2022).xlsx&quot;</span>
+
+    <span class="c1"># The file where we will be exporting all of our outputs to.</span>
+    <span class="c1"># The output is for</span>
+    <span class="n">export_file</span> <span class="o">=</span> <span class="s2">&quot;C:/Work/sam_scr/input/sam_input.xlsm&quot;</span>
+
+    <span class="n">sam_scr</span> <span class="o">=</span> <span class="n">SCR</span><span class="p">()</span>
+    <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_import_data</span><span class="p">(</span>
+        <span class="n">metadata_file</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">risk_free_rates</span><span class="o">=</span><span class="n">risk_free_rates</span><span class="p">,</span>
+        <span class="n">symmetric_adjustment</span><span class="o">=</span><span class="n">symmetric_adjustment</span><span class="p">,</span>
+        <span class="n">data_file</span><span class="o">=</span><span class="n">import_file</span><span class="p">,</span>
+        <span class="n">result_export</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">conn_string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">import_table</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">export_table</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_calculate</span><span class="p">(</span><span class="n">stop_at</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">export</span><span class="p">:</span>
+        <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_export_results</span><span class="p">(</span><span class="n">export_file</span><span class="p">)</span>
+
+    <span class="c1">### Pull the contents back into a string and close the stream</span>
+    <span class="n">log_contents</span> <span class="o">=</span> <span class="n">log_capture_string</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+    <span class="n">log_capture_string</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">sam_scr</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;c:/git_hub/sam_scr/src/&quot;</span><span class="p">)</span>
+
+    <span class="n">input_folder</span> <span class="o">=</span> <span class="s2">&quot;C:/git_hub/sam_scr/.input/&quot;</span>
+
+    <span class="k">def</span> <span class="nf">custom_warning_handler</span><span class="p">(</span>
+        <span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DeprecatedWarning: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stack_info</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Register the custom warning handler</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">showwarning</span> <span class="o">=</span> <span class="n">custom_warning_handler</span>
+
+    <span class="c1"># Set the logging configuration</span>
+    <span class="n">message_format</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> - </span><span class="si">%(levelname)s</span><span class="s2"> - </span><span class="si">%(name)s</span><span class="s2"> - </span><span class="si">%(funcName)s</span><span class="s2">() - </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># Thsi will capture teh logs to a string variable</span>
+    <span class="c1"># log_capture_string = StringBuffer()</span>
+    <span class="c1"># ch = logging.StreamHandler(log_capture_string)</span>
+    <span class="n">fh</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="s2">&quot;c:/git_hub/sam_scr/sam.log&quot;</span><span class="p">)</span>
+    <span class="c1"># Specify the fromat that will be capture din the string varibale</span>
+    <span class="c1"># formatter = logging.Formatter(message_format)</span>
+    <span class="c1"># ch.setFormatter(formatter)</span>
+
+    <span class="c1"># We need to remvoe all the handler before we can use basicCOnfig</span>
+    <span class="c1"># BasicConfig only adds handlers</span>
+    <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">logging</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">handlers</span><span class="p">[:]:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+        <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="n">message_format</span><span class="p">,</span>
+        <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;c:/git_hub/sam_scr/sam.log&quot;</span><span class="p">,</span>
+        <span class="n">filemode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+    <span class="c1"># logger.addHandler(fh)</span>
+
+    <span class="c1"># The import file</span>
+    <span class="c1"># This will contian all of our imputs and out metadata</span>
+    <span class="n">import_file</span> <span class="o">=</span> <span class="n">input_folder</span> <span class="o">+</span> <span class="s2">&quot;sam_input.xlsm&quot;</span>
+
+    <span class="n">risk_free_rates</span> <span class="o">=</span> <span class="n">input_folder</span> <span class="o">+</span> <span class="s2">&quot;12 SAM - Risk Free Rates  (30 December 2022).xlsx&quot;</span>
+    <span class="n">symmetric_adjustment</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">input_folder</span> <span class="o">+</span> <span class="s2">&quot;12 SAM - Equity Symmetric Adjustment (30 December 2022).xlsx&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># The file where we will be exporting all of our outputs to.</span>
+    <span class="c1"># The output is for</span>
+    <span class="n">export_file</span> <span class="o">=</span> <span class="n">input_folder</span> <span class="o">+</span> <span class="s2">&quot;sam_input.xlsm&quot;</span>
+
+    <span class="n">sam_scr</span> <span class="o">=</span> <span class="n">SCR</span><span class="p">()</span>
+    <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_import_data</span><span class="p">(</span>
+        <span class="n">metadata_file</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">risk_free_rates</span><span class="o">=</span><span class="n">risk_free_rates</span><span class="p">,</span>
+        <span class="n">symmetric_adjustment</span><span class="o">=</span><span class="n">symmetric_adjustment</span><span class="p">,</span>
+        <span class="n">data_file</span><span class="o">=</span><span class="n">import_file</span><span class="p">,</span>
+        <span class="n">result_export</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">conn_string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">import_table</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">export_table</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_calculate</span><span class="p">()</span>
+    <span class="n">export</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="n">export</span><span class="p">:</span>
+        <span class="n">sam_scr</span><span class="o">.</span><span class="n">f_export_results</span><span class="p">(</span><span class="n">export_file</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Clive Hogarth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,983 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samplicity.market.credit &mdash; samplicity 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=7ab3649f" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            samplicity
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction.html#further-reading">Further Reading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction.html#class-documentation">Class Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../introduction.html#indices-and-tables">Indices and Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#data-inputs">Data Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#running-the-tool">Running the Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#data-extraction">Data Extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../structure.html#main-classes">Main Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../structure.html#scr">SCR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../structure.html#data">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../structure.html#risk-module-classes">Risk Module Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#premres">PremRes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#natcat">NatCat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#factorcat">FactorCat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#manmade">ManMade</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#nonprop">NonProp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#market">Market</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#reinsurance">Reinsurance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../structure.html#oprisk">OpRisk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../structure.html#how-the-classes-work-together">How the Classes work together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../structure.html#usage-example">Usage Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../knownissues.html">Known Issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../knownissues.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../knownissues.html#premium-and-reserve-risk">Premium and Reserve Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../knownissues.html#factor-based-catastrophe-risk">Factor Based Catastrophe Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../knownissues.html#concentration-risk">Concentration Risk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../knownissues.html#python-design">Python Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../knownissues.html#object-orientated-approach">Object Orientated Approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../knownissues.html#splitting-of-classes">Splitting of Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Class Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../scr.html">SCR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../scr.html#module-samplicity.scr.scr">scr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR"><code class="docutils literal notranslate"><span class="pre">SCR</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.__init__"><code class="docutils literal notranslate"><span class="pre">SCR.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.calculation_steps"><code class="docutils literal notranslate"><span class="pre">SCR.calculation_steps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.classes"><code class="docutils literal notranslate"><span class="pre">SCR.classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.create_supporting"><code class="docutils literal notranslate"><span class="pre">SCR.create_supporting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_aggregation"><code class="docutils literal notranslate"><span class="pre">SCR.f_aggregation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_calculate"><code class="docutils literal notranslate"><span class="pre">SCR.f_calculate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_create_venv"><code class="docutils literal notranslate"><span class="pre">SCR.f_create_venv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_data"><code class="docutils literal notranslate"><span class="pre">SCR.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_diversification_calcs"><code class="docutils literal notranslate"><span class="pre">SCR.f_diversification_calcs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_error_count"><code class="docutils literal notranslate"><span class="pre">SCR.f_error_count()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_export_results"><code class="docutils literal notranslate"><span class="pre">SCR.f_export_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_import_data"><code class="docutils literal notranslate"><span class="pre">SCR.f_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_info"><code class="docutils literal notranslate"><span class="pre">SCR.f_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_save_pickle"><code class="docutils literal notranslate"><span class="pre">SCR.f_save_pickle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.f_shapely"><code class="docutils literal notranslate"><span class="pre">SCR.f_shapely()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.handle_calculation_error"><code class="docutils literal notranslate"><span class="pre">SCR.handle_calculation_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.handle_warning"><code class="docutils literal notranslate"><span class="pre">SCR.handle_warning()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.load_pickle"><code class="docutils literal notranslate"><span class="pre">SCR.load_pickle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.output"><code class="docutils literal notranslate"><span class="pre">SCR.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.output_errors"><code class="docutils literal notranslate"><span class="pre">SCR.output_errors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.scr.SCR.output_runtimes"><code class="docutils literal notranslate"><span class="pre">SCR.output_runtimes</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scr.html#support-modules">Support Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#module-samplicity.scr.aggregation">aggregation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#module-samplicity.scr.diversification">diversification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.diversification.shapely_calc"><code class="docutils literal notranslate"><span class="pre">shapely_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#module-samplicity.scr.info">info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.info.info"><code class="docutils literal notranslate"><span class="pre">info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#module-samplicity.scr.lacdt">lacdt</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../scr.html#samplicity.scr.lacdt.f_lacdt_calculation"><code class="docutils literal notranslate"><span class="pre">f_lacdt_calculation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../scr.html#solver">solver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../data.html#module-samplicity.data.data">data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.f_data"><code class="docutils literal notranslate"><span class="pre">Data.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.f_export_results"><code class="docutils literal notranslate"><span class="pre">Data.f_export_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.f_import_data"><code class="docutils literal notranslate"><span class="pre">Data.f_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.output"><code class="docutils literal notranslate"><span class="pre">Data.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data.Data.scr"><code class="docutils literal notranslate"><span class="pre">Data.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../data.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#access">access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#module-samplicity.data.data_models">data_models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.asset_data"><code class="docutils literal notranslate"><span class="pre">asset_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.asset_shocks"><code class="docutils literal notranslate"><span class="pre">asset_shocks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.convert_none_to_value"><code class="docutils literal notranslate"><span class="pre">convert_none_to_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.counterparty"><code class="docutils literal notranslate"><span class="pre">counterparty</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.division_detail"><code class="docutils literal notranslate"><span class="pre">division_detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.nat_cat_si"><code class="docutils literal notranslate"><span class="pre">nat_cat_si</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.prem_res"><code class="docutils literal notranslate"><span class="pre">prem_res</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.reinsurance"><code class="docutils literal notranslate"><span class="pre">reinsurance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_models.reinsurance_share"><code class="docutils literal notranslate"><span class="pre">reinsurance_share</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#module-samplicity.data.data_validation">data_validation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.data_validation.validate_data"><code class="docutils literal notranslate"><span class="pre">validate_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#module-samplicity.data.excel">excel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.excel.f_excel_export"><code class="docutils literal notranslate"><span class="pre">f_excel_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.excel.f_excel_import_data"><code class="docutils literal notranslate"><span class="pre">f_excel_import_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.excel.f_excel_import_pa_data"><code class="docutils literal notranslate"><span class="pre">f_excel_import_pa_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.excel.f_excel_import_range"><code class="docutils literal notranslate"><span class="pre">f_excel_import_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#module-samplicity.data.odbc">odbc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.odbc.chunker"><code class="docutils literal notranslate"><span class="pre">chunker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.odbc.f_odbc_export"><code class="docutils literal notranslate"><span class="pre">f_odbc_export()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.odbc.f_odbc_import"><code class="docutils literal notranslate"><span class="pre">f_odbc_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.odbc.f_odbc_table_import"><code class="docutils literal notranslate"><span class="pre">f_odbc_table_import()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../data.html#samplicity.data.odbc.insert_with_progress"><code class="docutils literal notranslate"><span class="pre">insert_with_progress()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../data.html#validation">validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../premres.html">PremRes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../premres.html#samplicity.prem_res.PremRes"><code class="docutils literal notranslate"><span class="pre">PremRes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../premres.html#samplicity.prem_res.PremRes.__init__"><code class="docutils literal notranslate"><span class="pre">PremRes.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../premres.html#samplicity.prem_res.PremRes.f_calculate"><code class="docutils literal notranslate"><span class="pre">PremRes.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../premres.html#samplicity.prem_res.PremRes.f_data"><code class="docutils literal notranslate"><span class="pre">PremRes.f_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../natcat.html">NatCat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat"><code class="docutils literal notranslate"><span class="pre">NatCat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.__init__"><code class="docutils literal notranslate"><span class="pre">NatCat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.f_calculate"><code class="docutils literal notranslate"><span class="pre">NatCat.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.f_cat_calculation"><code class="docutils literal notranslate"><span class="pre">NatCat.f_cat_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.f_data"><code class="docutils literal notranslate"><span class="pre">NatCat.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.f_data_aggregation"><code class="docutils literal notranslate"><span class="pre">NatCat.f_data_aggregation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.output"><code class="docutils literal notranslate"><span class="pre">NatCat.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../natcat.html#samplicity.nat_cat.NatCat.scr"><code class="docutils literal notranslate"><span class="pre">NatCat.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../factorcat.html">FactorCat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat"><code class="docutils literal notranslate"><span class="pre">FactorCat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.__init__"><code class="docutils literal notranslate"><span class="pre">FactorCat.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.f_calculate"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.f_data"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.f_indv_calculation"><code class="docutils literal notranslate"><span class="pre">FactorCat.f_indv_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.output"><code class="docutils literal notranslate"><span class="pre">FactorCat.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../factorcat.html#samplicity.factor_cat.FactorCat.scr"><code class="docutils literal notranslate"><span class="pre">FactorCat.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../nonprop.html">NonProp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp"><code class="docutils literal notranslate"><span class="pre">NonProp</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.__init__"><code class="docutils literal notranslate"><span class="pre">NonProp.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.f_calculate"><code class="docutils literal notranslate"><span class="pre">NonProp.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.f_data"><code class="docutils literal notranslate"><span class="pre">NonProp.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.f_indv_calculation"><code class="docutils literal notranslate"><span class="pre">NonProp.f_indv_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.output"><code class="docutils literal notranslate"><span class="pre">NonProp.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../nonprop.html#samplicity.non_prop.NonProp.scr"><code class="docutils literal notranslate"><span class="pre">NonProp.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../manmade.html">ManMade</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade"><code class="docutils literal notranslate"><span class="pre">ManMade</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.__init__"><code class="docutils literal notranslate"><span class="pre">ManMade.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.f_calculate"><code class="docutils literal notranslate"><span class="pre">ManMade.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.f_data"><code class="docutils literal notranslate"><span class="pre">ManMade.f_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.f_gross_event"><code class="docutils literal notranslate"><span class="pre">ManMade.f_gross_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.output"><code class="docutils literal notranslate"><span class="pre">ManMade.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../manmade.html#samplicity.man_made.ManMade.scr"><code class="docutils literal notranslate"><span class="pre">ManMade.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reinsurance.html">Reinsurnace</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../reinsurance.html#module-samplicity.reinsurance.reinsurance">reinsurance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance"><code class="docutils literal notranslate"><span class="pre">Reinsurance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.__init__"><code class="docutils literal notranslate"><span class="pre">Reinsurance.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_calculate_net_events"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_calculate_net_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_calculate_recoveries"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_calculate_recoveries()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.f_data"><code class="docutils literal notranslate"><span class="pre">Reinsurance.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.output"><code class="docutils literal notranslate"><span class="pre">Reinsurance.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.reinsurance.Reinsurance.scr"><code class="docutils literal notranslate"><span class="pre">Reinsurance.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reinsurance.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../reinsurance.html#module-samplicity.reinsurance.ri_man_made">ri_man_made</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.ri_man_made.f_man_made"><code class="docutils literal notranslate"><span class="pre">f_man_made()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reinsurance.html#module-samplicity.reinsurance.ri_prog">ri_prog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.ri_prog.f_apply_reinsurance"><code class="docutils literal notranslate"><span class="pre">f_apply_reinsurance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reinsurance.html#samplicity.reinsurance.ri_prog.f_apply_ri_prog"><code class="docutils literal notranslate"><span class="pre">f_apply_ri_prog()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../market.html">Market</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../market.html#module-samplicity.market.market">market</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market"><code class="docutils literal notranslate"><span class="pre">Market</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.__init__"><code class="docutils literal notranslate"><span class="pre">Market.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.class_data"><code class="docutils literal notranslate"><span class="pre">Market.class_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.f_aggregate_charges"><code class="docutils literal notranslate"><span class="pre">Market.f_aggregate_charges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.f_calc_impairment"><code class="docutils literal notranslate"><span class="pre">Market.f_calc_impairment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.f_data"><code class="docutils literal notranslate"><span class="pre">Market.f_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.f_market_risk"><code class="docutils literal notranslate"><span class="pre">Market.f_market_risk()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.f_spread_interest"><code class="docutils literal notranslate"><span class="pre">Market.f_spread_interest()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.output"><code class="docutils literal notranslate"><span class="pre">Market.output</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.market.Market.scr"><code class="docutils literal notranslate"><span class="pre">Market.scr</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../market.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../market.html#module-samplicity.market.aggregate">aggregate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.aggregate.f_aggregate_market"><code class="docutils literal notranslate"><span class="pre">f_aggregate_market()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../market.html#module-samplicity.market.bond">bond</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.bond.BOND_VAL"><code class="docutils literal notranslate"><span class="pre">BOND_VAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.bond.f_fixed"><code class="docutils literal notranslate"><span class="pre">f_fixed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.bond.f_floating"><code class="docutils literal notranslate"><span class="pre">f_floating()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.bond.f_newton_calc"><code class="docutils literal notranslate"><span class="pre">f_newton_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../market.html#module-samplicity.market.conc">conc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.conc.f_concentration_risk"><code class="docutils literal notranslate"><span class="pre">f_concentration_risk()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../market.html#module-samplicity.market.credit">credit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.credit.calculate_u_matrix_entry"><code class="docutils literal notranslate"><span class="pre">calculate_u_matrix_entry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.credit.f_credit_type_1"><code class="docutils literal notranslate"><span class="pre">f_credit_type_1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.credit.f_impairment"><code class="docutils literal notranslate"><span class="pre">f_impairment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.credit.f_u_matrix"><code class="docutils literal notranslate"><span class="pre">f_u_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../market.html#samplicity.market.credit.f_v_vector"><code class="docutils literal notranslate"><span class="pre">f_v_vector()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bondval.html">BOND VAL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.BOND_VAL"><code class="docutils literal notranslate"><span class="pre">BOND_VAL</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.BOND_VAL.__init__"><code class="docutils literal notranslate"><span class="pre">BOND_VAL.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.BOND_VAL.f_calculate"><code class="docutils literal notranslate"><span class="pre">BOND_VAL.f_calculate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.f_fixed"><code class="docutils literal notranslate"><span class="pre">f_fixed()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.f_floating"><code class="docutils literal notranslate"><span class="pre">f_floating()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../bondval.html#samplicity.market.bond.f_newton_calc"><code class="docutils literal notranslate"><span class="pre">f_newton_calc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../oprisk.html">OpRisk</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../oprisk.html#samplicity.op_risk.OpRisk"><code class="docutils literal notranslate"><span class="pre">OpRisk</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../oprisk.html#samplicity.op_risk.OpRisk.__init__"><code class="docutils literal notranslate"><span class="pre">OpRisk.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../oprisk.html#samplicity.op_risk.OpRisk.f_calculate"><code class="docutils literal notranslate"><span class="pre">OpRisk.f_calculate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../oprisk.html#samplicity.op_risk.OpRisk.f_data"><code class="docutils literal notranslate"><span class="pre">OpRisk.f_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Helper Code</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../helper.html">Helper Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.allocation_matrix"><code class="docutils literal notranslate"><span class="pre">allocation_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.check_tuple"><code class="docutils literal notranslate"><span class="pre">check_tuple()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.combins_df_col"><code class="docutils literal notranslate"><span class="pre">combins_df_col()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_accummulate_figures"><code class="docutils literal notranslate"><span class="pre">f_accummulate_figures()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_best_join"><code class="docutils literal notranslate"><span class="pre">f_best_join()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_best_match"><code class="docutils literal notranslate"><span class="pre">f_best_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_best_match_new"><code class="docutils literal notranslate"><span class="pre">f_best_match_new()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_div_match"><code class="docutils literal notranslate"><span class="pre">f_div_match()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_fast_join"><code class="docutils literal notranslate"><span class="pre">f_fast_join()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_fast_match_element"><code class="docutils literal notranslate"><span class="pre">f_fast_match_element()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_get_total_row"><code class="docutils literal notranslate"><span class="pre">f_get_total_row()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_new_match_element"><code class="docutils literal notranslate"><span class="pre">f_new_match_element()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.f_new_match_idx"><code class="docutils literal notranslate"><span class="pre">f_new_match_idx()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../helper.html#samplicity.helper.log_decorator"><code class="docutils literal notranslate"><span class="pre">log_decorator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../main.html">Main Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../main.html#samplicity.main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../main.html#samplicity.main.run_excel"><code class="docutils literal notranslate"><span class="pre">run_excel()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../main.html#samplicity.main.run_ms_access"><code class="docutils literal notranslate"><span class="pre">run_ms_access()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../main.html#samplicity.main.test_runs"><code class="docutils literal notranslate"><span class="pre">test_runs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">samplicity</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">samplicity.market.credit</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for samplicity.market.credit</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">credit.</span>
+
+<span class="sd">A module containing the calculation of type 1 credit risk.</span>
+<span class="sd">This supports the Market class</span>
+
+<span class="sd">@author: chogarth</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">from</span> <span class="nn">..helper</span> <span class="kn">import</span> <span class="n">f_get_total_row</span><span class="p">,</span> <span class="n">f_new_match_idx</span><span class="p">,</span> <span class="n">combins_df_col</span><span class="p">,</span> <span class="n">log_decorator</span>
+
+
+<div class="viewcode-block" id="calculate_u_matrix_entry">
+<a class="viewcode-back" href="../../../source/market.html#samplicity.market.credit.calculate_u_matrix_entry">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_u_matrix_entry</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate an entry for the U matrix.&quot;&quot;&quot;</span>
+    <span class="n">gam</span> <span class="o">=</span> <span class="mf">0.25</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gam</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span></div>
+
+
+
+<div class="viewcode-block" id="f_u_matrix">
+<a class="viewcode-back" href="../../../source/market.html#samplicity.market.credit.f_u_matrix">[docs]</a>
+<span class="k">def</span> <span class="nf">f_u_matrix</span><span class="p">(</span><span class="n">mr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the U matrix used in Type 1 credit risk.&quot;&quot;&quot;</span>
+    <span class="n">cf</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="s2">&quot;credit_type_1_factor&quot;</span><span class="p">)</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="n">cf</span><span class="p">[</span><span class="s2">&quot;factor&quot;</span><span class="p">]</span>
+
+    <span class="n">u_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">calculate_u_matrix_entry</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">u_matrix</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">factors</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">factors</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="f_v_vector">
+<a class="viewcode-back" href="../../../source/market.html#samplicity.market.credit.f_v_vector">[docs]</a>
+<span class="k">def</span> <span class="nf">f_v_vector</span><span class="p">(</span><span class="n">mr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the V vector used in spread risk calculations.&quot;&quot;&quot;</span>
+    <span class="n">gam</span> <span class="o">=</span> <span class="mf">0.25</span>
+    <span class="n">cf</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="s2">&quot;credit_type_1_factor&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">gam</span><span class="p">)</span> <span class="o">*</span> <span class="n">cf</span><span class="p">[</span><span class="s2">&quot;factor&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cf</span><span class="p">[</span><span class="s2">&quot;factor&quot;</span><span class="p">]))</span>
+        <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">gam</span> <span class="o">-</span> <span class="n">cf</span><span class="p">[</span><span class="s2">&quot;factor&quot;</span><span class="p">])</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="f_impairment">
+<a class="viewcode-back" href="../../../source/market.html#samplicity.market.credit.f_impairment">[docs]</a>
+<span class="k">def</span> <span class="nf">f_impairment</span><span class="p">(</span><span class="n">mr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the impairment charges for the reinsurance.&quot;&quot;&quot;</span>
+    <span class="n">impair</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Premium Reserve Risk</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;prem_res&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Only need the overall figures</span>
+        <span class="c1"># We rename the columns to comply with the function</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;overall&quot;</span><span class="p">:</span> <span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">,</span> <span class="s2">&quot;counterparty&quot;</span><span class="p">:</span> <span class="s2">&quot;counterparty_id&quot;</span><span class="p">}</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;premium&quot;</span><span class="p">,</span> <span class="s2">&quot;reserve&quot;</span><span class="p">])</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">f_get_total_row</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">)</span>
+        <span class="n">impair</span><span class="p">[</span><span class="s2">&quot;prem_res&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">__f_default</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">ri_exposure</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">total_exposure</span><span class="o">=</span><span class="n">total</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">impair</span><span class="p">[</span><span class="s2">&quot;prem_res&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># We perform the exatc calcualtion for all the different event</span>
+    <span class="c1"># Create a list and look through all the evetns at once</span>
+    <span class="n">events</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="o">*</span><span class="p">[</span><span class="s2">&quot;hail&quot;</span><span class="p">,</span> <span class="s2">&quot;earthquake&quot;</span><span class="p">,</span> <span class="s2">&quot;horizontal&quot;</span><span class="p">],</span>
+        <span class="o">*</span><span class="n">mr</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="s2">&quot;factor_cat_charge&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+        <span class="c1"># *mr.scr.f_data(&quot;man_made_cat&quot;, &quot;perils&quot;, &quot;all&quot;)[&quot;heading&quot;],</span>
+        <span class="o">*</span><span class="p">[</span><span class="s2">&quot;np_property&quot;</span><span class="p">,</span> <span class="s2">&quot;np_credit_guarantee&quot;</span><span class="p">],</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;reinsurance&quot;</span><span class="p">,</span> <span class="s2">&quot;counterparty_recoveries&quot;</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;recovery&quot;</span><span class="p">:</span> <span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">})</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;reinsurance&quot;</span><span class="p">,</span> <span class="s2">&quot;recoveries&quot;</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+                <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cparty_recov&quot;</span><span class="p">:</span> <span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">}</span>
+            <span class="p">)</span>
+            <span class="n">impair</span><span class="p">[</span><span class="n">event</span><span class="p">]</span> <span class="o">=</span> <span class="n">__f_default</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">ri_exposure</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">total_exposure</span><span class="o">=</span><span class="n">total</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">impair</span><span class="p">[</span><span class="n">event</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">impair</span></div>
+
+
+
+<div class="viewcode-block" id="f_credit_type_1">
+<a class="viewcode-back" href="../../../source/market.html#samplicity.market.credit.f_credit_type_1">[docs]</a>
+<span class="k">def</span> <span class="nf">f_credit_type_1</span><span class="p">(</span><span class="n">mr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Type 1 credit risk calculation.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">__f_default</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">ri_exposure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">total_exposure</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">__f_default</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">ri_exposure</span><span class="p">,</span> <span class="n">total_exposure</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate Type 1 Credit Risk.&quot;&quot;&quot;</span>
+    <span class="c1"># logger.debug(&quot;Function start&quot;)</span>
+    <span class="c1"># This is not a straigth forward clacualtion</span>
+    <span class="c1"># It is also not clear if the calcualtion should be done per</span>
+    <span class="c1"># countertary or but group</span>
+    <span class="c1"># We will do it per group as it is clearer</span>
+    <span class="c1"># The allocation of collaterla becomes an issue as it impacts the</span>
+    <span class="c1"># weighting for the counterparty default impariment</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    We have a couple challegnes with the collateral and how we </span>
+<span class="sd">    should treat it for reinsurance recoveries. Effectivley we allocate </span>
+<span class="sd">    collaterla at an overall level but then we allocate the assets to </span>
+<span class="sd">    the different products, divisions,etc. We will allocate the </span>
+<span class="sd">    reinsurance recoveris for the entire license and then that will </span>
+<span class="sd">    determine the allocation of collateral to the different assets</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Retrieve the asset credit data and counterparty information</span>
+    <span class="c1"># Perform some data manipulation to prepare the data for the calculation</span>
+    <span class="n">credit_data</span><span class="p">,</span> <span class="n">cparty_collat</span> <span class="o">=</span> <span class="n">__f_data_manip</span><span class="p">(</span><span class="n">mr</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">total_exposure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># A double chekc to make sure that we don&#39;t include negative values.</span>
+        <span class="c1"># Can&#39;t imagine this happening.</span>
+        <span class="n">total_exposure</span><span class="p">[</span><span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_exposure</span><span class="p">[</span><span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">total_exposure</span><span class="p">[</span><span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">other</span><span class="o">=</span><span class="mi">0</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ri_exposure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Our reinsurance information doesn&#39;t have all the required fields.</span>
+        <span class="c1"># We need to add CQS and LGD fields which come form our market risk</span>
+        <span class="n">ri_exposure</span> <span class="o">=</span> <span class="n">__f_ri_data_manip</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">ri_exposure</span><span class="p">)</span>
+
+        <span class="c1"># Now we allocate the collateral between assets and reinsurance</span>
+        <span class="c1"># We then allocate capital to the different assets.</span>
+
+        <span class="n">credit_data</span><span class="p">,</span> <span class="n">ri_exposure</span> <span class="o">=</span> <span class="n">__f_alloc_collat</span><span class="p">(</span>
+            <span class="n">credit_data</span><span class="p">,</span> <span class="n">ri_exposure</span><span class="p">,</span> <span class="n">total_exposure</span><span class="p">,</span> <span class="n">cparty_collat</span>
+        <span class="p">)</span>
+
+    <span class="c1"># We now need to calculate the weighted CQS for the combinations of assets</span>
+    <span class="c1"># We can&#39;t combine the reinsurance and assets at this stage as</span>
+    <span class="c1"># the allocation is not linear</span>
+
+    <span class="n">asset_data</span> <span class="o">=</span> <span class="n">__f_calc_cqs</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">credit_data</span><span class="p">)</span>
+
+    <span class="c1"># We know allocate the assets to all the different combinations</span>
+    <span class="c1"># We need to pivot each dataset, this is handled here</span>
+    <span class="n">asset_calc</span> <span class="o">=</span> <span class="n">__f_pivot_asset</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">asset_data</span><span class="p">,</span> <span class="n">rein</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ri_exposure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># TODO: Need to edit the data manipulation to ensure field consistency</span>
+        <span class="n">ri_calc</span> <span class="o">=</span> <span class="n">__f_calc_cqs</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">ri_exposure</span><span class="p">)</span>
+
+        <span class="c1"># We also need to pivot the RI data here</span>
+        <span class="n">ri_calc</span> <span class="o">=</span> <span class="n">__f_pivot_asset</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">ri_calc</span><span class="p">,</span> <span class="n">rein</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># We don&#39;t need to do the same alloation as with the asset data</span>
+        <span class="c1"># This has already been done for the reinsurance data</span>
+        <span class="c1"># We still need to join them.</span>
+        <span class="c1"># We need every combination of asset and reinsurance data</span>
+
+        <span class="n">asset_calc</span> <span class="o">=</span> <span class="n">__f_join_data</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">asset_calc</span><span class="p">,</span> <span class="n">ri_calc</span><span class="p">)</span>
+
+    <span class="c1"># We have our combined datasets we can now perform the calculation</span>
+
+    <span class="n">overall_result</span> <span class="o">=</span> <span class="n">__f_credit_calc</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">asset_calc</span><span class="p">)</span>
+    <span class="n">overall_result</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># We now need to decdie if we return the base calcualtion or</span>
+    <span class="c1"># subtract type 1 credit risk. We only subtract type 1 credit risk if</span>
+    <span class="c1"># this is an impairment calculation</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ri_exposure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># We are dealing with an impairment charge</span>
+        <span class="n">credit_charge</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;credit_type_1_charge&quot;</span><span class="p">]</span>
+
+        <span class="n">match</span> <span class="o">=</span> <span class="n">f_new_match_idx</span><span class="p">(</span>
+            <span class="n">overall_result</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">(),</span> <span class="n">credit_charge</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;div&quot;</span><span class="p">)</span>
+        <span class="n">credit_charge</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+            <span class="n">credit_charge</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="n">overall_result</span> <span class="o">=</span> <span class="n">overall_result</span> <span class="o">-</span> <span class="n">credit_charge</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span>
+        <span class="c1"># overall_result=overall_result.to_frame(name=&#39;result&#39;)</span>
+    <span class="c1"># We store the result as part of the market risk class</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">overall_result</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;result&quot;</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">__f_data_manip</span><span class="p">(</span><span class="n">mr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform require daat manipulation on the asset credti data.&quot;&quot;&quot;</span>
+    <span class="c1"># logger.debug(&quot;Function start&quot;)</span>
+
+    <span class="c1"># MANIPULATE ASSET CREDIT DATA</span>
+
+    <span class="n">credit_data</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;asset_data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># counterparty=mr.output[&#39;counterparty&#39;]</span>
+    <span class="n">credit_data</span> <span class="o">=</span> <span class="n">credit_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;credit_type_1_ind&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">credit_data</span> <span class="o">=</span> <span class="n">credit_data</span><span class="p">[</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;market_value&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;collateral&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;lgd&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;used_cqs&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;counterparty_group&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;counterparty_id&quot;</span><span class="p">,</span>
+            <span class="n">mr</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;div_field&quot;</span><span class="p">],</span>
+        <span class="p">]</span>
+    <span class="p">]</span>
+
+    <span class="n">credit_data</span><span class="p">[[</span><span class="s2">&quot;mv_net_collateral&quot;</span><span class="p">,</span> <span class="s2">&quot;add_collateral&quot;</span><span class="p">,</span> <span class="s2">&quot;lgd_calc&quot;</span><span class="p">,</span> <span class="s2">&quot;lgd_cqs_calc&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;mv_net_collateral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;market_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span>
+        <span class="mi">0</span>
+    <span class="p">)</span> <span class="o">-</span> <span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;collateral&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Make sure we remove the negative exposures.</span>
+    <span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;mv_net_collateral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;mv_net_collateral&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;mv_net_collateral&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">other</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+
+    <span class="c1"># GET COLLATERAL INFORMATION</span>
+
+    <span class="n">cparty_collat</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;counterparty&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cparty_collat</span> <span class="o">=</span> <span class="n">cparty_collat</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">cparty_collat</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
+    <span class="n">cparty_collat</span> <span class="o">=</span> <span class="n">cparty_collat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+        <span class="n">cparty_collat</span><span class="p">[</span><span class="s2">&quot;counterparty_collateral&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;counterparty_collateral&quot;</span><span class="p">]</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">credit_data</span><span class="p">,</span> <span class="n">cparty_collat</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">__f_ri_data_manip</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">ri_exposure</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manipulate the reinsurance data.&quot;&quot;&quot;</span>
+
+    <span class="c1"># We now need to add the CQS and LGD fields to the data</span>
+    <span class="c1"># We get that from the counterparty table</span>
+    <span class="n">counterparty</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;counterparty&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ri_exposure</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ri_exposure</span> <span class="o">=</span> <span class="n">ri_exposure</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+        <span class="n">counterparty</span><span class="p">[[</span><span class="s2">&quot;counterparty_group&quot;</span><span class="p">,</span> <span class="s2">&quot;counterparty_cqs&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">]],</span>
+        <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+        <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">,</span>
+        <span class="n">right_on</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ri_exposure</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;counterparty_cqs&quot;</span><span class="p">:</span> <span class="s2">&quot;used_cqs&quot;</span><span class="p">,</span> <span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">:</span> <span class="s2">&quot;market_value&quot;</span><span class="p">},</span>
+        <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ri_exposure</span><span class="p">[[</span><span class="s2">&quot;collateral&quot;</span><span class="p">,</span> <span class="s2">&quot;add_collateral&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ri_exposure</span> <span class="o">=</span> <span class="n">ri_exposure</span><span class="p">[</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;index&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;counterparty_id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;counterparty_group&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;market_value&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;collateral&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;add_collateral&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;used_cqs&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">]</span>
+
+    <span class="c1"># We make sure that any missign cqs if populated with 18</span>
+    <span class="c1"># Really shouldn&#39;t happen if we have all counterparties populated</span>
+    <span class="k">if</span> <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;used_cqs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># mr.scr.handle_warning(</span>
+        <span class="c1">#     &quot;__f_ri_data_manip&quot;,</span>
+        <span class="c1">#     &quot;Missing CQS values in reinsurance data&quot;,</span>
+        <span class="c1">#     f&quot;{ri_exposure[&#39;used_cqs&#39;].isna().sum()}&quot;,</span>
+        <span class="c1"># )</span>
+        <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;used_cqs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;used_cqs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;counterparty_group&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># mr.scr.handle_warning(</span>
+        <span class="c1">#     &quot;__f_ri_data_manip&quot;,</span>
+        <span class="c1">#     &quot;Missing counterparty group names in reinsurance data&quot;,</span>
+        <span class="c1">#     f&quot;{ri_exposure[&#39;counterparty_group&#39;].isna().sum()} values converted&quot;,</span>
+        <span class="c1"># )</span>
+        <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;counterparty_group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;counterparty_group&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span>
+            <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;lgd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.45</span>
+
+    <span class="k">return</span> <span class="n">ri_exposure</span>
+
+
+<span class="k">def</span> <span class="nf">__f_alloc_collat</span><span class="p">(</span><span class="n">credit_data</span><span class="p">,</span> <span class="n">ri_exposure</span><span class="p">,</span> <span class="n">total_exposure</span><span class="p">,</span> <span class="n">cparty_collat</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Allocate collateral to the different assets.&quot;&quot;&quot;</span>
+    <span class="c1"># logger.debug(&quot;Function start&quot;)</span>
+
+    <span class="c1"># AGGREGATE CREDIT ASSET DATA</span>
+
+    <span class="n">cparty_totals</span> <span class="o">=</span> <span class="n">credit_data</span><span class="p">[[</span><span class="s2">&quot;mv_net_collateral&quot;</span><span class="p">,</span> <span class="s2">&quot;counterparty_id&quot;</span><span class="p">]]</span>
+    <span class="n">cparty_totals</span> <span class="o">=</span> <span class="n">cparty_totals</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">cparty_totals</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;mv_net_collateral&quot;</span><span class="p">:</span> <span class="s2">&quot;asset_mv&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># We now merge our collaterla data onto our credit and reinsurer data.</span>
+    <span class="n">collat_alloc</span> <span class="o">=</span> <span class="n">cparty_collat</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+        <span class="n">cparty_totals</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">total_exposure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">collat_alloc</span> <span class="o">=</span> <span class="n">collat_alloc</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+            <span class="n">total_exposure</span><span class="p">[</span><span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">],</span>
+            <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">,</span>
+            <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># We need a blank calculation for the generic case.</span>
+        <span class="n">collat_alloc</span><span class="p">[</span><span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Set any blank vlaues to be zero.</span>
+    <span class="n">collat_alloc</span> <span class="o">=</span> <span class="n">collat_alloc</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">collat_alloc</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># We now calcualte the collateral allocation split between</span>
+    <span class="c1"># the reinsurance and market data.</span>
+    <span class="c1"># We need to use this when we do the division based calculations</span>
+    <span class="c1"># For the overall view it won&#39;t matter.</span>
+    <span class="n">collat_alloc</span><span class="p">[</span><span class="s2">&quot;total_mv&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collat_alloc</span><span class="p">[[</span><span class="s2">&quot;asset_mv&quot;</span><span class="p">,</span> <span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">perc_share</span> <span class="o">=</span> <span class="n">collat_alloc</span><span class="p">[[</span><span class="s2">&quot;asset_mv&quot;</span><span class="p">,</span> <span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span>
+        <span class="n">collat_alloc</span><span class="p">[</span><span class="s2">&quot;total_mv&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;rows&quot;</span>
+    <span class="p">)</span>
+    <span class="n">collat_alloc</span><span class="p">[[</span><span class="s2">&quot;asset_collat&quot;</span><span class="p">,</span> <span class="s2">&quot;reinsurance_collat&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">perc_share</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span>
+        <span class="n">collat_alloc</span><span class="p">[</span><span class="s2">&quot;counterparty_collateral&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;rows&quot;</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    <span class="c1"># The above will create division by zero, we we remove these</span>
+    <span class="c1"># Allow division by zero &#39;error&#39; to shorten code</span>
+    <span class="n">collat_alloc</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># At this stage we know the collateral that must be allocted to</span>
+    <span class="c1"># the assets and the reinsurance recoveries</span>
+
+    <span class="c1"># ALLOCATE TO THE ASSET DATA</span>
+
+    <span class="c1"># We now need to allocate the collateral to the counterparties</span>
+    <span class="c1"># in the asset data</span>
+    <span class="c1"># Get the prcentage of the toal MV</span>
+    <span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;add_collateral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;mv_net_collateral&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span>
+        <span class="n">cparty_totals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">],</span> <span class="s2">&quot;asset_mv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="p">)</span>
+    <span class="c1"># Allocate te collateral accordingly</span>
+    <span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;add_collateral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;add_collateral&quot;</span><span class="p">]</span>
+        <span class="o">*</span> <span class="n">collat_alloc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">credit_data</span><span class="p">[</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">],</span> <span class="s2">&quot;asset_collat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="p">)</span>
+
+    <span class="c1"># ALLOCATE THE REINSURANCE RECOVERIES</span>
+
+    <span class="c1"># In this dataframe we have all of the events allocated to</span>
+    <span class="c1"># the different divisions</span>
+    <span class="c1"># The collateral first needs to be prorated.</span>
+    <span class="c1"># Thsi recognises that teh collateral is onlu a functon of the total</span>
+    <span class="c1"># agreement. We therefore redcue the collateral proportionately</span>
+    <span class="c1"># We have an instance where collateral is unique for division</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">ri_exposure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cparty_collat</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="c1"># We also chekc if there is actually any collaterla to allocates</span>
+        <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;add_collateral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span>
+            <span class="n">collat_alloc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">],</span> <span class="s2">&quot;reinsurance_mv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Need to add a minimum in the unlikely event the vlaue is above 1</span>
+        <span class="c1"># All divisions should be equal to or less than 1</span>
+        <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;add_collateral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;add_collateral&quot;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Allocate te collateral accordingly</span>
+        <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;add_collateral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;add_collateral&quot;</span><span class="p">]</span>
+            <span class="o">*</span> <span class="n">collat_alloc</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+                <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;counterparty_id&quot;</span><span class="p">],</span> <span class="s2">&quot;reinsurance_collat&quot;</span>
+            <span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="p">)</span>
+    <span class="c1"># Deals with the instance where there is no collateral</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">ri_exposure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ri_exposure</span><span class="p">[</span><span class="s2">&quot;add_collateral&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">credit_data</span><span class="p">,</span> <span class="n">ri_exposure</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">__f_calc_cqs</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">dat</span><span class="p">,</span> <span class="n">rein</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcualte CQS for the different combinations of assets.&quot;&quot;&quot;</span>
+    <span class="c1"># logger.debug(&quot;Function start&quot;)</span>
+
+    <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;lgd_calc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;lgd&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;market_value&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;collateral&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;add_collateral&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;lgd_cqs_calc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;used_cqs&quot;</span><span class="p">]</span>
+        <span class="o">*</span> <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;lgd&quot;</span><span class="p">]</span>
+        <span class="o">*</span> <span class="p">(</span><span class="n">dat</span><span class="p">[</span><span class="s2">&quot;market_value&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;collateral&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;add_collateral&quot;</span><span class="p">])</span>
+    <span class="p">)</span>
+
+    <span class="c1"># we apply this calcualtion to only include assets with a</span>
+    <span class="c1"># default in the CQS calculation.</span>
+    <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;lgd_calc_mod&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;lgd_calc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dat</span><span class="p">[</span><span class="s2">&quot;lgd_calc&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">other</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;lgd_cqs_calc_mod&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dat</span><span class="p">[</span><span class="s2">&quot;lgd_cqs_calc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dat</span><span class="p">[</span><span class="s2">&quot;lgd_calc&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">other</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dat</span>
+
+
+<span class="k">def</span> <span class="nf">__f_pivot_asset</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">dat</span><span class="p">,</span> <span class="n">rein</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pivot the asset/reinsurance data with counterparties as rows.&quot;&quot;&quot;</span>
+    <span class="c1"># logger.debug(&quot;Function start&quot;)</span>
+
+    <span class="n">calc</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">df_alloc</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;df_allocation&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">rein</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="s2">&quot;index&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;div_field&quot;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">fld</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;lgd_calc&quot;</span><span class="p">,</span> <span class="s2">&quot;lgd_cqs_calc&quot;</span><span class="p">,</span> <span class="s2">&quot;lgd_calc_mod&quot;</span><span class="p">,</span> <span class="s2">&quot;lgd_cqs_calc_mod&quot;</span><span class="p">]:</span>
+        <span class="n">calc</span><span class="p">[</span><span class="n">fld</span><span class="p">]</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">fld</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="s2">&quot;counterparty_group&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">)</span>
+        <span class="n">calc</span><span class="p">[</span><span class="n">fld</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rein</span><span class="p">:</span>
+            <span class="n">calc</span><span class="p">[</span><span class="n">fld</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_alloc</span><span class="p">[</span><span class="n">calc</span><span class="p">[</span><span class="n">fld</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">calc</span><span class="p">[</span><span class="n">fld</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">calc</span>
+
+
+<span class="k">def</span> <span class="nf">__f_join_data</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">asset_calc</span><span class="p">,</span> <span class="n">ri_calc</span><span class="p">):</span>
+    <span class="c1"># Generate a matching index between our ri data and the other</span>
+    <span class="c1"># data, we only want to create this once</span>
+    <span class="c1"># TODO: Need to work out the error in the join here</span>
+    <span class="c1"># Possibly don&#39;t need this as we can just use df_allocation</span>
+
+    <span class="c1"># Teh results are a dictionary</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">asset_calc</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">asset_div</span> <span class="o">=</span> <span class="n">asset_calc</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">ri_div</span> <span class="o">=</span> <span class="n">ri_calc</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="n">df_alloc</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">ri_div</span><span class="p">,</span> <span class="o">*</span><span class="n">asset_div</span><span class="p">]</span>
+    <span class="n">df_alloc</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">df_alloc</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">t</span><span class="p">]</span>
+    <span class="c1"># Get all the unique combinations</span>
+    <span class="n">df_alloc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">df_alloc</span><span class="p">)</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="n">df_alloc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_alloc</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;div&quot;</span><span class="p">])</span>
+    <span class="n">calc_level</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;calculation_level&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">lst_combins</span> <span class="o">=</span> <span class="n">combins_df_col</span><span class="p">(</span><span class="n">df_alloc</span><span class="p">,</span> <span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">calc_level</span><span class="p">)</span>
+
+    <span class="c1"># Merge the asset data</span>
+    <span class="n">asset_match</span> <span class="o">=</span> <span class="n">f_new_match_idx</span><span class="p">(</span><span class="n">lst_combins</span><span class="p">,</span> <span class="n">asset_calc</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">())</span>
+    <span class="n">asset_match</span> <span class="o">=</span> <span class="n">asset_match</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;div&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="c1"># Add teh reinsurance recoveries</span>
+    <span class="n">ri_match</span> <span class="o">=</span> <span class="n">f_new_match_idx</span><span class="p">(</span><span class="n">lst_combins</span><span class="p">,</span> <span class="n">ri_calc</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_series</span><span class="p">())</span>
+    <span class="n">ri_match</span> <span class="o">=</span> <span class="n">ri_match</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;div&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="c1"># Loop through the dictionaries</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">asset_calc</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">asset_calc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">asset_match</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+            <span class="n">asset_calc</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">asset_calc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;div&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">ri_calc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">ri_match</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+            <span class="n">ri_calc</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">ri_calc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;div&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># New concanenate the daaframes</span>
+        <span class="c1"># We don&#39;t need to wory about getting columns to match</span>
+        <span class="n">asset_calc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">asset_calc</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">ri_calc</span><span class="p">[</span><span class="n">k</span><span class="p">]],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># We now need a final aggregation to have our data grouped</span>
+        <span class="n">asset_calc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">asset_calc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">asset_calc</span>
+
+
+<span class="k">def</span> <span class="nf">__f_credit_calc</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">credit_calc</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the credit risk for a given set of credit exposures.</span>
+
+<span class="sd">    This function implements the core calculation for Type 1 credit risk under Solvency II.</span>
+<span class="sd">    It follows these main steps:</span>
+<span class="sd">    1. Adjust Loss Given Default (LGD) values</span>
+<span class="sd">    2. Calculate Credit Quality Step (CQS) for each exposure</span>
+<span class="sd">    3. Aggregate exposures by CQS</span>
+<span class="sd">    4. Apply correlation factors and risk factors</span>
+<span class="sd">    5. Calculate the final credit risk charge</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    mr (Market): The Market risk object containing necessary data and parameters</span>
+<span class="sd">    credit_calc (pd.DataFrame): DataFrame containing credit exposure data</span>
+<span class="sd">                                Expected columns: lgd_calc, lgd_calc_mod, lgd_cqs_calc_mod</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    np.ndarray: Array of credit risk charges for each row in the input DataFrame</span>
+
+<span class="sd">    Note: This function assumes that the &#39;u&#39; and &#39;v&#39; matrices are pre-calculated</span>
+<span class="sd">    and stored in mr.output.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Adjust LGD values: remove negative exposures and calculate squared LGD</span>
+    <span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;lgd_calc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;lgd_calc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;lgd_calc_2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;lgd_calc&quot;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="c1"># Calculate CQS (Credit Quality Step) for each exposure</span>
+    <span class="c1"># CQS is bounded between 1 and 18, with 18 as the default for undefined values</span>
+    <span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;cqs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;lgd_cqs_calc_mod&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;lgd_calc_mod&quot;</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;cqs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;cqs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="c1"># Get unique CQS values and prepare correlation matrices</span>
+    <span class="n">cqs_unique</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;cqs&quot;</span><span class="p">])</span>
+    <span class="n">ix_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">cqs_unique</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cqs_unique</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">][</span><span class="n">ix_grid</span><span class="p">]</span>  <span class="c1"># Correlation matrix</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">][</span><span class="n">cqs_unique</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># Risk factors</span>
+
+    <span class="c1"># Prepare DataFrames for sum and sum of squares by CQS</span>
+    <span class="n">cqs_columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cqs_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cqs_unique</span><span class="p">]</span>
+    <span class="n">sum_by_cqs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;lgd_calc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cqs_columns</span>
+    <span class="p">)</span>
+    <span class="n">sum_2_by_cqs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;lgd_calc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cqs_columns</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Aggregate LGD and LGD^2 by CQS</span>
+    <span class="k">for</span> <span class="n">cqs</span> <span class="ow">in</span> <span class="n">cqs_unique</span><span class="p">:</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;cqs&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cqs</span>
+        <span class="n">sum_by_cqs</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cqs_</span><span class="si">{</span><span class="n">cqs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;lgd_calc&quot;</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">sum_2_by_cqs</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cqs_</span><span class="si">{</span><span class="n">cqs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credit_calc</span><span class="p">[</span><span class="s2">&quot;lgd_calc_2&quot;</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the correlated sum of exposures</span>
+    <span class="c1"># This represents the systematic risk component</span>
+    <span class="n">result_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ni,ij,jn-&gt;n&quot;</span><span class="p">,</span> <span class="n">sum_by_cqs</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">sum_by_cqs</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the sum of squared exposures multiplied by risk factors</span>
+    <span class="c1"># This represents the idiosyncratic risk component</span>
+    <span class="n">result_square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;i,hi-&gt;h&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">sum_2_by_cqs</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the final credit risk charge</span>
+    <span class="c1"># The charge is the minimum of:</span>
+    <span class="c1"># 1. 3 times the square root of (systematic risk + idiosyncratic risk)</span>
+    <span class="c1"># 2. The sum of all exposures (representing a 100% loss scenario)</span>
+    <span class="n">overall_result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span>
+        <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">result_sum</span> <span class="o">+</span> <span class="n">result_square</span><span class="p">),</span> <span class="n">sum_by_cqs</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">overall_result</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Clive Hogarth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
