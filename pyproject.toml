@@ -1,27 +1,74 @@
+[build-system]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "samplicity"
 description = "SAM Non-Life Solvency Calculation Tool"
-dynamic = ["version"]
 readme = "README.md"
 requires-python = ">= 3.8"
-dependencies = [
-  "annotated-types==0.7.0", 
-  "asttokens==2.4.1", "colorama==0.4.6", "comm==0.2.2", "debugpy==1.8.1", "decorator==5.1.1", "exceptiongroup==1.2.1", 
-  "executing==2.0.1", "greenlet==3.0.3", "ipykernel==6.29.4", "ipython==8.25.0", "jedi==0.19.1", "jupyter_client==8.6.2", 
-  "jupyter_core==5.7.2", "matplotlib-inline==0.1.7", "nest-asyncio==1.6.0", "numpy==1.26.4", "packaging==24.0", "pandas==2.2.2", 
-  "parso==0.8.4", "platformdirs==4.2.2", "prompt_toolkit==3.0.46", "psutil==5.9.8", "pure-eval==0.2.2", "pydantic==2.7.3", 
-  "pydantic_core==2.18.4", "Pygments==2.18.0", "pyodbc==5.1.0", "python-dateutil==2.9.0.post0", "pytz==2024.1", "pywin32==306", 
-  "pyzmq==26.0.3", "scipy==1.13.1", "six==1.16.0", "SQLAlchemy==2.0.30", "stack-data==0.6.3", "tornado==6.4.1", "tqdm==4.66.4", 
-  "traitlets==5.14.3", "typing_extensions==4.12.2", "tzdata==2024.1", "wcwidth==0.2.13", "xlwings==0.31.4",
-]
 authors = [
   {name = "Clive Hogarth", email = "clive.hogarth@gmail.com"},
 ]
-
-[tool.setuptools.package-data]
-'samplicity' = ["metadata/metadata.p"]
+dynamic = ["version"]
+dependencies = [
+  "annotated-types==0.7.0",
+  "asttokens==2.4.1",
+  "colorama==0.4.6",
+  "comm==0.2.2",
+  "debugpy==1.8.1",
+  "decorator==5.1.1",
+  "exceptiongroup==1.2.1",
+  "executing==2.0.1",
+  "greenlet==3.0.3",
+  "ipykernel==6.29.4",
+  "ipython==8.25.0",
+  "jedi==0.19.1",
+  "jupyter_client==8.6.2",
+  "jupyter_core==5.7.2",
+  "matplotlib-inline==0.1.7",
+  "nest-asyncio==1.6.0",
+  "numpy==1.26.4",
+  "packaging==24.0",
+  "pandas==2.2.2",
+  "parso==0.8.4",
+  "platformdirs==4.2.2",
+  "prompt_toolkit==3.0.46",
+  "psutil==5.9.8",
+  "pure-eval==0.2.2",
+  "pydantic==2.7.3",
+  "pydantic_core==2.18.4",
+  "Pygments==2.18.0",
+  "pyodbc==5.1.0",
+  "python-dateutil==2.9.0.post0",
+  "pytz==2024.1",
+  "pywin32==306",
+  "pyzmq==26.0.3",
+  "scipy==1.13.1",
+  "six==1.16.0",
+  "SQLAlchemy==2.0.30",
+  "stack-data==0.6.3",
+  "tornado==6.4.1",
+  "tqdm==4.66.4",
+  "traitlets==5.14.3",
+  "typing_extensions==4.12.2",
+  "tzdata==2024.1",
+  "wcwidth==0.2.13",
+  "xlwings==0.31.4",
+]
 
 [project.urls]
 Documentation = "https://bitbucket.org/omi-it/samplicity/wiki/Home"
 Homepage = "https://bitbucket.org/omi-it/samplicity/"
 Source = "https://bitbucket.org/omi-it/samplicity.git"
+
+[tool.setuptools.packages.find]
+where = ["."]  # look for packages in the root directory
+include = ["samplicity*"]  # only include the samplicity package
+exclude = ["input*", "proofs*", "tests*"]  # explicitly exclude other directories
+
+[tool.setuptools.package-data]
+"samplicity" = ["metadata/metadata.p"]
+
+[tool.setuptools_scm]
+# This will use your Git tags for versioning
