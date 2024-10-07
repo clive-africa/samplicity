@@ -405,7 +405,7 @@
 
 
 <div class="viewcode-block" id="ManMade">
-<a class="viewcode-back" href="../../source/manmade.html#samplicity.man_made.ManMade">[docs]</a>
+<a class="viewcode-back" href="../../manmade.html#samplicity.man_made.ManMade">[docs]</a>
 <span class="k">class</span> <span class="nc">ManMade</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A class to &#39;calculate&#39; the man-made catastrophe risk.</span>
 
@@ -429,7 +429,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ManMade.__init__">
-<a class="viewcode-back" href="../../source/manmade.html#samplicity.man_made.ManMade.__init__">[docs]</a>
+<a class="viewcode-back" href="../../manmade.html#samplicity.man_made.ManMade.__init__">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">sam_scr</span><span class="p">,</span> <span class="n">class_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;man_made_cat&quot;</span><span class="p">,</span> <span class="n">calculate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
@@ -448,7 +448,7 @@
 
     
 <div class="viewcode-block" id="ManMade.f_calculate">
-<a class="viewcode-back" href="../../source/manmade.html#samplicity.man_made.ManMade.f_calculate">[docs]</a>
+<a class="viewcode-back" href="../../manmade.html#samplicity.man_made.ManMade.f_calculate">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="nf">f_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Aggregate the inputs to return the gross man-made charges.&quot;&quot;&quot;</span>
@@ -504,7 +504,7 @@
 
 
 <div class="viewcode-block" id="ManMade.f_gross_event">
-<a class="viewcode-back" href="../../source/manmade.html#samplicity.man_made.ManMade.f_gross_event">[docs]</a>
+<a class="viewcode-back" href="../../manmade.html#samplicity.man_made.ManMade.f_gross_event">[docs]</a>
     <span class="k">def</span> <span class="nf">f_gross_event</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">div_field</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -551,7 +551,7 @@
 
 
 <div class="viewcode-block" id="ManMade.f_data">
-<a class="viewcode-back" href="../../source/manmade.html#samplicity.man_made.ManMade.f_data">[docs]</a>
+<a class="viewcode-back" href="../../manmade.html#samplicity.man_made.ManMade.f_data">[docs]</a>
     <span class="k">def</span> <span class="nf">f_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sub_data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>

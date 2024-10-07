@@ -440,7 +440,7 @@
 
 
 <div class="viewcode-block" id="SCR">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR">[docs]</a>
 <span class="k">class</span> <span class="nc">SCR</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SCR is the main class of the samplicity package.</span>
@@ -482,7 +482,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="SCR.__init__">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.__init__">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the SCR class.&quot;&quot;&quot;</span>
@@ -522,7 +522,7 @@
 
 
 <div class="viewcode-block" id="SCR.create_supporting">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.create_supporting">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.create_supporting">[docs]</a>
     <span class="k">def</span> <span class="nf">create_supporting</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">class_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span>
@@ -603,7 +603,7 @@
 
 
 <div class="viewcode-block" id="SCR.handle_calculation_error">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.handle_calculation_error">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.handle_calculation_error">[docs]</a>
     <span class="k">def</span> <span class="nf">handle_calculation_error</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">step_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">halt_on_error</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -668,7 +668,7 @@
 
 
 <div class="viewcode-block" id="SCR.handle_warning">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.handle_warning">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.handle_warning">[docs]</a>
     <span class="k">def</span> <span class="nf">handle_warning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">warning_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">warning_detail</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle errors that occur during calculation steps. It logs the error details, adds them to the `output_errors` list.</span>
@@ -692,7 +692,7 @@
 
 
 <div class="viewcode-block" id="SCR.f_calculate">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.f_calculate">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.f_calculate">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="nf">f_calculate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -780,7 +780,7 @@
 
 
 <div class="viewcode-block" id="SCR.f_diversification_calcs">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.f_diversification_calcs">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.f_diversification_calcs">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="nf">f_diversification_calcs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -834,7 +834,7 @@
 
 
 <div class="viewcode-block" id="SCR.f_aggregation">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.f_aggregation">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.f_aggregation">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="nf">f_aggregation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -880,7 +880,7 @@
 
     <span class="c1"># @log_decorator</span>
 <div class="viewcode-block" id="SCR.f_import_data">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.f_import_data">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.f_import_data">[docs]</a>
     <span class="k">def</span> <span class="nf">f_import_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">risk_free_rates</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -928,7 +928,7 @@
 
 
 <div class="viewcode-block" id="SCR.f_export_results">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.f_export_results">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.f_export_results">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="nf">f_export_results</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">export_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">process_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">conn_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
@@ -952,7 +952,7 @@
     <span class="c1"># @log_decorator</span>
 
 <div class="viewcode-block" id="SCR.f_shapely">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.f_shapely">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.f_shapely">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="nf">f_shapely</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -996,7 +996,7 @@
 
 
 <div class="viewcode-block" id="SCR.f_save_pickle">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.f_save_pickle">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.f_save_pickle">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="nf">f_save_pickle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1043,7 +1043,7 @@
 
 
 <div class="viewcode-block" id="SCR.load_pickle">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.load_pickle">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.load_pickle">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">load_pickle</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1078,7 +1078,7 @@
 
 
 <div class="viewcode-block" id="SCR.f_create_venv">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.f_create_venv">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.f_create_venv">[docs]</a>
     <span class="k">def</span> <span class="nf">f_create_venv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a virtual environment for the Samplicity package.</span>
@@ -1147,7 +1147,7 @@
 
 
 <div class="viewcode-block" id="SCR.f_info">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.f_info">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.f_info">[docs]</a>
     <span class="k">def</span> <span class="nf">f_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve information about hwat information is availabel within the SCR class - and all the supporting classes.</span>
@@ -1174,7 +1174,7 @@
 
 
 <div class="viewcode-block" id="SCR.f_data">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.f_data">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.f_data">[docs]</a>
     <span class="k">def</span> <span class="nf">f_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">sub_data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
@@ -1270,7 +1270,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot find data: </span><span class="si">{</span><span class="n">module</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">sub_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SCR.f_error_count">
-<a class="viewcode-back" href="../../../source/scr.html#samplicity.scr.scr.SCR.f_error_count">[docs]</a>
+<a class="viewcode-back" href="../../../scr.html#samplicity.scr.scr.SCR.f_error_count">[docs]</a>
     <span class="k">def</span> <span class="nf">f_error_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exclude_warning</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Count the number of errors and warnings in the output.</span>

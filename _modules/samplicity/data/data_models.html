@@ -401,7 +401,7 @@
 
 <span class="c1"># A generic function that will be used across multiple data models</span>
 <div class="viewcode-block" id="convert_none_to_value">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.convert_none_to_value">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.convert_none_to_value">[docs]</a>
 <span class="k">def</span> <span class="nf">convert_none_to_value</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">field_mapping</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     
     <span class="c1"># Get the information we need from the context</span>
@@ -425,7 +425,7 @@
 <span class="c1"># The data model for division_detai</span>
 
 <div class="viewcode-block" id="division_detail">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.division_detail">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.division_detail">[docs]</a>
 <span class="k">class</span> <span class="nc">division_detail</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">level_1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">level_2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -436,7 +436,7 @@
     <span class="n">lapse_risk</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
     
 <div class="viewcode-block" id="division_detail.convert_none">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.division_detail.convert_none">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.division_detail.convert_none">[docs]</a>
     <span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;before&#39;</span><span class="p">)</span>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">convert_none</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
@@ -450,7 +450,7 @@
 <span class="c1"># The data model for counterparty</span>
 
 <div class="viewcode-block" id="counterparty">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.counterparty">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.counterparty">[docs]</a>
 <span class="k">class</span> <span class="nc">counterparty</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span>
     <span class="n">counterparty_name</span><span class="p">:</span> <span class="nb">str</span>
@@ -461,7 +461,7 @@
     <span class="n">counterparty_collateral</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="counterparty.convert_none">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.counterparty.convert_none">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.counterparty.convert_none">[docs]</a>
     <span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;before&#39;</span><span class="p">)</span>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">convert_none</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
@@ -475,7 +475,7 @@
 <span class="c1"># The data model for the table asset shocks</span>
 
 <div class="viewcode-block" id="asset_shocks">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.asset_shocks">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.asset_shocks">[docs]</a>
 <span class="k">class</span> <span class="nc">asset_shocks</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">asset_type</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">shock</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span>
@@ -495,7 +495,7 @@
 <span class="c1"># The data model for asset_data</span>
 
 <div class="viewcode-block" id="asset_data">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.asset_data">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.asset_data">[docs]</a>
 <span class="k">class</span> <span class="nc">asset_data</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">float</span>
     <span class="n">asset_description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
@@ -520,7 +520,7 @@
     <span class="n">spread_credit_down_shock</span><span class="p">:</span> <span class="nb">float</span>
 
 <div class="viewcode-block" id="asset_data.convert_none">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.asset_data.convert_none">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.asset_data.convert_none">[docs]</a>
     <span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;before&#39;</span><span class="p">)</span>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">convert_none</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
@@ -532,7 +532,7 @@
 
 
 <div class="viewcode-block" id="asset_data.parse_maturity_date">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.asset_data.parse_maturity_date">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.asset_data.parse_maturity_date">[docs]</a>
     <span class="nd">@validator</span><span class="p">(</span><span class="s1">&#39;maturity_date&#39;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">parse_maturity_date</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="c1"># Need to hanlde a weird issue that crashes Pydantic here.</span>
@@ -551,7 +551,7 @@
 <span class="c1"># The data model for reinsurance</span>
 
 <div class="viewcode-block" id="reinsurance">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.reinsurance">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.reinsurance">[docs]</a>
 <span class="k">class</span> <span class="nc">reinsurance</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="c1"># Will change this in future but we import this as an index.</span>
     <span class="c1"># Must change this.</span>
@@ -567,7 +567,7 @@
 <span class="c1"># The data model for reinsurance_share</span>
 
 <div class="viewcode-block" id="reinsurance_share">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.reinsurance_share">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.reinsurance_share">[docs]</a>
 <span class="k">class</span> <span class="nc">reinsurance_share</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">reinsurance_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span>
     <span class="n">counterparty_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span>
@@ -577,7 +577,7 @@
 <span class="c1"># The data model for prem_res</span>
 
 <div class="viewcode-block" id="prem_res">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.prem_res">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.prem_res">[docs]</a>
 <span class="k">class</span> <span class="nc">prem_res</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">level_1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">level_2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -644,7 +644,7 @@
     <span class="n">ri_structure</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]</span>
 
 <div class="viewcode-block" id="prem_res.convert_none">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.prem_res.convert_none">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.prem_res.convert_none">[docs]</a>
     <span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;before&#39;</span><span class="p">)</span>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">convert_none</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
@@ -660,7 +660,7 @@
 
 
 <div class="viewcode-block" id="nat_cat_si">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.nat_cat_si">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.nat_cat_si">[docs]</a>
 <span class="k">class</span> <span class="nc">nat_cat_si</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">level_1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">level_2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -674,7 +674,7 @@
     <span class="n">motor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="nat_cat_si.convert_none">
-<a class="viewcode-back" href="../../../source/data.html#samplicity.data.data_models.nat_cat_si.convert_none">[docs]</a>
+<a class="viewcode-back" href="../../../data.html#samplicity.data.data_models.nat_cat_si.convert_none">[docs]</a>
     <span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;before&#39;</span><span class="p">)</span>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">convert_none</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>

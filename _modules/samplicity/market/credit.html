@@ -413,7 +413,7 @@
 
 
 <div class="viewcode-block" id="calculate_u_matrix_entry">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.credit.calculate_u_matrix_entry">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.credit.calculate_u_matrix_entry">[docs]</a>
 <span class="k">def</span> <span class="nf">calculate_u_matrix_entry</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate an entry for the U matrix.&quot;&quot;&quot;</span>
     <span class="n">gam</span> <span class="o">=</span> <span class="mf">0.25</span>
@@ -424,7 +424,7 @@
 
 
 <div class="viewcode-block" id="f_u_matrix">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.credit.f_u_matrix">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.credit.f_u_matrix">[docs]</a>
 <span class="k">def</span> <span class="nf">f_u_matrix</span><span class="p">(</span><span class="n">mr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the U matrix used in Type 1 credit risk.&quot;&quot;&quot;</span>
     <span class="n">cf</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">scr</span><span class="o">.</span><span class="n">f_data</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="s2">&quot;credit_type_1_factor&quot;</span><span class="p">)</span>
@@ -438,7 +438,7 @@
 
 
 <div class="viewcode-block" id="f_v_vector">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.credit.f_v_vector">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.credit.f_v_vector">[docs]</a>
 <span class="k">def</span> <span class="nf">f_v_vector</span><span class="p">(</span><span class="n">mr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the V vector used in spread risk calculations.&quot;&quot;&quot;</span>
     <span class="n">gam</span> <span class="o">=</span> <span class="mf">0.25</span>
@@ -451,7 +451,7 @@
 
 
 <div class="viewcode-block" id="f_impairment">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.credit.f_impairment">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.credit.f_impairment">[docs]</a>
 <span class="k">def</span> <span class="nf">f_impairment</span><span class="p">(</span><span class="n">mr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the impairment charges for the reinsurance.&quot;&quot;&quot;</span>
     <span class="n">impair</span> <span class="o">=</span> <span class="p">{}</span>
@@ -494,7 +494,7 @@
 
 
 <div class="viewcode-block" id="f_credit_type_1">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.credit.f_credit_type_1">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.credit.f_credit_type_1">[docs]</a>
 <span class="k">def</span> <span class="nf">f_credit_type_1</span><span class="p">(</span><span class="n">mr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Type 1 credit risk calculation.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">__f_default</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span> <span class="n">ri_exposure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">total_exposure</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>

@@ -408,7 +408,7 @@
 
 
 <div class="viewcode-block" id="combins_df_col">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.combins_df_col">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.combins_df_col">[docs]</a>
 <span class="k">def</span> <span class="nf">combins_df_col</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">calc_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get all possible combinations of a dataframe column.&quot;&quot;&quot;</span>
 
@@ -447,7 +447,7 @@
 
 
 <div class="viewcode-block" id="allocation_matrix">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.allocation_matrix">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.allocation_matrix">[docs]</a>
 <span class="k">def</span> <span class="nf">allocation_matrix</span><span class="p">(</span>
     <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">calc_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
@@ -486,14 +486,14 @@
 
 
 <div class="viewcode-block" id="check_tuple">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.check_tuple">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.check_tuple">[docs]</a>
 <span class="k">def</span> <span class="nf">check_tuple</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">tuple_string</span><span class="o">=</span><span class="s2">&quot;(&#39;b&#39;, &#39;c&#39;, &#39;d&#39;)&quot;</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">tuple_string</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
 <div class="viewcode-block" id="f_div_match">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.f_div_match">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.f_div_match">[docs]</a>
 <span class="k">def</span> <span class="nf">f_div_match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_to_match</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">list_to_match</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_combinations</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">list_to_match</span>
@@ -508,7 +508,7 @@
 
 
 <div class="viewcode-block" id="f_best_match">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.f_best_match">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.f_best_match">[docs]</a>
 <span class="k">def</span> <span class="nf">f_best_match</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">join_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function not used, repalce with f_new_match_element.&quot;&quot;&quot;</span>
     <span class="c1"># The new version is a little more robust and does more checks</span>
@@ -538,7 +538,7 @@
 
 
 <div class="viewcode-block" id="f_fast_join">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.f_fast_join">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.f_fast_join">[docs]</a>
 <span class="k">def</span> <span class="nf">f_fast_join</span><span class="p">(</span><span class="n">left_df</span><span class="p">,</span> <span class="n">right_df</span><span class="p">,</span> <span class="n">dest_field</span><span class="p">,</span> <span class="n">source_field</span><span class="p">):</span>
     <span class="c1"># Handle the case when the rigth df is None</span>
     <span class="c1"># This cna occur when there is no data to join</span>
@@ -589,7 +589,7 @@
 
 
 <div class="viewcode-block" id="f_best_join">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.f_best_join">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.f_best_join">[docs]</a>
 <span class="k">def</span> <span class="nf">f_best_join</span><span class="p">(</span><span class="n">left_df</span><span class="p">,</span> <span class="n">right_df</span><span class="p">,</span> <span class="n">dest_field</span><span class="p">,</span> <span class="n">source_field</span><span class="p">):</span>
     <span class="c1"># Convert index to list for faster lookup</span>
     <span class="n">left_idx</span> <span class="o">=</span> <span class="n">left_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -613,7 +613,7 @@
 
 
 <div class="viewcode-block" id="f_accummulate_figures">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.f_accummulate_figures">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.f_accummulate_figures">[docs]</a>
 <span class="k">def</span> <span class="nf">f_accummulate_figures</span><span class="p">(</span>
     <span class="n">dest_df</span><span class="p">,</span>
     <span class="n">source_df</span><span class="p">,</span>
@@ -664,7 +664,7 @@
 
 
 <div class="viewcode-block" id="f_get_total_row">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.f_get_total_row">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.f_get_total_row">[docs]</a>
 <span class="k">def</span> <span class="nf">f_get_total_row</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the index with the longest tuple.&quot;&quot;&quot;</span>
     <span class="n">length</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
@@ -676,7 +676,7 @@
 
 
 <div class="viewcode-block" id="f_fast_match_element">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.f_fast_match_element">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.f_fast_match_element">[docs]</a>
 <span class="k">def</span> <span class="nf">f_fast_match_element</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">right_list</span><span class="p">):</span>
 
     <span class="c1"># Check for an exact match</span>
@@ -707,7 +707,7 @@
 
 
 <div class="viewcode-block" id="f_new_match_element">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.f_new_match_element">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.f_new_match_element">[docs]</a>
 <span class="k">def</span> <span class="nf">f_new_match_element</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">right_list</span><span class="p">):</span>
     <span class="c1"># We first chekc for an exact match</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">right_list</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">list</span><span class="p">:</span>
@@ -756,7 +756,7 @@
 
 
 <div class="viewcode-block" id="f_new_match_idx">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.f_new_match_idx">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.f_new_match_idx">[docs]</a>
 <span class="k">def</span> <span class="nf">f_new_match_idx</span><span class="p">(</span>
     <span class="n">left_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">right_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">both</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
@@ -784,7 +784,7 @@
 
 
 <div class="viewcode-block" id="log_decorator">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.log_decorator">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.log_decorator">[docs]</a>
 <span class="k">def</span> <span class="nf">log_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A decorator that logs the runtime of the decorated function and appends it to the `output_runtimes` attribute</span>
@@ -838,7 +838,7 @@
 
 
 <div class="viewcode-block" id="f_best_match_new">
-<a class="viewcode-back" href="../../source/helper.html#samplicity.helper.f_best_match_new">[docs]</a>
+<a class="viewcode-back" href="../../helper.html#samplicity.helper.f_best_match_new">[docs]</a>
 <span class="k">def</span> <span class="nf">f_best_match_new</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">join_list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function not used, repalce with f_new_match_element.&quot;&quot;&quot;</span>
     <span class="c1"># The new version is a little more robust and does more checks</span>

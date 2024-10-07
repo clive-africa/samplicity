@@ -399,7 +399,7 @@
 
 
 <div class="viewcode-block" id="NatCat">
-<a class="viewcode-back" href="../../source/natcat.html#samplicity.nat_cat.NatCat">[docs]</a>
+<a class="viewcode-back" href="../../natcat.html#samplicity.nat_cat.NatCat">[docs]</a>
 <span class="k">class</span> <span class="nc">NatCat</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class to calculate the gross natural catastrophe risk of the SAM SCR.</span>
@@ -419,7 +419,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="NatCat.__init__">
-<a class="viewcode-back" href="../../source/natcat.html#samplicity.nat_cat.NatCat.__init__">[docs]</a>
+<a class="viewcode-back" href="../../natcat.html#samplicity.nat_cat.NatCat.__init__">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sam_scr</span><span class="p">,</span> <span class="n">class_name</span><span class="o">=</span><span class="s2">&quot;nat_cat&quot;</span><span class="p">,</span> <span class="n">calculate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scr</span> <span class="o">=</span> <span class="n">sam_scr</span>
@@ -463,7 +463,7 @@
 
 
 <div class="viewcode-block" id="NatCat.f_data_aggregation">
-<a class="viewcode-back" href="../../source/natcat.html#samplicity.nat_cat.NatCat.f_data_aggregation">[docs]</a>
+<a class="viewcode-back" href="../../natcat.html#samplicity.nat_cat.NatCat.f_data_aggregation">[docs]</a>
     <span class="k">def</span> <span class="nf">f_data_aggregation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calc_type</span><span class="p">):</span>
         <span class="c1"># Get the different combinatiosn we need to calcualte the natural</span>
         <span class="c1"># catstrophe risk for</span>
@@ -545,7 +545,7 @@
 
 
 <div class="viewcode-block" id="NatCat.f_cat_calculation">
-<a class="viewcode-back" href="../../source/natcat.html#samplicity.nat_cat.NatCat.f_cat_calculation">[docs]</a>
+<a class="viewcode-back" href="../../natcat.html#samplicity.nat_cat.NatCat.f_cat_calculation">[docs]</a>
     <span class="k">def</span> <span class="nf">f_cat_calculation</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">nat_cat_data</span><span class="p">,</span> <span class="n">base_matrix</span><span class="p">,</span> <span class="n">df_allocation</span><span class="p">,</span> <span class="n">div_field</span><span class="p">,</span> <span class="n">calc_type</span>
     <span class="p">):</span>
@@ -688,7 +688,7 @@
 
     <span class="c1"># Calcualtion to calcualte the natural catastrophe risk</span>
 <div class="viewcode-block" id="NatCat.f_calculate">
-<a class="viewcode-back" href="../../source/natcat.html#samplicity.nat_cat.NatCat.f_calculate">[docs]</a>
+<a class="viewcode-back" href="../../natcat.html#samplicity.nat_cat.NatCat.f_calculate">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="nf">f_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates natural catastrophe risk charges.</span>
@@ -833,7 +833,7 @@
 
 
 <div class="viewcode-block" id="NatCat.f_data">
-<a class="viewcode-back" href="../../source/natcat.html#samplicity.nat_cat.NatCat.f_data">[docs]</a>
+<a class="viewcode-back" href="../../natcat.html#samplicity.nat_cat.NatCat.f_data">[docs]</a>
     <span class="k">def</span> <span class="nf">f_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sub_data</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the output values stored in NatCat class.&quot;&quot;&quot;</span>
 

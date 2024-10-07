@@ -429,7 +429,7 @@
 
 
 <div class="viewcode-block" id="Market">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.market.Market">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.market.Market">[docs]</a>
 <span class="k">class</span> <span class="nc">Market</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the SAM market risk for a non-life insurer.</span>
@@ -474,7 +474,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Market.__init__">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.market.Market.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.market.Market.__init__">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sam_scr</span><span class="p">,</span> <span class="n">class_name</span><span class="o">=</span><span class="s2">&quot;market_risk&quot;</span><span class="p">,</span> <span class="n">calculate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct all the initial attributes for the MARKET object.</span>
@@ -668,7 +668,7 @@
 
 
 <div class="viewcode-block" id="Market.f_market_risk">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.market.Market.f_market_risk">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.market.Market.f_market_risk">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="nf">f_market_risk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the market risk charges for each asset.</span>
@@ -858,7 +858,7 @@
 
 
 <div class="viewcode-block" id="Market.f_spread_interest">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.market.Market.f_spread_interest">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.market.Market.f_spread_interest">[docs]</a>
     <span class="k">def</span> <span class="nf">f_spread_interest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shock</span><span class="p">,</span> <span class="n">asset_data</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the spread interest rate shock.&quot;&quot;&quot;</span>
         <span class="c1"># Create our infastructure adjustments</span>
@@ -892,7 +892,7 @@
 
 
 <div class="viewcode-block" id="Market.f_aggregate_charges">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.market.Market.f_aggregate_charges">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.market.Market.f_aggregate_charges">[docs]</a>
     <span class="k">def</span> <span class="nf">f_aggregate_charges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Aggregate the different market risk charges.&quot;&quot;&quot;</span>
         <span class="c1"># logger.debug(&quot;Function start&quot;)</span>
@@ -902,7 +902,7 @@
 
 
 <div class="viewcode-block" id="Market.f_calc_impairment">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.market.Market.f_calc_impairment">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.market.Market.f_calc_impairment">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="nf">f_calc_impairment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the impairment charges for reinsurance recoveries.&quot;&quot;&quot;</span>
@@ -912,7 +912,7 @@
 
 
 <div class="viewcode-block" id="Market.f_data">
-<a class="viewcode-back" href="../../../source/market.html#samplicity.market.market.Market.f_data">[docs]</a>
+<a class="viewcode-back" href="../../../market.html#samplicity.market.market.Market.f_data">[docs]</a>
     <span class="k">def</span> <span class="nf">f_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sub_data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Output values that are stored with the Market class.&quot;&quot;&quot;</span>
         <span class="c1"># logger.debug(&quot;Function start&quot;)</span>

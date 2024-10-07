@@ -411,7 +411,7 @@
 
 
 <div class="viewcode-block" id="PremRes">
-<a class="viewcode-back" href="../../source/premres.html#samplicity.prem_res.PremRes">[docs]</a>
+<a class="viewcode-back" href="../../premres.html#samplicity.prem_res.PremRes">[docs]</a>
 <span class="k">class</span> <span class="nc">PremRes</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class to calculate the premium and reserve risk component of the SAM SCR.</span>
@@ -432,7 +432,7 @@
 
     <span class="c1">#@log_decorator</span>
 <div class="viewcode-block" id="PremRes.__init__">
-<a class="viewcode-back" href="../../source/premres.html#samplicity.prem_res.PremRes.__init__">[docs]</a>
+<a class="viewcode-back" href="../../premres.html#samplicity.prem_res.PremRes.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">sam_scr</span><span class="p">:</span> <span class="s2">&quot;SCR&quot;</span><span class="p">,</span> <span class="n">class_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;prem_res&quot;</span><span class="p">,</span> <span class="n">calculate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PremRes</span><span class="p">:</span>
@@ -457,7 +457,7 @@
 
 
 <div class="viewcode-block" id="PremRes.f_calculate">
-<a class="viewcode-back" href="../../source/premres.html#samplicity.prem_res.PremRes.f_calculate">[docs]</a>
+<a class="viewcode-back" href="../../premres.html#samplicity.prem_res.PremRes.f_calculate">[docs]</a>
     <span class="nd">@log_decorator</span>
     <span class="k">def</span> <span class="nf">f_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -672,7 +672,7 @@
 
 
 <div class="viewcode-block" id="PremRes.f_data">
-<a class="viewcode-back" href="../../source/premres.html#samplicity.prem_res.PremRes.f_data">[docs]</a>
+<a class="viewcode-back" href="../../premres.html#samplicity.prem_res.PremRes.f_data">[docs]</a>
     <span class="k">def</span> <span class="nf">f_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sub_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
