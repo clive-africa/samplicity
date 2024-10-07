@@ -21,7 +21,6 @@ authors = [
 [tool.setuptools.package-data]
 'samplicity' = ["metadata/metadata.p"]
 
- Multiple top-level packages discovered in a flat-layout: ['input', 'proofs', 'samplicity'].
 [project.urls]
 Documentation = "https://bitbucket.org/omi-it/samplicity/wiki/Home"
 Homepage = "https://bitbucket.org/omi-it/samplicity/"
