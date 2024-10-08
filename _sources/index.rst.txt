@@ -1,3 +1,7 @@
+==================
+Samplicity Index
+==================
+
 .. toctree::
    :caption: Table of Contents
    :maxdepth: 2
