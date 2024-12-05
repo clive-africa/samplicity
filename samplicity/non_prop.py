@@ -8,6 +8,7 @@ import logging
 
 import numpy as np
 import pandas as pd
+from typing import Optional, Union
 
 logger = logging.getLogger(__name__)
 
@@ -167,7 +168,7 @@ class NonProp:
 
             # The general guidance requires that for the reinsurance
             # calculation we must allocate the charges proportionately.
-            # It is difficult to decide where this should ahppen -
+            # It is difficult to decide where this should happen -
             # and the placement of this calculation is a little debatable.
             # Ultimately it has been decided to put the calcualtion here.
             # For factor cat thsi is alsmost always not necessary as the
@@ -255,14 +256,28 @@ class NonProp:
 
         return result
 
-    def f_data(self, data="info", sub_data="info", df=None):
-        """Output values that are stored with the NonProp class."""
-        # logger.debug("Function start")
+    def f_data(
+        self, data: Optional[str] = None, sub_data: Optional[str] = None
+    ) -> Union[pd.DataFrame, None]:
+        """
+        Retrieve data from the PremRes class. Supports f_data from the SCR class.
 
+        :param data: The specific data name to retrieve.
+        :type data: str
+        :param sub_data: The sub-data name, if applicable.
+        :type sub_data: str, optional
+        :return: The retrieved data as a pandas DataFrame or None if not found.
+        :rtype: Union[pd.DataFrame, None]
+        :raises ValueError: If the requested data cannot be found or accessed.
+
+        .. note::
+            All input strings are converted to lowercase and stripped of leading/trailing spaces
+            to improve user experience and reduce errors due to case sensitivity or whitespace.
+
+        """
         try:
-            # Just some cleaning of our inputs to ensure no errors occur
-            data = data.lower().strip()
-            sub_data = sub_data.lower().strip()
+            data = data.lower().strip() if data else ""
+            sub_data = sub_data.lower().strip() if sub_data else ""
 
             if data == "div_structure":
                 df = self.output[data][sub_data]
@@ -273,7 +288,8 @@ class NonProp:
 
             if data == "reinsurance":
                 df = df.T
-        except:
-            logger.critical(f"Error: {data} - {sub_data}")
+        except Exception as e:
+            raise ValueError(f"Cannot find {data} - {sub_data}") from e
+            return None
         else:
             return df.copy(deep=True)

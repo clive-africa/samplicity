@@ -330,8 +330,10 @@ class Market:
                 )
 
             elif shock == "spread_credit":
-                asset_data.loc[incl, ["spread_credit_up", "spread_credit_up_shock"]] = (
-                    asset_data.loc[incl, ["spread_credit_up", "spread_credit_up_shock"]]
+                asset_data.loc[incl, ["spread_credit_up", "spread_credit_down"]] = (
+                    asset_data.loc[
+                        incl, ["spread_credit_up_shock", "spread_credit_down_shock"]
+                    ]
                 )
 
             elif shock == "concentration":
@@ -370,7 +372,7 @@ class Market:
                     incl, "market_value"
                 ] * np.array(factor)
 
-            elif shock in ("spread_interest", "spread_interest_infastructure"):
+            elif shock in ("spread_interest", "spread_interest_infrastructure"):
                 asset_data.loc[incl, "spread_interest"] = self.f_spread_interest(
                     shock, asset_data.loc[incl, :]
                 )

@@ -11,11 +11,11 @@ import samplicity as sam
 
 
 # The file where our data is stored
-import_file = "c:/git_hub/samplicity/.input/sam_input.xlsm"
+import_file = r"C:\git_hub\samplicity_git\samplicity\input\sam_input_poc.xlsm"
 risk_free_rates = (
-    "c:/git_hub/samplicity/.input/12 SAM - Risk Free Rates  (30 December 2022).xlsx"
+    r"C:\git_hub\samplicity_git\samplicity\input\12 SAM - Risk Free Rates  (30 December 2022).xlsx"
 )
-symmetric_adjustment = "c:/git_hub/samplicity/.input/12 SAM - Equity Symmetric Adjustment (30 December 2022).xlsx"
+symmetric_adjustment = r"C:\git_hub\samplicity_git\samplicity\input\12 SAM - Equity Symmetric Adjustment (30 December 2022).xlsx"
 
 # Create an instance of the SAM SCR class
 sam_scr = sam.scr.SCR()
