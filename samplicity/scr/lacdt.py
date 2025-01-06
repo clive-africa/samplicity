@@ -1,17 +1,14 @@
-import logging
 import pandas as pd
-
-logger = logging.getLogger(__name__)
 
 
 def f_lacdt_calculation(sam_scr, base_scr):
     """Aggregate the lacdt amounts."""
-    #logger.debug("Function start")
+    # logger.debug("Function start")
 
     lacdt = sam_scr.f_data("data", "data", "division_detail")
 
     # An approximation is used here where we typically would not have
-    # assets for each and every product, div_levelersification grouping
+    # assets for each and every product, diversification grouping
     # Instead we add the products, this assumes independence
     # May not always be true.
     # I believe this is a far better approximation than others use.
@@ -26,7 +23,7 @@ def f_lacdt_calculation(sam_scr, base_scr):
         raise Exception(
             "scr",
             "f_lacdt_calculation",
-            "div_levelersification listing is incorrect",
+            "diversification listing is incorrect",
             "",
         )
 
@@ -72,12 +69,11 @@ def f_lacdt_calculation(sam_scr, base_scr):
             other=tax_calc["max_lacdt"],
         )
 
-    # Can't exceed the 
+    # Can't exceed the
     tax_calc[chrg + "_lacdt"] = tax_calc[chrg + "_lacdt"].where(
         tax_calc[chrg + "_lacdt"] < tax_calc["max_lacdt"],
         other=tax_calc["max_lacdt"],
     )
-
 
     # We only need these 3 fields for the rest of the calculation
     cols = ["gross", "net", "impairment", "gross_return"]

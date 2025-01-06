@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 from .helper import combins_df_col, log_decorator
 from typing import Literal
+from typing import Any, Dict, Optional, Union
 
 
 logger = logging.getLogger(__name__)
@@ -320,13 +321,28 @@ class FactorCat:
 
         return calc_chrg
 
-    def f_data(self, data="info", sub_data="info"):
-        """Output values that are stored with the FactorCat class."""
+    def f_data(
+        self, data: Optional[str] = None, sub_data: Optional[str] = None
+    ) -> Union[pd.DataFrame, None]:
+        """
+        Retrieve data from the PremRes class. Supports f_data from the SCR class.
 
+        :param data: The specific data name to retrieve.
+        :type data: str
+        :param sub_data: The sub-data name, if applicable.
+        :type sub_data: str, optional
+        :return: The retrieved data as a pandas DataFrame or None if not found.
+        :rtype: Union[pd.DataFrame, None]
+        :raises ValueError: If the requested data cannot be found or accessed.
+
+        .. note::
+            All input strings are converted to lowercase and stripped of leading/trailing spaces
+            to improve user experience and reduce errors due to case sensitivity or whitespace.
+
+        """
         try:
-            # Just some cleaning of our inputs to ensure no errors occur
-            data = data.lower().strip()
-            sub_data = sub_data.lower().strip()
+            data = data.lower().strip() if data else ""
+            sub_data = sub_data.lower().strip() if sub_data else ""
 
             if data in ("div_structure"):
                 res = self.output[data][sub_data]

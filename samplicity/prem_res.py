@@ -1,19 +1,8 @@
-"""
-The PremRes class is contained in the prem_res.py module.
-
-"""
-
 from __future__ import annotations
-
-import logging
 from typing import Any, Dict, Optional, Union
-
 import numpy as np
 import pandas as pd
-
 from .helper import allocation_matrix, combins_df_col, log_decorator
-
-logger = logging.getLogger(__name__)
 
 
 class PremRes:
@@ -34,7 +23,7 @@ class PremRes:
 
     """
 
-    #@log_decorator
+    # @log_decorator
     def __init__(
         self, sam_scr: "SCR", class_name: str = "prem_res", calculate: bool = False
     ) -> PremRes:
@@ -43,7 +32,7 @@ class PremRes:
 
         :param sam_scr: The base SCR class.
         :type sam_scr: str
-        :param class_name: The name that should be used for the prem_res class.
+        :param class_name: The name that should be used for the prem_res class, defaults to 'prem_res'.
         :type class_name: str
         :param calculate: If the PremRes calculation should be performed.
         :type calculate: bool

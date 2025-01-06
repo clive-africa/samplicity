@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+from typing import Optional, Union
 from .helper import combins_df_col, log_decorator, allocation_matrix
 
 

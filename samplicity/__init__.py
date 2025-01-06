@@ -14,5 +14,5 @@ from .reinsurance import reinsurance
 from .main import run_excel, run_ms_access
 
 # Allow for logging in the package
-import logging
-logger = logging.getLogger('samplexity')
+# import logging
+# logger = logging.getLogger('samplicity')
