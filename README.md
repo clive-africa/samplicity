@@ -33,7 +33,7 @@ Download the package, unzip the files, and run the file 'create_virtual.bat'. Th
 The requirements for the virtual environment can be found in the requirements.txt file. However, one can use a 'blank' virtual environment and the package will install all of the necessary dependencies - these are detailed in the pyproject.toml file. To install the package using PIP one must use the code.
 
 ```
-pip install git+https://bitbucket.org/omi-it/samplicity](https://github.com/clive-africa/samplicity.git
+pip install git+https://github.com/clive-africa/samplicity.git
 ```
 
 ## Data Inputs <a name="data_inputs" id="data_inputs"></a>
