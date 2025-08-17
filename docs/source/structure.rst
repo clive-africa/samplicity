@@ -1,12 +1,12 @@
 ================================
-Samplicity Strcuture
+Samplicity strcuture
 ================================
 
 The Samplicity package is designed to calculate the Solvency Assessment and Management (SAM) Solvency Capital Requirement (SCR) for non-life insurers.
 It consists of several interconnected classes that work together to perform various aspects of the calculation.
 
 --------------
-Main Classes
+Main classes
 --------------
 
 SCR
@@ -30,7 +30,7 @@ Key responsibilities:
 - Validating and preprocessing input data
 - Exporting calculation results
 
-Risk Module Classes
+Risk module classes
 =======================
 
 PremRes
@@ -74,7 +74,7 @@ OpRisk
 The ``OpRisk`` class computes the operational risk component of the SCR.
 
 -------------------------------
-How the Classes work together
+How the classes work together
 -------------------------------
 
 1. The ``SCR`` class initializes all other classes and stores them in its `classes` dictionary.
@@ -99,7 +99,7 @@ How the Classes work together
 6. Finally, the ``SCR`` class computes the overall Solvency Capital Requirement - allowing for LACDT - and stores the results.
 
 -------------------------------
-Usage Example
+Usage example
 -------------------------------
 
 .. code-block:: python

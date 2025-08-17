@@ -1,0 +1,73 @@
+import random
+import helper as hf
+# Assume 'list_A' and 'list_B' are your lists of sets
+list_A = [{'apple', 'banana'}, {'banana', 'cherry'}, {'apple', 'cherry', 'date'}]
+list_B = [{'banana', 'cherry'}, {'apple', 'date'}]
+
+# Convert lists of sets to sets of frozensets for set operations
+#set_A = set(s for s in list_A)
+set_A = set(frozenset(s) for s in list_A)
+set_B = set(frozenset(s) for s in list_B)
+
+# Find elements in list_A not in list_B
+diff_AB = set_A.difference(set_B)
+
+# Convert back to list of sets
+diff_AB = [set(s) for s in diff_AB]
+
+print(diff_AB)
+
+import _random
+
+# Calculate the number of records to select
+num_records = int(len(prem_res) * 0.3)
+
+prem_res=sam_scr.f_data('prem_res','net','all')
+
+# Randomly select records from res
+random_records = random.sample(prem_res.index.to_list(), num_records)
+
+#test=res.loc[random_records,:].copy(deep=True)
+
+#test=test*1.3
+
+
+f_fast_join(prem_res, random_records, dest_field, source_field)
+
+set_A = set(res.index.to_list())
+set_B = set(prem_res.index.to_list())
+
+# Find elements in list_A not in list_B
+diff_AB = set_A.difference(set_B)
+match_AB=set_A.intersection(set_B)
+# Convert back to list of sets
+#diff_AB = [set(s) for s in diff_AB]
+match_AB=list(match_AB)
+diff_AB=list(diff_AB)
+
+res2=res.copy(deep=True)
+print(res.equals(res2))
+
+res.loc[match_AB,["premium", "reserve", "premium_reserve"]]=prem_res.loc[match_AB,["premium", "reserve", "overall"]].values
+
+print(res.equals(res2))
+
+hf.f_best_join(
+    left_df=res.loc[diff_AB],
+    right_df=prem_res,
+    dest_field=["premium", "reserve", "premium_reserve"],
+    source_field=["premium", "reserve", "overall"],
+    )
+
+
+
+
+
+hf.f_best_join(
+    left_df=res2,
+    right_df=prem_res,
+    dest_field=["premium", "reserve", "premium_reserve"],
+    source_field=["premium", "reserve", "overall"],
+    )
+
+print(res.equals(res2))

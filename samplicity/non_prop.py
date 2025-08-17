@@ -21,8 +21,6 @@ class NonProp:
 
     This class supports the class 'SCR'.
 
-    ...
-
     Attributes
     ----------
         None
@@ -32,6 +30,13 @@ class NonProp:
     calculate(sam_scr):
     Performs the data manipulation and calcutions required.
     The results are returned as a dictionary.
+
+    .. warning::
+        - If the column 'include_non_prop_cat' is left blank it will be defaulted to 'N' and no charge will be calculated for the data point.
+        - In performing the calcualtion of the charges for the different reinsurance arrangements, the charges are pro-rated across the different reinsurance treaties.
+        - If no reinsurance arrangement (ri_structure) is provided it is defaulted to '__none__'.
+    
+
     """
 
     @log_decorator
@@ -46,7 +51,7 @@ class NonProp:
 
         # We get only the rows that we need for the calculation.
         factor_data = self.scr.f_data("data", "data", "prem_res")
-        # sam_scr.data_files['prem_res'].copy(deep=True)
+        
         factor_data.fillna({"include_non_prop_cat": "N"}, inplace=True)
         factor_data["include_non_prop_cat"] = factor_data["include_non_prop_cat"].map(
             str.upper
@@ -71,6 +76,12 @@ class NonProp:
         factor_data[["gross_p_last", "gross_p"]] = factor_data[
             ["gross_p_last", "gross_p"]
         ].fillna(0)
+
+        # We populate the field 'ri_structure' with 'None' where no reinsurance is provided.
+        # This avoid countless issues later on in the ocde when delaing with scenarios where
+        # users may not populate any reinsurance arrangements.
+        factor_data["ri_structure"] = factor_data["ri_structure"].fillna("__none__")
+
         div_field = self.scr.f_data("data", "data", "diversification_level").iloc[0]
         factor_data["div_structure"] = list(
             factor_data[[div_field, "ri_structure"]].itertuples(index=False, name=None)
@@ -84,8 +95,7 @@ class NonProp:
             self.f_calculate()
 
     def f_indv_calculation(self, calculation_type):
-        """Perform calcualtions for eahc calcaultion type."""
-        # logger.debug("Function start")
+        """Perform calcualtions for each calcaultion type."""
 
         if calculation_type in ("base", "div_structure"):
             div_field = self.scr.f_data("data", "data", "diversification_level").iloc[0]
@@ -97,11 +107,17 @@ class NonProp:
             div_field = div_field
             calc_level = "diversification"
 
+        # For the division structure calcualtion we need to create a special matrix
+        # This allows for the calcualtion to be performed in a single step
         if calculation_type == "div_structure":
-            lst = combins_df_col(self.output["factor_data"], div_field, calc_level)
+            lst, _ = combins_df_col(self.output["factor_data"], div_field, calc_level)
 
-            structure_list = np.unique(self.output["factor_data"]["ri_structure"])
             division_list = np.unique(self.output["factor_data"][div_field])
+
+            # Need to allow for scenarios where we do not have any reinsurance
+            # arrangements populated. np.unique will not work
+            # Thsi was fixed by defualting all of the reinsurance arrangements to 'None'
+            structure_list = np.unique(self.output["factor_data"]["ri_structure"])
 
             new_lst = [(x, y) for x in lst for y in structure_list]
             cols = [(x, y) for x in division_list for y in structure_list]
@@ -109,13 +125,16 @@ class NonProp:
             matrix = [x[0] in y[0] and x[1] in y[1] for x in cols for y in new_lst]
             matrix = np.reshape(matrix, (len(cols), len(new_lst))).T.astype(int)
             df_allocation = pd.DataFrame(matrix, index=new_lst, columns=cols)
-            # Now we move back to normal to allow the calcaultion to take place
+            
+            # Now we move back to normal to allow the calculation to take place
             lst = new_lst
             div_field = "div_structure"
         else:
             df_allocation = allocation_matrix(
                 self.output["factor_data"], div_field, calc_level
             )
+
+        # Perform the actual calculation here
 
         factor_data = self.output["factor_data"][
             [div_field, "non_prop_charge", "gross_p_last", "gross_p"]
@@ -175,9 +194,11 @@ class NonProp:
             # charges are linear but could be necessary where premiums are
             # negative. The same calculation will need to be repeated for
             # factor based catastrophe risk.
+            if calc == "base":
+                self.output[calc] = result
 
-            if calc == "reinsurance":
-                # We get the index, we are lookign for the total entry.
+            elif calc == "reinsurance":
+                # We get the index, we are looking for the total entry.
                 # This should always be the last entry, but we check
                 max_length = max([len(x) for x in result.index])
                 if len(result.index[len(result) - 1]) != max_length:
@@ -189,8 +210,10 @@ class NonProp:
                     )
 
                 # At this stage we are good to proceed
-                # This formual is slightly more complex than nat_cat as we
-                # vector the calculation
+                # This formula is slightly more complex than nat_cat as we
+                # vectorise the calculation. In these steps we are proportionately
+                # pro-rating the total charge across the different reinsurance treaties.
+                # We do this for all of the columns in the matrix in one step
                 sum_charges = (
                     result.sum(axis=0) - result.loc[[result.index[len(result) - 1]], :]
                 )
@@ -204,13 +227,12 @@ class NonProp:
 
                 # We remove the last total row
                 result = result[:-1]
-                # result.drop(index=result.index[-1], axis=0, inplace=True)
                 result["np_total"] = np.sqrt(
                     np.square(result["np_property"])
                     + np.square(result["np_credit_guarantee"])
                 )
 
-            self.output[calc] = result
+                self.output[calc] = result
 
             # A similar approahc needs to happen for the calculations by
             # division and structure. We will be consistent in our approach
@@ -218,11 +240,11 @@ class NonProp:
             # Because we knwo that the divsion_structure calcualtion
             # happens last, we have reference the base calculation
 
-            if calc == "div_structure":
+            elif calc == "div_structure":
                 # Just doign this to keep this a little short
-                # data=self.output[('div_structure',shck)]
                 # We need to split our tuples out here
-                # logger.debug("Test: div_structure")
+
+                # We are creating two columsn with the division and structure
                 result[["div", "structure"]] = [
                     np.array([x[0], x[1]], dtype=object) for x in result.index
                 ]
@@ -231,8 +253,8 @@ class NonProp:
                 base_data = self.output["base"]
 
                 temp_result = {}
-                perils = pd.Series(["np_property", "np_credit_guarantee"])
-                for p in perils:
+                #perils = pd.Series(["np_property", "np_credit_guarantee"])
+                for p in ["np_property", "np_credit_guarantee"]:
                     df = pd.pivot_table(
                         data=result[["div", "structure", p]],
                         values=p,

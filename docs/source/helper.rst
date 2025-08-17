@@ -6,7 +6,3 @@ Helper Functions
    :members:
    :undoc-members:
    :show-inheritance:
-
-
-
-

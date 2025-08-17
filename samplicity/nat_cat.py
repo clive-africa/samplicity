@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from typing import Optional, Union
+from typing import Optional, Union, Literal, Tuple
 from .helper import combins_df_col, log_decorator, allocation_matrix
 
 
@@ -17,7 +17,7 @@ class NatCat:
 
     >>> # Create a NatCat class and perform a calculation
     >>> nat_cat = NatCat(sam_scr, "nat_cat", True)
-    >>> # An alternative methodology to do this
+    >>> # An alternative way to do this
     >>> nat_cat_module = sam_scr.create_supporting("nat_cat")
 
     """
@@ -29,8 +29,6 @@ class NatCat:
 
         self.output = {}
         """Stores all of the outputs of the class."""
-
-        # self.data_meta=sam_scr.data_meta
 
         nat_cat_si = self.scr.f_data("data", "data", "nat_cat_si").sort_values(
             by="postal_code"
@@ -51,6 +49,9 @@ class NatCat:
         # divsion and structure
         # Thsi is used to allocate reinsurance recoveries later
         div_field = self.scr.f_data("data", "data", "diversification_level").iloc[0]
+
+        # Fill the blank reinsurance structures with '__none__'
+        nc_data["ri_structure"] = nc_data["ri_structure"].fillna("__none__")
         nc_data["div_structure"] = list(
             nc_data[[div_field, "ri_structure"]].itertuples(index=False, name=None)
         )
@@ -63,11 +64,29 @@ class NatCat:
         if calculate:
             self.f_calculate()
 
-    def f_data_aggregation(self, calc_type):
-        # Get the different combinatiosn we need to calcualte the natural
+    def f_data_aggregation(
+        self, calc_type: Literal["base", "div_structure", "reinsurance"]
+    ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+        """
+        Aggregates data for natural catastrophe calculations.
+
+        Parameters:
+        ----------
+        calc_type : str
+            The type of calculation to perform. Options are "base", "reinsurance", or "div_structure".
+
+        Returns:
+        ----------
+        tuple
+            A tuple containing:
+            - calc_nat_cat_data (pd.DataFrame): Aggregated natural catastrophe data.
+            - base_matrix (pd.DataFrame): Base matrix for calculations.
+            - df_allocation (pd.DataFrame): Allocation matrix for calculations.
+        """
+        # Get the different combinations we need to calculate the natural
         # catstrophe risk for
         # We do this for each function individually as this significanly
-        # impacts our overall fucntion pseed.
+        # impacts our overall fucntion speed.
         # we need to get our diversifciation columns and the method of
         # diversification
         if calc_type in ("base", "div_structure"):
@@ -81,7 +100,7 @@ class NatCat:
             calc_level = "diversification"
 
         if calc_type == "div_structure":
-            lst = combins_df_col(self.output["nat_cat_data"], div_level, calc_level)
+            lst, _ = combins_df_col(self.output["nat_cat_data"], div_level, calc_level)
 
             structure_list = np.unique(self.output["nat_cat_data"]["ri_structure"])
             division_list = np.unique(self.output["nat_cat_data"][div_level])
@@ -96,15 +115,13 @@ class NatCat:
             ]
             matrix = np.reshape(matrix, (len(cols), len(new_lst))).T.astype(int)
             df_allocation = pd.DataFrame(matrix, index=new_lst, columns=cols)
-            # Now we move back to normal to allow the calcaultion to take place
+            # Now we move back to normal to allow the calculation to take place
             div_level = "div_structure"
             lst = new_lst
         else:
             df_allocation = allocation_matrix(
                 self.output["nat_cat_data"], div_level, calc_level
             )
-
-        # df_allocation.index=lst
 
         mat_index = self.scr.f_data("data", "metadata", "nat_cat_zone_mapping")[
             ["zone"]
@@ -145,8 +162,6 @@ class NatCat:
     def f_cat_calculation(
         self, nat_cat_data, base_matrix, df_allocation, div_field, calc_type
     ):
-        # logger.debug("Function start")
-
         if calc_type == "base":
             div_field = div_field
         elif calc_type == "reinsurance":
@@ -301,7 +316,6 @@ class NatCat:
         overall_risk_charge (dictionary):
             A dictionary of the gross natural catastrophe risk charges.
         """
-        # logger.debug("Function start")
 
         div_level = self.scr.f_data("data", "data", "diversification_level").iloc[0]
         for calc_type in ("base", "reinsurance", "div_structure"):
@@ -317,10 +331,10 @@ class NatCat:
                 nat_cat_data, base_matrix, df_allocation, div_level, calc_type
             )
 
-            self.output[(calc_type, "eq_charge")] = eq_charge
-            self.output[(calc_type, "hail_charge")] = hail_charge
-            self.output[(calc_type, "horizontal_10")] = horizontal_10
-            self.output[(calc_type, "horizontal_20")] = horizontal_20
+            self.output[(calc_type, "nc_earthquake")] = eq_charge
+            self.output[(calc_type, "nc_hail")] = hail_charge
+            self.output[(calc_type, "nc_horizontal_10")] = horizontal_10
+            self.output[(calc_type, "nc_horizontal_20")] = horizontal_20
 
             # The general guidance requires that for the reinsurance
             # calculation we must allocate the charges proportionately.
@@ -332,10 +346,10 @@ class NatCat:
 
             if calc_type == "reinsurance":
                 for shck in [
-                    "eq_charge",
-                    "hail_charge",
-                    "horizontal_10",
-                    "horizontal_20",
+                    "nc_earthquake",
+                    "nc_hail",
+                    "nc_horizontal_10",
+                    "nc_horizontal_20",
                 ]:
                     # Just doign this to keep this a little short
                     data = self.output[("reinsurance", shck)]
@@ -354,7 +368,7 @@ class NatCat:
                     # At this stage we are good to proceed
                     # 20240812 Bug Fix:
                     # T Futter discovered that when there was only a single reinsurance
-                    # structure the code rna into issues. It was caused by a duplicate key.
+                    # structure the code ran into issues. It was caused by a duplicate key.
                     # Fixed the code to make sure that index was no longer used.
                     # Also added additional chekcs to prevent similar issues
                     sum_charges = sum(data[:-1]["charge"])
@@ -386,10 +400,10 @@ class NatCat:
 
             if calc_type == "div_structure":
                 for shck in [
-                    "eq_charge",
-                    "hail_charge",
-                    "horizontal_10",
-                    "horizontal_20",
+                    "nc_earthquake",
+                    "nc_hail",
+                    "nc_horizontal_10",
+                    "nc_horizontal_20",
                 ]:
                     # Just doign this to keep this a little short
                     data = self.output[("div_structure", shck)]
@@ -433,21 +447,11 @@ class NatCat:
 
         try:
             if data in ("base", "reinsurance", "div_structure") and sub_data in (
-                "earthquake",
-                "hail",
-                "horizontal 10",
-                "horizontal 20",
+                "nc_earthquakee",
+                "nc_hail",
+                "nc_horizontal_10",
+                "nc_horizontal_20",
             ):
-                # Deal with some text replacement that needs to happen for the
-                # differently calculated charges.
-                # Need to maybe look at aligning naming conventions
-                if sub_data == "earthquake":
-                    sub_data = "eq_charge"
-                elif sub_data == "hail":
-                    sub_data = "hail_charge"
-                else:
-                    sub_data = sub_data.replace(" ", "_")
-
                 df = self.output[(data, sub_data)]
 
                 # Reinsurance needs the data in a slightly different format
@@ -459,10 +463,10 @@ class NatCat:
             elif data in ("div_structure") and sub_data in ("horizontal_combined"):
                 df = pd.concat(
                     [
-                        self.output[(data, "horizontal_10")],
-                        self.output[(data, "horizontal_10")],
-                        self.output[(data, "horizontal_10")],
-                        self.output[(data, "horizontal_20")],
+                        self.output[(data, "nc_horizontal_10")],
+                        self.output[(data, "nc_horizontal_10")],
+                        self.output[(data, "nc_horizontal_10")],
+                        self.output[(data, "nc_horizontal_20")],
                     ]
                 )
                 df = df.groupby(by="div").sum()
@@ -472,10 +476,10 @@ class NatCat:
             ):
                 df = pd.concat(
                     [
-                        self.output[(data, "horizontal_10")].T,
-                        self.output[(data, "horizontal_10")].T,
-                        self.output[(data, "horizontal_10")].T,
-                        self.output[(data, "horizontal_20")].T,
+                        self.output[(data, "nc_horizontal_10")].T,
+                        self.output[(data, "nc_horizontal_10")].T,
+                        self.output[(data, "nc_horizontal_10")].T,
+                        self.output[(data, "nc_horizontal_20")].T,
                     ],
                     ignore_index=True,
                 )
@@ -483,31 +487,39 @@ class NatCat:
             elif data in ("base", "reinsurance", "div_structure") and sub_data in (
                 "all"
             ):
-                df = self.output[(data, "hail_charge")]
-                df = df.rename(columns={"charge": "hail"}, inplace=False)
+                df = self.output[(data, "nc_hail")]
+                df = df.rename(columns={"charge": "nc_hail"}, inplace=False)
                 for v in [
-                    "eq_charge",
-                    "horizontal_10",
-                    "horizontal_10",
-                    "horizontal_10",
-                    "horizontal_20",
+                    "nc_earthquake",
+                    "nc_horizontal_10",
+                    "nc_horizontal_10",
+                    "nc_horizontal_10",
+                    "nc_horizontal_20",
                 ]:
                     tmp = self.output[(data, v)]
                     tmp = tmp.rename(columns={"charge": v}, inplace=False)
                     df = df.merge(tmp, left_index=True, right_index=True, how="outer")
 
                 df.columns = [
-                    "hail",
-                    "earthquake",
-                    "horizontal_1",
-                    "horizontal_2",
-                    "horizontal_3",
-                    "horizontal_4",
+                    "nc_hail",
+                    "nc_earthquake",
+                    "nc_horizontal_1",
+                    "nc_horizontal_2",
+                    "nc_horizontal_3",
+                    "nc_horizontal_4",
                 ]
-                df["horizontal_total"] = df[
-                    ["horizontal_1", "horizontal_2", "horizontal_3", "horizontal_4"]
+                df["nc_horizontal_total"] = df[
+                    [
+                        "nc_horizontal_1",
+                        "nc_horizontal_2",
+                        "nc_horizontal_3",
+                        "nc_horizontal_4",
+                    ]
                 ].sum(axis=1)
         except:
             raise ValueError(f"cannot find {data} - {sub_data}")
         else:
-            return df.copy(deep=True)
+            if df is None:
+                return None
+            else:
+                return df.copy(deep=True)

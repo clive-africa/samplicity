@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Aug 26 02:03:29 2023
-
-@author: chogarth
-"""
-
 import pandas as pd
 import math
 import numpy as np
@@ -14,7 +7,6 @@ from ..helper import log_decorator
 #@log_decorator
 def f_aggregate_market(mkt_risk):
     """Aggregate the various market risk charges."""
-    #logger.debug("Function start")
 
     sum_data = mkt_risk.output["summary_data"].copy(deep=True)
 

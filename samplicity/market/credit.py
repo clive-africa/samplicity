@@ -10,23 +10,23 @@ This supports the Market class
 """
 
 import pandas as pd
-import math
 import numpy as np
 import itertools
 from typing import Dict, Tuple
+from .. import MarketRisk
 
-from ..helper import f_get_total_row, f_new_match_idx, combins_df_col, log_decorator
+from ..helper import f_get_total_row, f_new_match_idx, combins_df_col
 
 
 def calculate_u_matrix_entry(p: Tuple[float, float]) -> float:
-    """Calculate an entry for the U matrix."""
+    """Calculate an individual entry for the U matrix."""
     gam = 0.25
     num = p[0] * (1 - p[0]) * p[1] * (1 - p[1])
     denom = (1 + gam) * (p[0] + p[1]) - p[0] * p[1]
     return num / denom
 
 
-def f_u_matrix(mr) -> np.ndarray:
+def f_u_matrix(mr: "MarketRisk") -> np.ndarray:
     """Calculate the U matrix used in Type 1 credit risk."""
     cf = mr.scr.f_data("data", "metadata", "credit_type_1_factor")
     factors = cf["factor"]
@@ -37,8 +37,8 @@ def f_u_matrix(mr) -> np.ndarray:
     return u_matrix.reshape(len(factors), len(factors))
 
 
-def f_v_vector(mr) -> np.ndarray:
-    """Generate the V vector used in spread risk calculations."""
+def f_v_vector(mr: "MarketRisk") -> np.ndarray:
+    """Generate the V vector used in Type 1 credit risk calculations."""
     gam = 0.25
     cf = mr.scr.f_data("data", "metadata", "credit_type_1_factor")
     return np.array(
@@ -47,11 +47,16 @@ def f_v_vector(mr) -> np.ndarray:
     )
 
 
-def f_impairment(mr) -> Dict[str, pd.DataFrame]:
-    """Calculate the impairment charges for the reinsurance."""
+def f_impairment(mr: "MarketRisk") -> Dict[str, pd.DataFrame]:
+    """Calculate the impairment charges for the reinsurance across all the relevant events."""
+
+    # This gets populated with the names of all the different events
     impair = {}
 
     # Premium Reserve Risk
+
+    # If we have no reinsurance, there will be no default cashflows
+    # and data will be None
     data = mr.scr.f_data("prem_res", "default", "all")
     if data is not None:
         # Only need the overall figures
@@ -59,70 +64,80 @@ def f_impairment(mr) -> Dict[str, pd.DataFrame]:
         data = data.rename(
             columns={"overall": "reinsurance_mv", "counterparty": "counterparty_id"}
         ).drop(columns=["premium", "reserve"])
+        # The dataset will return figures for all diversification combinations.
+        # We only want the data for the entries all the combinations
         total = f_get_total_row(data).set_index("counterparty_id")
         impair["prem_res"] = __f_default(mr, ri_exposure=data, total_exposure=total)
     else:
+        # Deals witht he case when there is no reinsurance on premium and reserve risk
         impair["prem_res"] = None
 
-    # We perform the exatc calcualtion for all the different event
-    # Create a list and look through all the evetns at once
+    # Catastrophe Events
+
+    # Create a list and look through all the events at once
     events = [
-        *["hail", "earthquake", "horizontal"],
+        *["nc_hail", "nc_earthquake", "nc_horizontal"],
         *mr.scr.f_data("data", "metadata", "factor_cat_charge").index,
-        # *mr.scr.f_data("man_made_cat", "perils", "all")["heading"],
         *["np_property", "np_credit_guarantee"],
     ]
 
     for event in events:
+        # Get the recovery at an individual counterparty level
+        # This wil return a dataframe with the counterparty id, the recoveries
         data = mr.scr.f_data("reinsurance", "counterparty_recoveries", event)
         if data is not None:
             data = data.rename(columns={"recovery": "reinsurance_mv"})
+            # Get the total recoveries for the event
             total = mr.scr.f_data("reinsurance", "recoveries", event).rename(
                 columns={"cparty_recov": "reinsurance_mv"}
             )
             impair[event] = __f_default(mr, ri_exposure=data, total_exposure=total)
         else:
+            # Deals with the case when there is no reinsurance on the event
             impair[event] = None
 
     return impair
 
 
-def f_credit_type_1(mr):
+def f_credit_type_1(mr: "MarketRisk") -> pd.DataFrame:
     """Type 1 credit risk calculation."""
+    # We use the same calcualtion to determine reinsurer impairment
+    # In the case of credit risk these figures will be None and can be ignored
     return __f_default(mr, ri_exposure=None, total_exposure=None)
 
 
-def __f_default(mr, ri_exposure, total_exposure):
+def __f_default(mr: "MarketRisk", ri_exposure, total_exposure) -> pd.DataFrame:
     """Calculate Type 1 Credit Risk."""
-    # logger.debug("Function start")
-    # This is not a straigth forward clacualtion
+    # This is not a straight forward calculation
     # It is also not clear if the calcualtion should be done per
-    # countertary or but group
-    # We will do it per group as it is clearer
-    # The allocation of collaterla becomes an issue as it impacts the
-    # weighting for the counterparty default impariment
+    # countertary or at a group level. Particularly as the calcualtion
+    # calls for independent counterparties, which suggests a group level.
+    # The allocation of collateral becomes an issue as it impacts the
+    # weighting for the counterparty default impairment
 
     """
-    We have a couple challegnes with the collateral and how we 
+    We have a couple challenges with the collateral and how we 
     should treat it for reinsurance recoveries. Effectivley we allocate 
-    collaterla at an overall level but then we allocate the assets to 
+    collateral at an overall level but then we allocate the assets to 
     the different products, divisions,etc. We will allocate the 
-    reinsurance recoveris for the entire license and then that will 
+    reinsurance recoveries for the entire license and then that will 
     determine the allocation of collateral to the different assets
     """
 
     # Retrieve the asset credit data and counterparty information
     # Perform some data manipulation to prepare the data for the calculation
+    # credit_data has the different assets
+    # cparty_collat has the counterparties with collateral
     credit_data, cparty_collat = __f_data_manip(mr)
 
-    if not total_exposure is None:
+    if total_exposure is not None:
         # A double chekc to make sure that we don't include negative values.
         # Can't imagine this happening.
         total_exposure["reinsurance_mv"] = total_exposure["reinsurance_mv"].where(
             total_exposure["reinsurance_mv"] > 0, other=0
         )
 
-    if not ri_exposure is None:
+    if ri_exposure is not None:
         # Our reinsurance information doesn't have all the required fields.
         # We need to add CQS and LGD fields which come form our market risk
         ri_exposure = __f_ri_data_manip(mr, ri_exposure)
@@ -144,7 +159,7 @@ def __f_default(mr, ri_exposure, total_exposure):
     # We need to pivot each dataset, this is handled here
     asset_calc = __f_pivot_asset(mr, asset_data, rein=False)
 
-    if not ri_exposure is None:
+    if ri_exposure is not None:
         # TODO: Need to edit the data manipulation to ensure field consistency
         ri_calc = __f_calc_cqs(mr, ri_exposure)
 
@@ -167,7 +182,7 @@ def __f_default(mr, ri_exposure, total_exposure):
     # subtract type 1 credit risk. We only subtract type 1 credit risk if
     # this is an impairment calculation
 
-    if not ri_exposure is None:
+    if ri_exposure is not None:
         # We are dealing with an impairment charge
         credit_charge = mr.output["credit_type_1_charge"]
 
@@ -185,9 +200,45 @@ def __f_default(mr, ri_exposure, total_exposure):
     return pd.DataFrame(overall_result.to_frame(name="result"))
 
 
-def __f_data_manip(mr):
-    """Perform require daat manipulation on the asset credti data."""
-    # logger.debug("Function start")
+def __f_data_manip(mr: "MarketRisk") -> tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Perform required data manipulation on the asset credit data.
+
+    This involves extracting the credit data from the base market data and performing
+    all of the necessary calculations to calculate the net exposure. The function filters
+    for credit instruments, calculates market value net of collateral, and extracts
+    counterparty collateral information.
+
+    :param mr: Market risk object containing output data including asset_data and counterparty information
+    :type mr: MarketRisk
+
+    :returns: Tuple containing processed credit data:
+
+        - **credit_data** (*pandas.DataFrame*) -- Filtered and processed credit asset data with columns:
+            - 'id': Asset identifier
+            - 'market_value': Market value of the asset
+            - 'collateral': Collateral amount captured directly against the asset
+            - 'lgd': Loss given default parameter
+            - 'used_cqs': Credit quality step used
+            - 'counterparty_group': Counterparty group identifier
+            - 'counterparty_id': Individual counterparty identifier
+            - mr.output["div_field"]: Diversification field (dynamic column name)
+            - 'mv_net_collateral': Calculated market value net of collateral (non-negative)
+            - 'add_collateral': Additional collateral field (initialized to 0)
+            - 'lgd_calc': LGD calculation field (initialized to 0)
+            - 'lgd_cqs_calc': LGD CQS calculation field (initialized to 0)
+        - **cparty_collat** (*pandas.DataFrame*) -- Counterparty collateral data containing only counterparties with positive collateral amounts
+
+    :rtype: tuple[pandas.DataFrame, pandas.DataFrame]
+
+    .. note::
+        - Only assets with credit_type_1_ind > 0 are included in the output
+        - Negative net exposures are set to zero to remove negative exposures
+        - Missing values in market_value and collateral are treated as zero
+
+    .. warning::
+        This is an internal function and should not be called directly by users. Instead users chould call 'f_credit_type_1'
+    """
 
     # MANIPULATE ASSET CREDIT DATA
 
@@ -286,7 +337,6 @@ def __f_ri_data_manip(mr, ri_exposure):
 
 def __f_alloc_collat(credit_data, ri_exposure, total_exposure, cparty_collat):
     """Allocate collateral to the different assets."""
-    # logger.debug("Function start")
 
     # AGGREGATE CREDIT ASSET DATA
 
@@ -298,7 +348,7 @@ def __f_alloc_collat(credit_data, ri_exposure, total_exposure, cparty_collat):
     collat_alloc = cparty_collat.merge(
         cparty_totals, how="outer", left_index=True, right_index=True
     )
-    if not total_exposure is None:
+    if total_exposure is not None:
         collat_alloc = collat_alloc.merge(
             total_exposure["reinsurance_mv"],
             how="outer",
@@ -355,7 +405,7 @@ def __f_alloc_collat(credit_data, ri_exposure, total_exposure, cparty_collat):
     # agreement. We therefore redcue the collateral proportionately
     # We have an instance where collateral is unique for division
 
-    if (not ri_exposure is None) & (len(cparty_collat) > 0):
+    if (ri_exposure is not None) & (len(cparty_collat) > 0):
         # We also chekc if there is actually any collaterla to allocates
         ri_exposure["add_collateral"] = ri_exposure["reinsurance_mv"].divide(
             collat_alloc.loc[ri_exposure["counterparty_id"], "reinsurance_mv"].values
@@ -372,7 +422,7 @@ def __f_alloc_collat(credit_data, ri_exposure, total_exposure, cparty_collat):
             ].values
         )
     # Deals with the instance where there is no collateral
-    elif not ri_exposure is None:
+    elif ri_exposure is not None:
         ri_exposure["add_collateral"] = 0
 
     return (credit_data, ri_exposure)
@@ -380,11 +430,12 @@ def __f_alloc_collat(credit_data, ri_exposure, total_exposure, cparty_collat):
 
 def __f_calc_cqs(mr, dat, rein=False):
     """Calcualte CQS for the different combinations of assets."""
-    # logger.debug("Function start")
 
+    # Calcualte the weigthed average of the LGD based on the exposure
     dat["lgd_calc"] = dat["lgd"] * (
         dat["market_value"] - dat["collateral"] - dat["add_collateral"]
     )
+    # We calculated the wieghted average of the CQS based on the losses given default
     dat["lgd_cqs_calc"] = (
         dat["used_cqs"]
         * dat["lgd"]
@@ -393,6 +444,7 @@ def __f_calc_cqs(mr, dat, rein=False):
 
     # we apply this calcualtion to only include assets with a
     # default in the CQS calculation.
+    # Settign the field to zero will mean that it won't inlfuence the calculation
     dat["lgd_calc_mod"] = dat["lgd_calc"].where(dat["lgd_calc"] > 0, other=0)
     dat["lgd_cqs_calc_mod"] = dat["lgd_cqs_calc"].where(dat["lgd_calc"] > 0, other=0)
 
@@ -401,7 +453,6 @@ def __f_calc_cqs(mr, dat, rein=False):
 
 def __f_pivot_asset(mr, dat, rein=False):
     """Pivot the asset/reinsurance data with counterparties as rows."""
-    # logger.debug("Function start")
 
     calc = {}
     df_alloc = mr.output["df_allocation"]
@@ -438,7 +489,7 @@ def __f_join_data(mr, asset_calc, ri_calc):
     df_alloc = pd.Series(df_alloc).unique()
     df_alloc = pd.DataFrame(df_alloc, columns=["div"])
     calc_level = mr.scr.f_data("data", "data", "calculation_level").iloc[0]
-    lst_combins = combins_df_col(df_alloc, "div", calc_level)
+    lst_combins, _ = combins_df_col(df_alloc, "div", calc_level)
 
     # Merge the asset data
     asset_match = f_new_match_idx(lst_combins, asset_calc[key].index.to_series())

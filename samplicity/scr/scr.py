@@ -415,7 +415,7 @@ class SCR:
         # Get all the potential divisions for the clacualtion
         divisions = self.f_data("data", "data", "division_detail")
         # Generate the combinations
-        lst_combins = hf.combins_df_col(divisions, div_level, calc_level)
+        lst_combins, _ = hf.combins_df_col(divisions, div_level, calc_level)
 
         self.output["list_combinations"] = pd.DataFrame({"combinations": lst_combins})
 

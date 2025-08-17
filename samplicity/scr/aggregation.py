@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from .lacdt import f_lacdt_calculation
 from ..helper import log_decorator
-from ..import helper as hf
+from ..helper import f_fast_join, f_accumulate_figures_vectorized
 
 
 @log_decorator
@@ -34,13 +34,13 @@ def _f_agg_scr(sam_scr, calc_name: str = "base_scr", cm: dict = None):
     res_columns = ["premium", "reserve", "premium_reserve", "lapse_risk"]
 
     nat_cat_headings = [
-        "hail",
-        "earthquake",
-        "horizontal_1",
-        "horizontal_2",
-        "horizontal_3",
-        "horizontal_4",
-        "horizontal_total",
+        "nc_hail",
+        "nc_earthquake",
+        "nc_horizontal_1",
+        "nc_horizontal_2",
+        "nc_horizontal_3",
+        "nc_horizontal_4",
+        "nc_horizontal_total",
     ]
 
     other_cat = [
@@ -111,7 +111,7 @@ def _f_agg_scr(sam_scr, calc_name: str = "base_scr", cm: dict = None):
             mod_chrg = "calc_net"
         else:
             mod_chrg = chrg
-        hf.f_fast_join(
+        f_fast_join(
             left_df=results[chrg],
             right_df=sam_scr.f_data("prem_res", mod_chrg, "all"),
             dest_field=["premium", "reserve", "premium_reserve"],
@@ -125,13 +125,15 @@ def _f_agg_scr(sam_scr, calc_name: str = "base_scr", cm: dict = None):
 
     # LAPSE RISK
     # This is populated manually
+    # We just sum the lapse risk across teh different combinations of divisions
     div_level = sam_scr.f_data("data", "data", "diversification_level").iloc[0]
     lapse_data = sam_scr.f_data("data", "data", "division_detail")[
         [div_level, "lapse_risk"]
     ]
-    lapse_data["lapse_risk"]=lapse_data["lapse_risk"].astype(float).fillna(0)
+    # No longe need the conversion as we have data validation
+    #lapse_data["lapse_risk"]=lapse_data["lapse_risk"].astype(float).fillna(0)
 
-    hf.f_accummulate_figures(
+    f_accumulate_figures_vectorized(
         dest_df=results["gross"],
         source_df=lapse_data,
         dest_col="lapse_risk",
@@ -143,12 +145,13 @@ def _f_agg_scr(sam_scr, calc_name: str = "base_scr", cm: dict = None):
     )
 
     # Copy the lapse risk across to the other dataframes
+    # We don't have the functionality to claculate net figures at this stage
     results["net"]["lapse_risk"] = results["gross"]["lapse_risk"]
     results["impairment"]["lapse_risk"] = results["gross"]["lapse_risk"]
     results["gross_return"]["lapse_risk"] = results["gross"]["lapse_risk"]
 
     # Now we populate the natural catastrophe risk charges
-    hf.f_fast_join(
+    f_fast_join(
         left_df=results["gross"],
         right_df=sam_scr.f_data("nat_cat", "base", "all"),
         dest_field=nat_cat_headings,
@@ -160,7 +163,7 @@ def _f_agg_scr(sam_scr, calc_name: str = "base_scr", cm: dict = None):
     factor_perils = sam_scr.f_data("factor_cat", "events")["peril"].values.tolist()
     # We need to populate the factor cat charges
     # We don't have aligned with our factor charges
-    hf.f_fast_join(
+    f_fast_join(
         left_df=results["gross"],
         right_df=sam_scr.f_data("factor_cat", "base", "all"),
         dest_field=factor_perils,
@@ -179,7 +182,7 @@ def _f_agg_scr(sam_scr, calc_name: str = "base_scr", cm: dict = None):
         "mm_terrorism",
         "mm_accident_health",
     ]
-    hf.f_fast_join(
+    f_fast_join(
         left_df=results["gross"],
         right_df=sam_scr.f_data("man_made_cat", "man_made_cat", "all"),
         dest_field=mm_perils,
@@ -189,7 +192,7 @@ def _f_agg_scr(sam_scr, calc_name: str = "base_scr", cm: dict = None):
     # NON-PROPORTIONAL CATASTROPHE RISK
     # The non-prop based perils
     np_perils = ["np_property", "np_credit_guarantee"]
-    hf.f_fast_join(
+    f_fast_join(
         left_df=results["gross"],
         right_df=sam_scr.f_data("non_prop_cat", "base", "np_all"),
         dest_field=np_perils,
@@ -204,7 +207,7 @@ def _f_agg_scr(sam_scr, calc_name: str = "base_scr", cm: dict = None):
     # For this we will get all of the data in a single dataframe
     right_df = sam_scr.f_data("market_risk", "impairment_charge", "all")
     source_field=[
-        *["prem_res", "hail", "earthquake", "horizontal"],
+        *["prem_res", "nc_hail", "nc_earthquake", "nc_horizontal"],
         *factor_perils,
         *mm_perils,
         *np_perils,
@@ -216,11 +219,11 @@ def _f_agg_scr(sam_scr, calc_name: str = "base_scr", cm: dict = None):
         right_df[add_cols]=0
 
     #print("aggregation " + type(right_df).__name__)
-    hf.f_fast_join(
+    f_fast_join(
         left_df=results[chrg],
         right_df=right_df,
         dest_field=[
-            *["premium_reserve", "hail", "earthquake", "horizontal_total"],
+            *["premium_reserve", "nc_hail", "nc_earthquake", "nc_horizontal_total"],
             *factor_perils,
             *mm_perils,
             *np_perils,
@@ -241,7 +244,7 @@ def _f_agg_scr(sam_scr, calc_name: str = "base_scr", cm: dict = None):
     for chrg in ["gross", "net", "impairment", "gross_return"]:
         # Natural Catastrophe calculation
         results[chrg]["nat_cat"] = results[chrg][
-            ["hail", "earthquake", "horizontal_total"]
+            ["nc_hail", "nc_earthquake", "nc_horizontal_total"]
         ].max(axis=1)
 
         # Factor based cacculation
@@ -297,7 +300,7 @@ def _f_agg_scr(sam_scr, calc_name: str = "base_scr", cm: dict = None):
     # these will be output seeprately.
     # We only get the total market risk at this stage.
 
-    hf.f_fast_join(
+    f_fast_join(
         results["gross"],
         sam_scr.f_data("market_risk", "summary_data"),
         market_columns,
