@@ -1,10 +1,14 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import pandas as pd
 import pandera.pandas as pa
 import numpy as np
 
+if TYPE_CHECKING:
+    from .data import Data
 
 # Import the data models that are stored as classes
-from .data_models import AssetData, NatCat, PremRes, ReinsuranceProg, ReinsuranceShare
+from .data_models import AssetData, NatCat, PremRes, ReinsuranceProg, ReinsuranceShare, AssetShocks
 
 # Import the standard data models
 from .data_models import division_detail_schema, reinsurance_schema, counterparty_schema
@@ -14,19 +18,19 @@ from .data_models import division_detail_schema, reinsurance_schema, counterpart
 # The name should match up to the name of the imported variable
 
 
-def validate_import(sam_scr):
+def f_validate_import(sam_data: Data):
     """Validate the imported data dictionary against the schemas defined in the data models."""
 
     # We map the different data models to their respective dataframes
     validations = {
         "division_detail": division_detail_schema,
         "counterparty": counterparty_schema,
-        #'asset_shocks': asset_data,
-        "asset_data": AssetData(sam_scr),
+        'asset_shocks': AssetShocks(sam_data),
+        "asset_data": AssetData(sam_data),
         "ri_contract": reinsurance_schema,
-        "ri_contract_share": ReinsuranceShare(sam_scr),
-        "prem_res": PremRes(sam_scr),
-        "nat_cat_si": NatCat(sam_scr),
+        "ri_contract_share": ReinsuranceShare(sam_data),
+        "prem_res": PremRes(sam_data),
+        "nat_cat_si": NatCat(sam_data),
     }
 
     all_errors = []  # Collect all errors
@@ -43,7 +47,7 @@ def validate_import(sam_scr):
     }
 
     for key, schema in validations.items():
-        df = sam_scr.classes["data"].output["data"][key]
+        df = sam_data.output["data"][key]
 
         try:
             new_df = schema.validate(df, lazy=True)

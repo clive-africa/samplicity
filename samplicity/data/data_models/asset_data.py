@@ -6,18 +6,24 @@ from pandera import Column, DataFrameSchema
 class AssetData:
     """Asset data validator with context"""
 
-    def __init__(self, sam_scr):
-        self.sam_scr = sam_scr
+    def __init__(self, sam_data):
+        # Teh different counterparties
+        self.counterparties = sam_data.output["data"]["counterparty"]["id"].unique().tolist()
+        self.asset_types = sam_data.output["data"]["asset_data"]["asset_type"].unique().tolist()
+        # The divisiosn that we allow for
+        self.levels = {}
+        for lev in [1, 2, 3]:
+            self.levels[lev] = (
+                sam_data.output["data"]["division_detail"][f"level_{lev}"]
+                .unique()
+                .tolist()
+            )
+            # We will degault all missing, null values to '__none__'
+            self.levels[lev].append("__none__")       
+        
         self.schema = self._create_schema()
 
-    def validate_counterparty_id(self, value):
-        """Validate counterparty ID format using stored sam_scr context."""
-        counterparties = (
-            self.sam_scr.classes["data"].output["data"]["counterparty"]["id"].unique()
-        )
-        if value not in counterparties:
-            return False
-        return True
+
 
     def _create_schema(self):
         """Create the validation schema with access to self.sam_scr"""
@@ -34,21 +40,40 @@ class AssetData:
                 ),
                 "level_1": Column(
                     str,
-                    checks=[pa.Check.isin(["div_a", "div_b", "div_c", "other"])],
+                    parsers=[pa.Parser(lambda s: s.fillna("__none__"))],
+                    checks=pa.Check.isin(
+                        self.levels[1], error="Invalid division level 1 included."
+                    ),
                     nullable=True,
                     description="Level 1 Division",
                 ),
-                "level_2": Column(str, nullable=True, description="Level 2 Division"),
-                "level_3": Column(str, nullable=True, description="Level 3 Division"),
-                "asset_type": Column(str, nullable=True, description="Type of asset"),
+                "level_2": Column(
+                    str,
+                    parsers=[pa.Parser(lambda s: s.fillna("__none__"))],
+                    checks=pa.Check.isin(
+                        self.levels[2], error="Invalid division level 2 included."
+                    ),
+                    nullable=True,
+                    description="Level 1 Division",
+                ),
+                "level_3": Column(
+                    str,
+                    parsers=[pa.Parser(lambda s: s.fillna("__none__"))],
+                    checks=pa.Check.isin(
+                        self.levels[3], error="Invalid division level 3 included."
+                    ),
+                    nullable=True,
+                    description="Level 1 Division",
+                ),
+                "asset_type": Column(
+                    str, 
+                    checks=pa.Check.isin(self.asset_types, error="Asset type has not been properly mapped."), 
+                    nullable=True, 
+                    description="Type of asset"
+                ),
                 "counterparty_id": Column(
                     str,
-                    checks=[
-                        pa.Check(
-                            self.validate_counterparty_id,
-                            error="Invalid counterparty ID format",
-                        )
-                    ],
+                    checks=pa.Check.isin(self.counterparties, error="Invalid counterparty ID format")
                     nullable=True,
                     description="Reference to counterparty table",
                 ),

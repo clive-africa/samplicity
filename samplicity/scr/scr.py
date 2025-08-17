@@ -507,6 +507,30 @@ class SCR:
 
         return True
 
+    def f_validate_data(self):
+        """ Validate the imported data. """
+        """
+        Validate the imported data against the defined schemas.
+
+        This method checks the integrity and structure of the imported data
+        using predefined schemas. It raises an exception if any validation errors are found.
+
+        :raises pa.errors.SchemaErrors: If any validation errors occur.
+
+        :return: None
+        :rtype: None
+
+        Example:
+            >>> sam_scr = SCR()
+            >>> sam_scr.f_validate_data()
+
+        .. note::
+            The validation results are stored in `self.output["data_validation"]`.
+        """
+        sam_data = self.classes["data"]
+        sam_data.f_validate_import()
+
+
     @log_decorator
     def f_export_results(
         self, export_file: str, process_id: int = None, conn_string: str = None

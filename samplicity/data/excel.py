@@ -148,6 +148,38 @@ def f_excel_import_data(
         tqdm._instances.clear()
         pbar.close()
 
+    # We need some manual manipulation
+    # We want to convert the Excel data into a database formar
+    # The preferred data input is via a database
+    # The conversions above achieve the majority of this
+    # Some final modifications are needed here
+    mm_event=data['man_made_division_event']
+    mm_event_melt = pd.melt(
+        mm_event,
+        id_vars=["level_1", "level_2", "level_3"],
+        var_name="mm_event",
+        value_name="gross_event"
+    )
+    mm_event_melt.dropna(subset=["mm_event"], inplace=True)
+    mm_reinsurance=data['man_made_division_reinsurance']
+
+    mm_reinsurance_melt = pd.melt(
+        mm_event,
+        id_vars=["level_1", "level_2", "level_3"],
+        var_name="mm_event",
+        value_name="ri_strcuture"
+    )
+    mm_reinsurance_melt.dropna(subset=["ri_strcuture"], inplace=True)
+
+    mm_event_melt=pd.merge(
+        mm_event_melt,
+        mm_reinsurance_melt,
+        on=["level_1", "level_2", "level_3", "mm_event"],
+        how="left"
+    )
+
+    mm_event_melt['ri_structure'] = mm_event_melt['ri_strcuture'].fillna('__none__')
+
     return data
 
 

@@ -8,12 +8,15 @@ This supports the Market class
 
 
 """
-
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import pandas as pd
 import numpy as np
 import itertools
 from typing import Dict, Tuple
-from .. import MarketRisk
+if TYPE_CHECKING:
+    from .. import MarketRisk
+
 
 from ..helper import f_get_total_row, f_new_match_idx, combins_df_col
 
@@ -26,7 +29,7 @@ def calculate_u_matrix_entry(p: Tuple[float, float]) -> float:
     return num / denom
 
 
-def f_u_matrix(mr: "MarketRisk") -> np.ndarray:
+def f_u_matrix(mr: MarketRisk) -> np.ndarray:
     """Calculate the U matrix used in Type 1 credit risk."""
     cf = mr.scr.f_data("data", "metadata", "credit_type_1_factor")
     factors = cf["factor"]
@@ -37,7 +40,7 @@ def f_u_matrix(mr: "MarketRisk") -> np.ndarray:
     return u_matrix.reshape(len(factors), len(factors))
 
 
-def f_v_vector(mr: "MarketRisk") -> np.ndarray:
+def f_v_vector(mr: MarketRisk) -> np.ndarray:
     """Generate the V vector used in Type 1 credit risk calculations."""
     gam = 0.25
     cf = mr.scr.f_data("data", "metadata", "credit_type_1_factor")
@@ -47,7 +50,7 @@ def f_v_vector(mr: "MarketRisk") -> np.ndarray:
     )
 
 
-def f_impairment(mr: "MarketRisk") -> Dict[str, pd.DataFrame]:
+def f_impairment(mr: MarketRisk) -> Dict[str, pd.DataFrame]:
     """Calculate the impairment charges for the reinsurance across all the relevant events."""
 
     # This gets populated with the names of all the different events
@@ -99,14 +102,14 @@ def f_impairment(mr: "MarketRisk") -> Dict[str, pd.DataFrame]:
     return impair
 
 
-def f_credit_type_1(mr: "MarketRisk") -> pd.DataFrame:
+def f_credit_type_1(mr: MarketRisk) -> pd.DataFrame:
     """Type 1 credit risk calculation."""
     # We use the same calcualtion to determine reinsurer impairment
     # In the case of credit risk these figures will be None and can be ignored
     return __f_default(mr, ri_exposure=None, total_exposure=None)
 
 
-def __f_default(mr: "MarketRisk", ri_exposure, total_exposure) -> pd.DataFrame:
+def __f_default(mr: MarketRisk, ri_exposure, total_exposure) -> pd.DataFrame:
     """Calculate Type 1 Credit Risk."""
     # This is not a straight forward calculation
     # It is also not clear if the calcualtion should be done per
@@ -200,7 +203,7 @@ def __f_default(mr: "MarketRisk", ri_exposure, total_exposure) -> pd.DataFrame:
     return pd.DataFrame(overall_result.to_frame(name="result"))
 
 
-def __f_data_manip(mr: "MarketRisk") -> tuple[pd.DataFrame, pd.DataFrame]:
+def __f_data_manip(mr: MarketRisk) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Perform required data manipulation on the asset credit data.
 
@@ -280,7 +283,7 @@ def __f_data_manip(mr: "MarketRisk") -> tuple[pd.DataFrame, pd.DataFrame]:
     return (credit_data, cparty_collat)
 
 
-def __f_ri_data_manip(mr, ri_exposure):
+def __f_ri_data_manip(mr: MarketRisk, ri_exposure):
     """Manipulate the reinsurance data."""
 
     # We now need to add the CQS and LGD fields to the data

@@ -1,17 +1,17 @@
 import pandas as pd
-import pandera as pa
+import pandera.pandas as pa
 from pandera import Column, DataFrameSchema
 
 
 class NatCat:
     """Validation of the natural catastrophe data with context"""
 
-    def __init__(self, sam_scr):
+    def __init__(self, sam_data):
         # All the difference diversionfication levels
         self.levels = {}
         for lev in [1, 2, 3]:
             self.levels[lev] = (
-                sam_scr.classes["data"]
+                sam_data
                 .output["data"]["division_detail"][f"level_{lev}"]
                 .unique()
                 .tolist()
@@ -19,7 +19,7 @@ class NatCat:
             self.levels[lev].append("__none__")
         # The different RI structures that are allowed
         self.ri_structure = (
-            sam_scr.classes["data"]
+            sam_data
             .output["data"]["reinsurance_prog"]
             .index.unique()
             .to_list()
