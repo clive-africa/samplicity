@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Market Class &mdash; samplicity 0.0.1 documentation</title>
+  <title>Asset Mapping &mdash; samplicity 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="BOND_VAL Class" href="bondval.html" />
-    <link rel="prev" title="Reinsurance Class" href="reinsurance.html" /> 
+    <link rel="next" title="Known issues" href="knownissues.html" />
+    <link rel="prev" title="Samplicity strcuture" href="structure.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,7 +43,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html#further-reading">Further Reading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="introduction.html#class-documentation">Class Documentation</a></li>
@@ -79,12 +79,12 @@
 <li class="toctree-l2"><a class="reference internal" href="structure.html#usage-example">Usage example</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="assetmapping.html">Asset Mapping</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="assetmapping.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="assetmapping.html#asset-shocks">Asset Shocks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="assetmapping.html#lgd-adjustments-lgd-adj">LGD Adjustments (lgd_adj)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="assetmapping.html#bond-type-bond-type">Bond Type (bond_type)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="assetmapping.html#lgd-classification">LGD Classification</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Asset Mapping</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#asset-shocks">Asset Shocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lgd-adjustments-lgd-adj">LGD Adjustments (lgd_adj)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bond-type-bond-type">Bond Type (bond_type)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lgd-classification">LGD Classification</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="knownissues.html">Known Issues</a><ul>
@@ -104,7 +104,7 @@
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Class Documentation</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="scr.html">SCR</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="scr.html#scr">scr</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scr.html#support-modules">Support Modules</a><ul>
@@ -166,13 +166,13 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Market</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#market">market</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#supporting-modules">Supporting Modules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#aggregate">aggregate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bond">bond</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#conc">conc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#credit">credit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="market.html">Market</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="market.html#market">market</a></li>
+<li class="toctree-l2"><a class="reference internal" href="market.html#supporting-modules">Supporting Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="market.html#aggregate">aggregate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="market.html#bond">bond</a></li>
+<li class="toctree-l3"><a class="reference internal" href="market.html#conc">conc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="market.html#credit">credit</a></li>
 </ul>
 </li>
 </ul>
@@ -213,9 +213,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Market Class</li>
+      <li class="breadcrumb-item active">Asset Mapping</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/market.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/assetmapping.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -223,25 +223,73 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="market-class">
-<h1>Market Class<a class="headerlink" href="#market-class" title="Link to this heading"></a></h1>
-<section id="market">
-<h2>market<a class="headerlink" href="#market" title="Link to this heading"></a></h2>
+  <section id="asset-mapping">
+<h1>Asset Mapping<a class="headerlink" href="#asset-mapping" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This document provides an overview of the asset mapping functionality within the Samplicity package. It details how different asset types are mapped to shocks, which are essential for calculating market risk.</p>
+<p>The assets inputs are detailed in the input files:</p>
+<ul class="simple">
+<li><p><em>asset_inputs:</em> Which provides all the detail on the different asset inputs.</p></li>
+<li><p><em>asset_mapping:</em> Whcih maps the different <em>asset_types</em> to the different asset shcoks.</p></li>
+</ul>
+<p>This document details the different values that are accepted for the two files.</p>
 </section>
-<section id="supporting-modules">
-<h2>Supporting Modules<a class="headerlink" href="#supporting-modules" title="Link to this heading"></a></h2>
-<section id="aggregate">
-<h3>aggregate<a class="headerlink" href="#aggregate" title="Link to this heading"></a></h3>
+<section id="asset-shocks">
+<h2>Asset Shocks<a class="headerlink" href="#asset-shocks" title="Link to this heading"></a></h2>
+<p>As noted previously, different asset types must be mapped to shocks. A user has complete freedom of the names that can be given the asset_types but the asset shock vlaues are limited.</p>
+<p>This is done in the asset_mapping files. The shocks are used by the package to calculate market risk. The following asset shocks are acceptable and used by the package:</p>
+<ul class="simple">
+<li><p>equity_global</p></li>
+<li><p>equity_sa</p></li>
+<li><p>equity_infrastructure</p></li>
+<li><p>equity_other</p></li>
+<li><p>property</p></li>
+<li><p>currency</p></li>
+<li><p>spread_credit</p></li>
+<li><p>concentration</p></li>
+<li><p>concentration_bank</p></li>
+<li><p>concentration_government</p></li>
+<li><p>default_type_1</p></li>
+<li><p>default_type_2</p></li>
+<li><p>default_type_2_overdue</p></li>
+<li><p>default_type_3</p></li>
+<li><p>spread_interest</p></li>
+<li><p>spread_interest_infastructure</p></li>
+<li><p>Interest_rate</p></li>
+</ul>
 </section>
-<section id="bond">
-<h3>bond<a class="headerlink" href="#bond" title="Link to this heading"></a></h3>
+<section id="lgd-adjustments-lgd-adj">
+<h2>LGD Adjustments (lgd_adj)<a class="headerlink" href="#lgd-adjustments-lgd-adj" title="Link to this heading"></a></h2>
+<p>The values that can be used for the different LGD adjustments:
+* cash_covered
+* over_collateralised
+* fully_collateralised
+* partially_collateralised
+* unsecured
+* less_50_collateral
+* more_50_collateral
+* sub_ordinated</p>
 </section>
-<section id="conc">
-<h3>conc<a class="headerlink" href="#conc" title="Link to this heading"></a></h3>
+<section id="bond-type-bond-type">
+<h2>Bond Type (bond_type)<a class="headerlink" href="#bond-type-bond-type" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>fixed</p></li>
+<li><p>floating_3_0</p></li>
+</ul>
 </section>
-<section id="credit">
-<h3>credit<a class="headerlink" href="#credit" title="Link to this heading"></a></h3>
-</section>
+<section id="lgd-classification">
+<h2>LGD Classification<a class="headerlink" href="#lgd-classification" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>cash_covered</p></li>
+<li><p>over_collateralised</p></li>
+<li><p>fully_collateralised</p></li>
+<li><p>partially_collateralised</p></li>
+<li><p>unsecured</p></li>
+<li><p>less_50_collateral</p></li>
+<li><p>more_50_collateral</p></li>
+<li><p>sub_ordinated</p></li>
+</ul>
 </section>
 </section>
 
@@ -249,8 +297,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="reinsurance.html" class="btn btn-neutral float-left" title="Reinsurance Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="bondval.html" class="btn btn-neutral float-right" title="BOND_VAL Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="structure.html" class="btn btn-neutral float-left" title="Samplicity strcuture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="knownissues.html" class="btn btn-neutral float-right" title="Known issues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
