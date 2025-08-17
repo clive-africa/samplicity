@@ -7,125 +7,106 @@ Various generic helper functions used the SCR and supporting classes.
 from itertools import combinations
 import pandas as pd
 import numpy as np
-from typing import Union
+from typing import Union, Callable, Literal
 import time
 import functools
-import samplicity as sam
+#import samplicity as sam
 
 
-def combins_df_col(df: pd.DataFrame, column: str, calc_type: Union[str, int]) -> list:
-    """Get all possible combinations of a dataframe column."""
+def combins_df_col(df: pd.DataFrame, column: str, calc_type: Literal['diversification', 'individual', 'overall']) -> list:
+    """
+    Generate all possible combinations of unique values from a DataFrame column.
+    
+    Args:
+        df: Input DataFrame
+        column: Column name to extract combinations from
+        calc_type: Type of combinations to generate:
+            - 'diversification': All possible combinations (1 to n items)
+            - 'individual': Single items and all items combined
+            - 'overall': Only the combination of all items
+    
+    Returns:
+        List of frozensets containing all requested combinations
+        
+    Raises:
+        ValueError: If calc_type is not one of the valid options
+    """
 
-    # COnvert our datframe to a unique set
-    df = df.sort_values(by=[column])
-    set_df = set(df[column].unique())
+    # Convert our datframe to a unique set
+    unique_values = sorted(set(df[column].unique()))
+    items = len(unique_values)
+
     # We loop through our set to work out what we need to return
-    if calc_type in ("diversification", -1):
-        comb_range = range(1, len(set_df) + 1)
-    elif calc_type in ("overall", 0):
-        comb_range = [len(set_df), len(set_df)]
-    elif calc_type in ("individual", 1):
-        comb_range = [1, len(set_df)]
+    if calc_type == "diversification":
+        combination_sizes = range(1, items + 1)
+    elif calc_type == "overall":
+        combination_sizes = [items, items]
+    elif calc_type =="individual":
+        combination_sizes = [1, items]
     else:
-        raise Exception(
-            "helper_functions",
-            "combins_from_df_column",
-            f"Invalid diversification level supplied, "
-            f" {calc_type} is not recognised.",
+        raise ValueError(
+            f"Invalid calc_type '{calc_type}'. "
+            f"Must be one of: 'diversification', 'individual', 'overall'"
         )
 
     # Create a blank list
-    list_combinations = list()
+    all_combinations = []
 
-    for n in comb_range:
-        res = list(combinations(set_df, n))
-        # res = [frozenset(x) for x in res]
-        list_combinations += res
+    for size in combination_sizes:
+        combinations_of_size = list(combinations(unique_values, size))
+        all_combinations.extend(combinations_of_size)
 
     # We are using sets as order doesn't matter
-    # A frozenset is needed for the variosu dataframes
-
-    list_combinations = [frozenset(x) for x in list_combinations]
-    return list_combinations
+    # A frozenset is needed for the various dataframes
+    return [frozenset(x) for x in all_combinations], unique_values
 
 
 def allocation_matrix(
-    df: pd.DataFrame, column: str, calc_type: Union[str, int]
+    df: pd.DataFrame, column: str, calc_type: Literal['diversification', 'individual', 'overall']
 ) -> pd.DataFrame:
-    unique = df[column].unique()
-    len_unique = len(unique)
+    """
+    Create a fast allocation matrix showing which elements are in each combination.
+    
+    Returns a DataFrame with combinations as index and unique elements as columns,
+    containing 1 if element is in combination, 0 otherwise.
+    """
+    idx, unq = combins_df_col(df, column, calc_type)
 
-    if calc_type in ("diversification", -1):
-        comb_range = range(1, len_unique + 1)
-    elif calc_type in ("overall", 0):
-        comb_range = [len_unique, len_unique]
-    elif calc_type in ("individual", 1):
-        comb_range = [1, len_unique]
-    else:
-        raise Exception(
-            "helper_functions",
-            "combins_from_df_column",
-            f"Invalid diversification level supplied, "
-            f" {calc_type} is not recognised.",
-        )
+    allocation_array = np.zeros((len(idx), len(unq)), dtype=np.int8)
 
-    combins = []
-    for r in comb_range:
-        combins.extend(combinations(unique, r))
+    # Create a mapping from element to column index for O(1) lookup
+    element_to_idx = {element: idx for idx, element in enumerate(unq)}
 
-    # Create a DataFrame with 0s and 1s
-    df = pd.DataFrame(
-        [{element: (element in combo) for element in unique} for combo in combins],
-        index=[frozenset(x) for x in combins],
+    # Fill the matrix efficiently
+    for combo_idx, combo in enumerate(idx):
+        for element in combo:
+            col_idx = element_to_idx[element]
+            allocation_array[combo_idx, col_idx] = 1
+    
+    # Convert to DataFrame
+    result_df = pd.DataFrame(
+        allocation_array,
+        index=idx,
+        columns=list(unq),
+        dtype=np.int8  # Use int8 to save memory since we only need 0/1
     )
 
-    # Convert boolean values to int
-    df = df.astype(int)
+    # # Create a DataFrame with 0s and 1s
+    # df = pd.DataFrame(
+    #     [{element: (element in combo) for element in unq} for combo in idx],
+    #     index=idx,
+    # )
 
-    return df
+    # # Convert boolean values to int
+    # df = df.astype(int)
+
+    return result_df
 
 
-def check_tuple(x, tuple_string="('b', 'c', 'd')"):
-    if str(x).find(tuple_string) >= 0:
-        return True
 
-def f_div_match(self, list_to_match):
-    if list_to_match in self.list_combinations:
-        return list_to_match
-    else:
-        count_intersect = list(
-            map(lambda i: len(i.intersection(list_to_match)), self.list_combinations)
-        )
-        max_value = max(count_intersect)
-        match_value = list(map(lambda i: i == max_value, count_intersect))
-        filtered = np.array(self.list_combinations)[np.array(match_value)]
-        return filtered
 
-def f_best_match(x, join_list):
-    """Function not used, repalce with f_new_match_element."""
-    # The new version is a little more robust and does more checks
-    # Need to check on the speed of the new version
-    if x in join_list:
-        return x
-    else:
-        count_intersect = pd.Series(
-            map(
-                lambda i: len(set(i).intersection(set(x)))
-                * int(set(i).difference(set(x), join_list) == set()),
-                join_list,
-            )
-        )
 
-        max_value = max(count_intersect)
-        if max_value > 0:
-            count_intersect = count_intersect == max_value
-            if sum(count_intersect) == 1:
-                filtered = np.array(join_list)[count_intersect]
-                return filtered[0]
-            else:
-                return np.nan
-        else:
-            return np.nan
+
 
 
 def f_fast_join(left_df, right_df, dest_field, source_field):
@@ -196,54 +177,88 @@ def f_best_join(left_df, right_df, dest_field, source_field):
 
     return left_df
 
-
-def f_accummulate_figures(
-    dest_df,
-    source_df,
-    dest_col,
-    source_col,
-    dest_index_col="index",
-    dest_index=True,
-    source_index_col="index",
-    source_index=True,
-    agg_func="sum",
-):
-    """Matches a df with tuples index, against df with 'traditional' index."""
-    if dest_index:
-        dest_index_col = "index"
-        prelim = pd.DataFrame(
-            dest_df.index.values, columns=["explode"], index=dest_df.index
-        )
-    else:
-        prelim = pd.DataFrame(
-            dest_df[dest_index_col], columns=["explode"], index=dest_df[dest_index_col]
-        )
-
-    prelim.index.names = ["index"]
-    prelim["explode"] = prelim["explode"].apply(list)
-    prelim.reset_index(inplace=True)
-    prelim = prelim.explode("explode")
-
+def f_accumulate_figures_vectorized(
+    dest_df: pd.DataFrame,
+    source_df: pd.DataFrame, 
+    dest_col: str,
+    source_col: str,
+    dest_index_col: str = "index",
+    dest_index: bool = True,
+    source_index_col: str = "index",
+    source_index: bool = True,
+    agg_func: Union[str, Callable] = "sum"
+) -> None:
+    """
+    Highly optimized vectorized version using pandas operations.
+    Best performance for large datasets.
+    
+    This function takes tuples/sets in dest_df index and aggregates corresponding values
+    from source_df for each element in those tuples.
+    
+    Args:
+        dest_df: Target dataframe with tuple/set indices
+        source_df: Source dataframe with individual element indices  
+        dest_col: Column in dest_df to update with aggregated values
+        source_col: Column in source_df to aggregate from
+        dest_index: If True, use dest_df.index; if False, use dest_index_col
+        source_index: If True, use source_df.index; if False, use source_index_col
+        agg_func: Aggregation function ('sum', 'mean', 'max', etc.)
+        
+    Example:
+        dest_df.index = [('A', 'B'), ('B', 'C')]  # tuples to explode
+        source_df.index = ['A', 'B', 'C']         # individual elements
+        # Will sum source values for A+B, and B+C respectively
+    """
+    
+    if source_df is None or source_df.empty:
+        return
+    
+    # Get source data as series
     if source_index:
-        prelim = prelim.merge(
-            source_df[[source_col]], how="left", left_on="explode", right_index=True
-        )
+        source_series = source_df[source_col]
     else:
-        prelim = prelim.merge(
-            source_df[[source_index_col, source_col]],
-            how="left",
-            left_on="explode",
-            right_on=source_index_col,
-        )
-
-    prelim = prelim[["index", source_col]].groupby("index").agg(agg_func)
-
+        source_series = source_df.set_index(source_index_col)[source_col]
+    
+    # Get destination keys
     if dest_index:
-        dest_df.loc[prelim.index, dest_col] = prelim[source_col]
+        dest_keys = dest_df.index
     else:
-        dest_df.loc[:, dest_col] = prelim.loc[dest_df[dest_index_col], source_col]
-        dest_df[source_col].fillna(0, inplace=True)
-
+        dest_keys = dest_df[dest_index_col]
+    
+    # Create exploded mapping in one operation
+    exploded_data = []
+    for dest_key in dest_keys:
+        if hasattr(dest_key, '__iter__') and not isinstance(dest_key, str):
+            for element in dest_key:
+                exploded_data.append({'dest_key': dest_key, 'element': element})
+        else:
+            exploded_data.append({'dest_key': dest_key, 'element': dest_key})
+    
+    if not exploded_data:
+        return
+        
+    # Convert to DataFrame for vectorized operations
+    exploded_df = pd.DataFrame(exploded_data)
+    
+    # Merge with source data
+    merged = exploded_df.merge(
+        source_series.reset_index(), 
+        left_on='element', 
+        right_on=source_series.index.name or 'index',
+        how='left'
+    )
+    
+    # Aggregate by destination key
+    if agg_func in ['sum', 'mean', 'max', 'min', 'std', 'var']:
+        aggregated = merged.groupby('dest_key')[source_col].agg(agg_func)
+    else:
+        aggregated = merged.groupby('dest_key')[source_col].apply(agg_func)
+    
+    # Update destination dataframe
+    if dest_index:
+        dest_df.loc[aggregated.index, dest_col] = aggregated.values
+    else:
+        dest_df[dest_col] = dest_df[dest_index_col].map(aggregated).fillna(0)
 
 def f_get_total_row(df):
     """Returns the index with the longest tuple."""
@@ -284,7 +299,7 @@ def f_fast_match_element(x, right_list):
 
 def f_new_match_element(x, right_list):
     # We first chekc for an exact match
-    if type(right_list) != list:
+    if type(right_list) is not list:
         if x in right_list.to_list():
             return x
     else:
@@ -430,3 +445,100 @@ def f_best_match_new(x, join_list):
                 return np.nan
         else:
             return np.nan
+
+
+#Function not used, repalce with f_new_match_element
+# def f_best_match(x, join_list):
+#     """Function not used, repalce with f_new_match_element."""
+#     # The new version is a little more robust and does more checks
+#     # Need to check on the speed of the new version
+#     if x in join_list:
+#         return x
+#     else:
+#         count_intersect = pd.Series(
+#             map(
+#                 lambda i: len(set(i).intersection(set(x)))
+#                 * int(set(i).difference(set(x), join_list) == set()),
+#                 join_list,
+#             )
+#         )
+
+#         max_value = max(count_intersect)
+#         if max_value > 0:
+#             count_intersect = count_intersect == max_value
+#             if sum(count_intersect) == 1:
+#                 filtered = np.array(join_list)[count_intersect]
+#                 return filtered[0]
+#             else:
+#                 return np.nan
+#         else:
+#             return np.nan
+
+
+
+# Old Version of the function which has been replaced by f_accumulate_figures_vectorized
+# This is kept for reference, but not used in the codebase.
+# It is not recommended to use this function as it is less efficient than the vectorized version.
+
+# def f_accummulate_figures(
+#     dest_df,
+#     source_df,
+#     dest_col,
+#     source_col,
+#     dest_index_col="index",
+#     dest_index=True,
+#     source_index_col="index",
+#     source_index=True,
+#     agg_func="sum",
+# ):
+#     """Matches a df with tuples index, against df with 'traditional' index."""
+#     if dest_index:
+#         dest_index_col = "index"
+#         prelim = pd.DataFrame(
+#             dest_df.index.values, columns=["explode"], index=dest_df.index
+#         )
+#     else:
+#         prelim = pd.DataFrame(
+#             dest_df[dest_index_col], columns=["explode"], index=dest_df[dest_index_col]
+#         )
+
+#     prelim.index.names = ["index"]
+#     prelim["explode"] = prelim["explode"].apply(list)
+#     prelim.reset_index(inplace=True)
+#     prelim = prelim.explode("explode")
+
+#     if source_index:
+#         prelim = prelim.merge(
+#             source_df[[source_col]], how="left", left_on="explode", right_index=True
+#         )
+#     else:
+#         prelim = prelim.merge(
+#             source_df[[source_index_col, source_col]],
+#             how="left",
+#             left_on="explode",
+#             right_on=source_index_col,
+#         )
+
+#     prelim = prelim[["index", source_col]].groupby("index").agg(agg_func)
+
+#     if dest_index:
+#         dest_df.loc[prelim.index, dest_col] = prelim[source_col]
+#     else:
+#         dest_df.loc[:, dest_col] = prelim.loc[dest_df[dest_index_col], source_col]
+#         dest_df[source_col].fillna(0, inplace=True)
+
+# def check_tuple(x, tuple_string="('b', 'c', 'd')"):
+#     if str(x).find(tuple_string) >= 0:
+#         return True
+
+# def f_div_match(self, list_to_match):
+#     if list_to_match in self.list_combinations:
+#         return list_to_match
+#     else:
+#         count_intersect = list(
+#             map(lambda i: len(i.intersection(list_to_match)), self.list_combinations)
+#         )
+#         max_value = max(count_intersect)
+#         match_value = list(map(lambda i: i == max_value, count_intersect))
+#         filtered = np.array(self.list_combinations)[np.array(match_value)]
+#         return filtered

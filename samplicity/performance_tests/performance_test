@@ -1,0 +1,84 @@
+import pandas as pd
+import numpy as np
+import time
+from ..helper import f_accumulate_figures_vectorized   
+import warnings
+import psutil
+
+warnings.filterwarnings("ignore")
+
+
+# Quick test function for smaller datasets
+def quick_test(
+    dest_df,
+    source_df,
+    dest_col="lapse_risk",
+    source_col="lapse_risk",
+    dest_index_col="index",
+    dest_index=True,
+    source_index_col='level_1',
+    source_index=False,
+    agg_func="sum",
+    test_iterations=100
+):
+    """Quick performance comparison with minimal setup, including memory monitoring."""
+
+    functions_to_test = [
+        #("Original", f_accummulate_figures),
+        # ("Optimized", f_accumulate_figures_optimized),
+        ("Vectorized", f_accumulate_figures_vectorized),
+    ]
+
+    results = {}
+
+    for name, func in functions_to_test:
+        times = []
+        memory_usages = []
+
+        for _ in range(test_iterations):  # Repeat the test 100 times
+            test_dest = dest_df.copy()
+            test_source = source_df.copy()
+
+            # Measure memory before
+            process = psutil.Process()
+            mem_before = process.memory_info().rss / 1024 / 1024  # MB
+
+            start_time = time.perf_counter()
+            func(test_dest, test_source, dest_col, source_col, dest_index_col, dest_index, source_index_col, source_index, agg_func)
+            end_time = time.perf_counter()
+
+            # Measure memory after
+            mem_after = process.memory_info().rss / 1024 / 1024  # MB
+
+            times.append(end_time - start_time)
+            memory_usages.append(mem_after - mem_before)
+
+        # Calculate statistics
+        min_time = min(times)
+        max_time = max(times)
+        median_time = np.median(times)
+        avg_time = np.mean(times)
+        avg_memory = np.mean(memory_usages)
+
+        results[name] = {
+            "min": min_time,
+            "max": max_time,
+            "median": median_time,
+            "average": avg_time,
+            "average_memory": avg_memory,
+        }
+
+        print(f"{name}: min={min_time:.4f}s, max={max_time:.4f}s, median={median_time:.4f}s, average={avg_time:.4f}s, memory={avg_memory:.2f}MB")
+
+    # Find fastest based on average time
+    fastest_avg = min(results[name]["average"] for name in results)
+    print("\nSpeedups vs fastest (based on average time):")
+    for name, stats in results.items():
+        print(f"  {name}: {fastest_avg / stats['average']:.1f}x")
+
+    results_df = pd.DataFrame(results).T
+
+    return results_df
+
+
+

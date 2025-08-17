@@ -2,6 +2,7 @@
 A python library to calculate the SAM SCR for a non-life insurer.
 
 * [Introduction](#introduction)
+* [License](#license)
 * [Installation](#installation)
 * [Data Inputs](#data_inputs)
 * [Running The Tool](#running_tool)
@@ -20,6 +21,22 @@ The function allows for input to be provided either in the format of a:
 2. Excel worksheet
 
 The data input is discussed in more detail in further sections below.
+
+## License <a name="license" id="license"></a>
+This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0). This means:
+
+You can freely use, modify, and distribute this software
+If you modify and distribute this software, you must:
+
+* Make your modifications available under the AGPL-3.0
+* Include the original copyright notice
+* Include the complete source code
+* State your modifications
+
+If you use this software to provide services over a network, you must make the complete source code available to users
+
+This project includes third-party packages under various open-source licenses. See the NOTICE file for details.
+For the complete license text, see the LICENSE file.
 
 ## Installation <a name="installation" id="installation"></a>
 To try make the installation as easy as possible we ahve allowed for a various installation methods. Ideally the package should be installed in a virtual environment. The 'two' methods of installing the package are:

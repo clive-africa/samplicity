@@ -56,6 +56,13 @@ dependencies = [
   "xlwings==0.31.4",
 ]
 
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "pytest-html",
+]
+
 [project.urls]
 Documentation = "https://bitbucket.org/omi-it/samplicity/wiki/Home"
 Homepage = "https://bitbucket.org/omi-it/samplicity/"

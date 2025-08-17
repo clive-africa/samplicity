@@ -1,249 +1,408 @@
-from typing import Literal, Optional
-from pydantic import BaseModel, ValidationInfo, field_validator, ValidationError, Field, model_validator, validator
-import datetime
+# import pandas as pd
+# import pandera as pa
+# from pandera import Column, DataFrameSchema
 
-# Something weird ahppesn between Excel, xlwings and Pandas.
-from pandas._libs.tslibs.nattype import NaTType
-
-# A generic function that will be used across multiple data models
-def convert_none_to_value(data: dict, field_mapping: dict, info) -> dict:
+# class AssetDataValidator:
+#     """Asset data validator with context"""
     
-    # Get the information we need from the context
-    context = info.context
-    record_id = context.get('record_id', None) if context else None
-    data_conversions=info.context.get('data_conversions', None) if context else None
+#     def __init__(self, sam_scr):
+#         self.sam_scr = sam_scr
+#         self.schema = self._create_schema()
     
-    for fld, val in field_mapping.items():
-        if fld in data and data[fld] is None:
-            data_conversions.append({
-                'table': 'division_detail',
-                'row': record_id,
-                'field': fld,
-                'old_value': None,
-                'new_value': val                    
-            })
-            data[fld] = val
-    return data
-
-# The data model for division_detai
-
-class division_detail(BaseModel):
-    level_1: Optional[str | int] = None
-    level_2: Optional[str | int] = None
-    level_3: Optional[str | int] = None
-    tax_percent: float = 0.0
-    max_lacdt: float = 0.0
-    scr_cover_ratio: float = 0.0
-    lapse_risk: float = 0.0
+#     def validate_counterparty_id(self, value):
+#         """Validate counterparty ID format using stored sam_scr context."""
+#         counterparties = self.sam_scr.classes['data'].output['data']['counterparty']['id'].unique()
+#         if value not in counterparties:
+#             return False
+#         return True
     
-    @model_validator(mode='before')
-    @classmethod
-    def convert_none(cls, data: dict, info) -> dict:
+#     def _create_schema(self):
+#         """Create the validation schema with access to self.sam_scr"""
+#         return DataFrameSchema({
+#             "id": Column(
+#                 str,
+#                 nullable=False,
+#                 unique=True,
+#                 description="Unique asset identifier"
+#             ),
+#             "asset_description": Column(
+#                 str,
+#                 nullable=True,
+#                 description="Asset description"
+#             ),
+#             "level_1": Column(
+#                 str,
+#                 checks=[
+#                     Check.isin(['div_a', 'div_b', 'div_c', 'other'])
+#                 ],
+#                 nullable=True,
+#                 description="Level 1 Division"
+#             ),
+#             "level_2": Column(
+#                 str,
+#                 nullable=True,
+#                 description="Level 2 Division"
+#             ),
+#             "level_3": Column(
+#                 str,
+#                 nullable=True,
+#                 description="Level 3 Division"
+#             ),
+#             "asset_type": Column(
+#                 str,
+#                 nullable=True,
+#                 description="Type of asset"
+#             ),
+#             "counterparty_id": Column(
+#                 str,
+#                 checks=[
+#                     pa.Check(self.validate_counterparty_id, error="Invalid counterparty ID format")
+#                 ],
+#                 nullable=True,
+#                 description="Reference to counterparty table"
+#             ),
+#             "asset_cqs": Column(
+#                 int,
+#                 nullable=True,
+#                 description="Asset Credit Quality Step"
+#             ),
+#             "lgd_adj": Column(
+#                 float,
+#                 nullable=True,
+#                 description="Loss Given Default adjustment"
+#             ),
+#             "mod_duration": Column(
+#                 float,
+#                 nullable=True,
+#                 description="Modified duration"
+#             ),
+#             "market_value": Column(
+#                 float,
+#                 nullable=True,
+#                 description="Market value of the asset"
+#             ),
+#             "nominal_value": Column(
+#                 float,
+#                 nullable=True,
+#                 description="Nominal value of the asset"
+#             ),
+#             "collateral": Column(
+#                 str,
+#                 nullable=True,
+#                 description="Collateral information"
+#             ),
+#             "bond_type_old": Column(
+#                 str,
+#                 nullable=True,
+#                 description="Legacy bond type classification"
+#             ),
+#             "maturity_date": Column(
+#                 str,  # Will be converted to datetime in preprocessing
+#                 nullable=True,
+#                 description="Asset maturity date"
+#             ),
+#             "coupon": Column(
+#                 str,  # Handle percentage strings like "7.8%"
+#                 nullable=True,
+#                 description="Coupon rate"
+#             ),
+#             "spread": Column(
+#                 str,  # Handle percentage strings like "0.00%"
+#                 nullable=True,
+#                 description="Spread over benchmark"
+#             ),
+#             "coupon_freq": Column(
+#                 int,
+#                 checks=[
+#                     pa.Check.isin([1, 2, 4, 12])  # Annual, Semi-annual, Quarterly, Monthly
+#                 ],
+#                 nullable=True,
+#                 description="Coupon frequency per year"
+#             ),
+#             "bond_type": Column(
+#                 str,
+#                 checks=[
+#                     pa.Check.isin(['fixed', 'floating', 'inflation_linked', 'zero_coupon'])
+#                 ],
+#                 nullable=True,
+#                 description="Bond type"
+#             ),
+#             "equity_volatility_shock": Column(
+#                 float,
+#                 nullable=True,
+#                 description="Equity volatility shock factor"
+#             ),
+#             "spread_credit_up_shock": Column(
+#                 float,
+#                 nullable=True,
+#                 description="Spread credit up shock"
+#             ),
+#             "spread_credit_down_shock": Column(
+#                 float,
+#                 nullable=True,
+#                 description="Spread credit down shock"
+#             )
+#         },
+#         strict=False,
+#         name="asset_data_schema",
+#         description="Schema for asset data with market and risk information"
+#         )
+    
+#     def validate(self, df, **kwargs):
+#         """Validate the DataFrame"""
+#         return self.schema.validate(df, **kwargs)
+
+# # Usage:
+# validator = AssetDataValidator(sam_scr)
+# test = validator.validate(sam_scr.classes['data'].output['data']['asset_data'], lazy=True)
+
+
+# # from typing import Literal, Optional
+# # from pydantic import BaseModel, ValidationInfo, field_validator, ValidationError, Field, model_validator, validator
+# # import datetime
+
+# # # Something weird ahppesn between Excel, xlwings and Pandas.
+# # from pandas._libs.tslibs.nattype import NaTType
+
+# # # A generic function that will be used across multiple data models
+# # def convert_none_to_value(data: dict, field_mapping: dict, info) -> dict:
+    
+# #     # Get the information we need from the context
+# #     context = info.context
+# #     record_id = context.get('record_id', None) if context else None
+# #     data_conversions=info.context.get('data_conversions', None) if context else None
+    
+# #     for fld, val in field_mapping.items():
+# #         if fld in data and data[fld] is None:
+# #             data_conversions.append({
+# #                 'table': 'division_detail',
+# #                 'row': record_id,
+# #                 'field': fld,
+# #                 'old_value': None,
+# #                 'new_value': val                    
+# #             })
+# #             data[fld] = val
+# #     return data
+
+# # # The data model for division_detai
+
+# # class division_detail(BaseModel):
+# #     level_1: Optional[str | int] = None
+# #     level_2: Optional[str | int] = None
+# #     level_3: Optional[str | int] = None
+# #     tax_percent: float = 0.0
+# #     max_lacdt: float = 0.0
+# #     scr_cover_ratio: float = 0.0
+# #     lapse_risk: float = 0.0
+    
+# #     @model_validator(mode='before')
+# #     @classmethod
+# #     def convert_none(cls, data: dict, info) -> dict:
         
-        field_mapping = {"scr_cover_ratio": 0, "lapse_risk": 0, "tax_percent": 0, "max_lacdt": 0}
-        data=convert_none_to_value(data, field_mapping, info)
-        return data
+# #         field_mapping = {"scr_cover_ratio": 0, "lapse_risk": 0, "tax_percent": 0, "max_lacdt": 0}
+# #         data=convert_none_to_value(data, field_mapping, info)
+# #         return data
 
-# The data model for counterparty
+# # # The data model for counterparty
 
-class counterparty(BaseModel):
-    id: str | int
-    counterparty_name: str
-    counterparty_cqs: float = Field(None, ge=0, le=19)
-    counterparty_equivalent: Literal["Y", "N"]
-    counterparty_group: Optional[str | int] = None
-    counterparty_group_cqs: Optional[float] = None
-    counterparty_collateral: float = None
+# # class counterparty(BaseModel):
+# #     id: str | int
+# #     counterparty_name: str
+# #     counterparty_cqs: float = Field(None, ge=0, le=19)
+# #     counterparty_equivalent: Literal["Y", "N"]
+# #     counterparty_group: Optional[str | int] = None
+# #     counterparty_group_cqs: Optional[float] = None
+# #     counterparty_collateral: float = None
 
-    @model_validator(mode='before')
-    @classmethod
-    def convert_none(cls, data: dict, info) -> dict:
+# #     @model_validator(mode='before')
+# #     @classmethod
+# #     def convert_none(cls, data: dict, info) -> dict:
         
-        field_mapping = {"counterparty_cqs": 19, "counterparty_equivalent": 'N', "counterparty_collateral": 0}
-        data=convert_none_to_value(data, field_mapping, info)
-        return data
+# #         field_mapping = {"counterparty_cqs": 19, "counterparty_equivalent": 'N', "counterparty_collateral": 0}
+# #         data=convert_none_to_value(data, field_mapping, info)
+# #         return data
 
-# The data model for the table asset shocks
+# # # The data model for the table asset shocks
 
-class asset_shocks(BaseModel):
-    asset_type: str
-    shock: Literal[
-        "concentration",
-        "concentration_government",
-        "credit_type_3",
-        "default_type_1",
-        "default_type_2",
-        "default_type_2_overdue",
-        "equity_sa",
-        "interest_rate",
-        "spread",
-        "spread_risk",
-    ]
+# # class asset_shocks(BaseModel):
+# #     asset_type: str
+# #     shock: Literal[
+# #         "concentration",
+# #         "concentration_government",
+# #         "credit_type_3",
+# #         "default_type_1",
+# #         "default_type_2",
+# #         "default_type_2_overdue",
+# #         "equity_sa",
+# #         "interest_rate",
+# #         "spread",
+# #         "spread_risk",
+# #     ]
 
-# The data model for asset_data
+# # # The data model for asset_data
 
-class asset_data(BaseModel):
-    id: str | float
-    asset_description: Optional[str]
-    level_1: Optional[str | int] = None
-    level_2: Optional[str | int] = None
-    level_3: Optional[str | int] = None
-    asset_type: str
-    counterparty_id: str | float
-    asset_cqs: float = Field(None, ge=0.0, le=19.0)
-    lgd_adj: float = None
-    mod_duration: float
-    market_value: float
-    nominal_value: float
-    collateral: float = None
-    maturity_date: Optional[datetime.date] = None
-    coupon: float
-    spread: float
-    coupon_freq: float
-    bond_type: Optional[str] = None
-    equity_volatility_shock: float
-    spread_credit_up_shock: float
-    spread_credit_down_shock: float
+# # class asset_data(BaseModel):
+# #     id: str | float
+# #     asset_description: Optional[str]
+# #     level_1: Optional[str | int] = None
+# #     level_2: Optional[str | int] = None
+# #     level_3: Optional[str | int] = None
+# #     asset_type: str
+# #     counterparty_id: str | float
+# #     asset_cqs: float = Field(None, ge=0.0, le=19.0)
+# #     lgd_adj: float = None
+# #     mod_duration: float
+# #     market_value: float
+# #     nominal_value: float
+# #     collateral: float = None
+# #     maturity_date: Optional[datetime.date] = None
+# #     coupon: float
+# #     spread: float
+# #     coupon_freq: float
+# #     bond_type: Optional[str] = None
+# #     equity_volatility_shock: float
+# #     spread_credit_up_shock: float
+# #     spread_credit_down_shock: float
 
-    @model_validator(mode='before')
-    @classmethod
-    def convert_none(cls, data: dict, info) -> dict:
+# #     @model_validator(mode='before')
+# #     @classmethod
+# #     def convert_none(cls, data: dict, info) -> dict:
         
-        field_mapping = {"lgd_adj": 0.45, "collateral": 0.0, "equity_volatility_shock": 0.0, 
-                         "spread_credit_up_shock": 0.0, "spread_credit_down_shock": 0.0}
-        data=convert_none_to_value(data, field_mapping, info)
-        return data
+# #         field_mapping = {"lgd_adj": 0.45, "collateral": 0.0, "equity_volatility_shock": 0.0, 
+# #                          "spread_credit_up_shock": 0.0, "spread_credit_down_shock": 0.0}
+# #         data=convert_none_to_value(data, field_mapping, info)
+# #         return data
 
-    @validator('maturity_date', pre=True)
-    def parse_maturity_date(cls, value):
-        # Need to hanlde a weird issue that crashes Pydantic here.
-        if value == '' or value is None or isinstance(value, NaTType):
-            return None
-        if isinstance(value, datetime.date):
-            return value
-        try:
-            return datetime.datetime.strptime(value, '%Y-%m-%d').date()
-        except ValueError:
-            raise ValueError('Invalid date format. Use YYYY-MM-DD')
+# #     @validator('maturity_date', pre=True)
+# #     def parse_maturity_date(cls, value):
+# #         # Need to hanlde a weird issue that crashes Pydantic here.
+# #         if value == '' or value is None or isinstance(value, NaTType):
+# #             return None
+# #         if isinstance(value, datetime.date):
+# #             return value
+# #         try:
+# #             return datetime.datetime.strptime(value, '%Y-%m-%d').date()
+# #         except ValueError:
+# #             raise ValueError('Invalid date format. Use YYYY-MM-DD')
 
 
-# The data model for reinsurance
+# # # The data model for reinsurance
 
-class reinsurance(BaseModel):
-    # Will change this in future but we import this as an index.
-    # Must change this.
-    #id: str | int
-    contract_type: Literal["prop", "xol"]
-    ri_share: float = Field(None, ge=0.0, le=1.0)
-    excess: float | None
-    layer_size: float | None = Field(None, ge=0)
-    reinstate_count: int | None = Field(None, ge=0)
-    reinstate_rate: float | None = Field(None, ge=0)
+# # class reinsurance(BaseModel):
+# #     # Will change this in future but we import this as an index.
+# #     # Must change this.
+# #     #id: str | int
+# #     contract_type: Literal["prop", "xol"]
+# #     ri_share: float = Field(None, ge=0.0, le=1.0)
+# #     excess: float | None
+# #     layer_size: float | None = Field(None, ge=0)
+# #     reinstate_count: int | None = Field(None, ge=0)
+# #     reinstate_rate: float | None = Field(None, ge=0)
 
-# The data model for reinsurance_share
+# # # The data model for reinsurance_share
 
-class reinsurance_share(BaseModel):
-    reinsurance_id: str | int
-    counterparty_id: str | int
-    counterparty_share: float = Field(None, ge=0.0, le=1.0)
+# # class reinsurance_share(BaseModel):
+# #     reinsurance_id: str | int
+# #     counterparty_id: str | int
+# #     counterparty_share: float = Field(None, ge=0.0, le=1.0)
 
-# The data model for prem_res
+# # # The data model for prem_res
 
-class prem_res(BaseModel):
-    level_1: Optional[str | int] = None
-    level_2: Optional[str | int] = None
-    level_3: Optional[str | int] = None
-    lob_type: Literal["D", "P", "NP", "O", "FP", "FNP", "FO"]
-    lob: Literal[
-        "1a",
-        "1b",
-        "2a",
-        "2b",
-        "3i",
-        "3ii",
-        "3iii",
-        "4i",
-        "4ii",
-        "5i",
-        "5ii",
-        "6i",
-        "6ii",
-        "7i",
-        "7ii",
-        "8i",
-        "8ii",
-        "9",
-        "10i",
-        "10ii",
-        "10iii",
-        "10iv",
-        "10v",
-        "10vi",
-        "10vii",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16i",
-        "16ii",
-        "16iii",
-        "17i",
-        "17ii",
-        "17iii",
-        "17iv",
-        "18b",
-        "18c",
-    ]
-    gross_p: float = None
-    gross_p_last: float = None
-    gross_p_last_24: float = None
-    gross_fp_existing: float = None
-    gross_fp_future: float = None
-    gross_claim: float = None
-    gross_other: float = None
-    net_p: float = None
-    net_p_last: float = None
-    net_p_last_24: float = None
-    net_fp_existing: float = None
-    net_fp_future: float = None
-    net_claim: float = None
-    net_other: float = None
-    include_factor_cat: Literal["Y", "N"]
-    include_non_prop_cat: Literal["Y", "N"]
-    reinsurance_id: Optional[str | int]
-    ri_structure: Optional[str | int]
+# # class prem_res(BaseModel):
+# #     level_1: Optional[str | int] = None
+# #     level_2: Optional[str | int] = None
+# #     level_3: Optional[str | int] = None
+# #     lob_type: Literal["D", "P", "NP", "O", "FP", "FNP", "FO"]
+# #     lob: Literal[
+# #         "1a",
+# #         "1b",
+# #         "2a",
+# #         "2b",
+# #         "3i",
+# #         "3ii",
+# #         "3iii",
+# #         "4i",
+# #         "4ii",
+# #         "5i",
+# #         "5ii",
+# #         "6i",
+# #         "6ii",
+# #         "7i",
+# #         "7ii",
+# #         "8i",
+# #         "8ii",
+# #         "9",
+# #         "10i",
+# #         "10ii",
+# #         "10iii",
+# #         "10iv",
+# #         "10v",
+# #         "10vi",
+# #         "10vii",
+# #         "11",
+# #         "12",
+# #         "13",
+# #         "14",
+# #         "15",
+# #         "16i",
+# #         "16ii",
+# #         "16iii",
+# #         "17i",
+# #         "17ii",
+# #         "17iii",
+# #         "17iv",
+# #         "18b",
+# #         "18c",
+# #     ]
+# #     gross_p: float = None
+# #     gross_p_last: float = None
+# #     gross_p_last_24: float = None
+# #     gross_fp_existing: float = None
+# #     gross_fp_future: float = None
+# #     gross_claim: float = None
+# #     gross_other: float = None
+# #     net_p: float = None
+# #     net_p_last: float = None
+# #     net_p_last_24: float = None
+# #     net_fp_existing: float = None
+# #     net_fp_future: float = None
+# #     net_claim: float = None
+# #     net_other: float = None
+# #     include_factor_cat: Literal["Y", "N"]
+# #     include_non_prop_cat: Literal["Y", "N"]
+# #     reinsurance_id: Optional[str | int]
+# #     ri_structure: Optional[str | int]
 
-    @model_validator(mode='before')
-    @classmethod
-    def convert_none(cls, data: dict, info) -> dict:
+# #     @model_validator(mode='before')
+# #     @classmethod
+# #     def convert_none(cls, data: dict, info) -> dict:
         
-        field_mapping = {"gross_p": 0.0, "gross_p_last": 0.0, "gross_p_last_24": 0.0, 
-                         "gross_fp_existing": 0.0, "gross_fp_future": 0.0, "gross_claim": 0.0,
-                         "gross_other": 0.0, "net_p": 0.0, "net_p_last": 0.0, "net_p_last_24": 0.0, 
-                         "net_fp_existing": 0.0, "net_fp_future": 0.0, "net_claim": 0.0,
-                         "net_other": 0.0}
-        data=convert_none_to_value(data, field_mapping, info)
-        return data
+# #         field_mapping = {"gross_p": 0.0, "gross_p_last": 0.0, "gross_p_last_24": 0.0, 
+# #                          "gross_fp_existing": 0.0, "gross_fp_future": 0.0, "gross_claim": 0.0,
+# #                          "gross_other": 0.0, "net_p": 0.0, "net_p_last": 0.0, "net_p_last_24": 0.0, 
+# #                          "net_fp_existing": 0.0, "net_fp_future": 0.0, "net_claim": 0.0,
+# #                          "net_other": 0.0}
+# #         data=convert_none_to_value(data, field_mapping, info)
+# #         return data
 
-class nat_cat_si(BaseModel):
-    level_1: Optional[str | int] = None
-    level_2: Optional[str | int] = None
-    level_3: Optional[str | int] = None
-    ri_structure: Optional[str | int] = None
-    postal_code: int = Field(None, gt=0, lt=10000)
-    res_buildings: float = None
-    comm_buildings: float = None
-    contents: float = None
-    engineering: float = None
-    motor: float = None
+# # class nat_cat_si(BaseModel):
+# #     level_1: Optional[str | int] = None
+# #     level_2: Optional[str | int] = None
+# #     level_3: Optional[str | int] = None
+# #     ri_structure: Optional[str | int] = None
+# #     postal_code: int = Field(None, gt=0, lt=10000)
+# #     res_buildings: float = None
+# #     comm_buildings: float = None
+# #     contents: float = None
+# #     engineering: float = None
+# #     motor: float = None
 
-    @model_validator(mode='before')
-    @classmethod
-    def convert_none(cls, data: dict, info) -> dict:
+# #     @model_validator(mode='before')
+# #     @classmethod
+# #     def convert_none(cls, data: dict, info) -> dict:
         
-        field_mapping = {"res_buildings": 0.0, "comm_buildings": 0.0, "contents": 0.0, 
-                         "engineering": 0.0, "motor": 0.0}
-        data=convert_none_to_value(data, field_mapping, info)
-        return data
+# #         field_mapping = {"res_buildings": 0.0, "comm_buildings": 0.0, "contents": 0.0, 
+# #                          "engineering": 0.0, "motor": 0.0}
+# #         data=convert_none_to_value(data, field_mapping, info)
+# #         return data
 

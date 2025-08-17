@@ -1,15 +1,7 @@
-import logging
-import math
 from typing import Union
-
-import numpy as np
 import pandas as pd
-
 from .ri_man_made import f_man_made
 from .ri_prog import f_apply_ri_prog
-
-logger = logging.getLogger(__name__)
-
 from ..helper import log_decorator
 
 
@@ -19,7 +11,7 @@ class Reinsurance:
     @log_decorator
     def __init__(self, sam_scr, class_name="reinsurance", calculate=False):
         self.output = {}
-        """ A dictionary that will store all of the results of the class. """
+        """ A dictionary that will store all of the results of the class."""
 
         self.scr = sam_scr
         """ A reference to the main SCR object. """
@@ -30,18 +22,14 @@ class Reinsurance:
             self.f_calculate_net_events()
 
     @log_decorator
-    def f_calculate_net_events(self):
-        """Net events for all different events with applicable reinsurance."""
+    def f_calculate_net_events(self: "Reinsurance") -> bool:
+        """Calculate net events for all different events with applicable reinsurance."""
 
         # ##########
 
         # HAIL CHARGE
 
         # ##########
-
-        # Create a blank dictionary that we will store all of our results in.
-        # results={}
-        # temp_results={}
 
         net_event = {}
         recoveries = {}
@@ -56,44 +44,49 @@ class Reinsurance:
 
         # ##########
 
-        # We sue the same code given the similarity in the approahc>
-        # We add the f_ to differentiate between teh perils and to
-        # avoid issues where the perils repeat names
+        # We sue the same code given the similarity in the approach
+        # We add a prefix differentiate between the perils and
+        # avoid issues where the perils repeat names.
         # We also need to make allowance for the horizontal event,
         # the base provide four rows that get duplicated
-        # This would create a #D array which is not really possible to manage
-        # We jsut ombined the figures for the horizontla event
+        # This would create a 3D array which is not really possible to manage
+        # We just combined the figures for the horizontal event
         f_charge_names = self.scr.f_data("data", "metadata", "factor_cat_charge").index
         event_list = (
-            ["hail", "earthquake", "horizontal"]
+            ["nc_hail", "nc_earthquake", "nc_horizontal"]
             + list(f_charge_names.to_series())
             + ["np_property", "np_credit_guarantee"]
         )
 
-        for event in event_list:
-            # These are the gross, pro-rated event by reinsurance structure
-            if event[:3] == "fc_":
-                cat = "factor_cat"
-            elif event[:3] == "np_":
-                cat = "non_prop_cat"
-            else:
-                cat = "nat_cat"
+        # Provide an easy mapping of the different events to factories
+        event_map = {"fc_": "factor_cat", "np_": "non_prop_cat", "nc_": "nat_cat"}
 
+        for event in event_list:
+            # We need to get the category to know which module to call
+            cat = event_map[event[:3]]
+
+            # This returns a datafrmae where the columns are the different RI arrangements
+            # The column __none__  is where there is no reinsurance
+            # This will be the total event for all 'divisions'
             event_set = self.scr.f_data(cat, "reinsurance", event)
 
             # Need to allow for scenarios when we don't have any events
             if event_set is None:
                 total_event = 0
             else:
-                # print(mod_event)
+                # Given we prepare everyting as a frozenset, to cater for all the combinations
+                # We need to convert the columns to just text strings
+                # This is so that we can use the columns in the reinsurance programme
                 event_set.columns = [
                     list(x)[0] if isinstance(x, frozenset) else x
                     for x in event_set.columns
                 ]
-                total_event = sum(event_set.sum())
+                # Sum across the columns to get the toal event across all reinsurance structures
+                total_event = sum(event_set.sum(axis=1))
 
             # Deal with the case where there is no event
-            # We store None here to make sure that we don't trigger issues
+            # We store None here
+            # Could possible place this above, but maybe there is a zero event?
 
             if total_event == 0:
                 # We know the event is zero
@@ -101,72 +94,74 @@ class Reinsurance:
                 recoveries[event] = None
                 detail_recoveries[event] = None
                 counterparty_recoveries[event] = None
+                continue
+
+            # We can proceed with the calculation
+            # These are results by division and structure
+            # They have alreayd been pro-rataed across the divisions and structures
+            if event == "nc_horizontal":
+                div_struct = self.scr.f_data(
+                    "nat_cat", "div_structure", "horizontal_combined"
+                )
             else:
-                # These are results by division and structure
-                # They have alreayd been pro-rataed
-                if event == "horizontal":
-                    div_struct = self.scr.f_data(
-                        "nat_cat", "div_structure", "horizontal_combined"
-                    )
-                else:
-                    div_struct = self.scr.f_data(cat, "div_structure", event)
+                div_struct = self.scr.f_data(cat, "div_structure", event)
 
-                # We need to make allowance for the horizontal event here
-                # All other events will have a single event but the horizontal
-                # event will have 4 events
+            # We need to make allowance for the horizontal event here
+            # All other events will have a single event but the horizontal
+            # event will have 4 events
 
-                # Need to get the proportion of these of the total event
-                row_sums = div_struct.sum(axis=1)
-                row_sums = row_sums / total_event
+            # Need to get the proportion of these of the total event
+            # row_sums = div_struct.sum(axis=1)
+            # row_sums = row_sums / total_event
 
-                div_struct = div_struct.multiply(row_sums, axis=0)
-                event_columns = div_struct.columns
+            # At this stage we know how much eahc combination of divisions contributes to the total event
+            # An assumption of this tool is that when we look at the different divisions we pr-rate the recoveries
+            # IT is not reasonable to assume thaat the sum reinsurance strucre would remain in palce
 
-                div_struct = div_struct.loc[:, event_columns].div(
-                    event_set.iloc[0][event_columns]
+            # TO DO: Worry that I am double dividing here
+
+            # div_struct = div_struct.multiply(row_sums, axis=0)
+            event_columns = div_struct.columns
+
+            div_struct = div_struct.loc[:, event_columns].div(
+                event_set.iloc[0][event_columns]
+            )
+            div_struct.index.name = "division"
+            div_struct.reset_index(inplace=True)
+            div_struct = pd.melt(
+                frame=div_struct,
+                id_vars="division",
+                var_name="structure",
+                value_name="perc",
+            )
+
+            # We need to remove the event with no reinsurance
+            # This will be named "__none__"
+            if event_set is not None and len(event_set) > 0:
+                event_set.drop(columns=["__none__"], inplace=True, errors="ignore")
+                (
+                    net_event[event],
+                    recoveries[event],
+                    df,
+                ) = self.f_calculate_recoveries(event_name=event, event_set=event_set)
+
+                # df=detail_recoveries[event]
+                df = df.merge(
+                    div_struct,
+                    how="inner",
+                    left_on="structure",
+                    right_on="structure",
                 )
-                div_struct.index.name = "division"
-                div_struct.reset_index(inplace=True)
-                div_struct = pd.melt(
-                    frame=div_struct,
-                    id_vars="division",
-                    var_name="structure",
-                    value_name="perc",
-                )
-
-                # print(event_set)
-                # event_set=event_set.iloc[0:len(event_set)-1,:].T
-                # We need to remove the evetn with no reinsurance
-                if event_set is not None and len(event_set) > 0:
-                    event_set.drop(columns=["none"], inplace=True, errors="ignore")
-                    (
-                        net_event[event],
-                        recoveries[event],
-                        df,
-                    ) = self.f_calculate_recoveries(
-                        event_name=event, event_set=event_set
-                    )
-
-                    # df=detail_recoveries[event]
-                    df = df.merge(
-                        div_struct,
-                        how="inner",
-                        left_on="structure",
-                        right_on="structure",
-                    )
-                    df["recovery"] = df["recovery"] * df["perc"]
-                    df = df[~(df["recovery"] == 0)]
-                    df = df[["division", "counterparty_id", "structure", "recovery"]]
-                    detail_recoveries[event] = df
-                    df = df[["division", "counterparty_id", "recovery"]]
-                    df = df.groupby(
-                        ["division", "counterparty_id"], as_index=False
-                    ).sum()
-                    df.index = df["division"]
-                    df.index.names = ["index"]
-                    df.drop(columns=["division"], inplace=True)
-                    counterparty_recoveries[event] = df
-            # logger.debug(event)
+                df["recovery"] = df["recovery"] * df["perc"]
+                df = df[~(df["recovery"] == 0)]
+                df = df[["division", "counterparty_id", "structure", "recovery"]]
+                detail_recoveries[event] = df
+                df = df[["division", "counterparty_id", "recovery"]]
+                df = df.groupby(["division", "counterparty_id"], as_index=False).sum()
+                df.index = df["division"]
+                df.index.names = ["index"]
+                df.drop(columns=["division"], inplace=True)
+                counterparty_recoveries[event] = df
 
         # ##########
 
@@ -201,7 +196,6 @@ class Reinsurance:
 
     def f_calculate_recoveries(self, event_name, event_set):
         """Calculate the recoveries for an event."""
-        # logger.debug("Function start")
 
         # DATA MANIPULATIONS
 
@@ -219,11 +213,14 @@ class Reinsurance:
 
         # If this error occurs there are events which don't exist in our
         # reinsurance programme.
+
+        # Need to allow for the "__none__" event which is where there is no reinsurance
+        # We need to remove this event from the event set
         if len(event_set.columns.difference(rein_prog.columns)) > 0:
             raise Exception(
                 "reinsurance",
                 "f_calculate_recoveries",
-                "Invalid reinsurance structure provided",
+                f"Invalid reinsurance structure provided: {event_name}",
             )
 
         # We create a copy of the reinsurance contract, we will only be
@@ -335,9 +332,7 @@ class Reinsurance:
 
         return (cparty_recov, cparty_struct_rec)
 
-    def f_data(
-        self, data: str = "info", sub_data: str = "info"
-    ) -> Union[pd.DataFrame, None]:
+    def f_data(self, data: str, sub_data: str) -> Union[pd.DataFrame, None]:
         """Return the output values stored in Reinsurance class."""
         err = f"Error: Cannot find {data} - {sub_data}"
         data = data.lower().strip()
@@ -352,10 +347,8 @@ class Reinsurance:
             ):
                 df = self.output[data][sub_data]
             else:
-                logger.critical(err)
                 raise ValueError(err)
         except KeyError:
-            logger.critical(err)
             raise ValueError(err)
         else:
             return df.copy() if df is not None else None

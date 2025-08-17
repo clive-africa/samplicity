@@ -255,6 +255,10 @@ class PremRes:
                 df_default[calc] = df_default[calc + "_y"] - df_default[calc + "_x"]
             df_default = df_default[["counterparty", "premium", "reserve", "overall"]]
             self.output["default"] = df_default
+        else:
+            # For the case where we have no reinsurance, 
+            # we return none to avoid errors later on
+            self.output["default"] = None
 
         return self.output
 
@@ -290,4 +294,4 @@ class PremRes:
             raise ValueError(f"Cannot find {data} - {sub_data}") from e
             return None
         else:
-            return None if df is None else df.copy(deep=True)
+            return df.copy(deep=True) if df is not None else None

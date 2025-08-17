@@ -1,0 +1,52 @@
+## NOTICE
+
+# Third-Party Software Notices and Information
+
+This software includes the following third-party packages. The use of these packages is governed by their respective license terms.
+
+## Scientific Computing
+
+### NumPy
+- **License**: BSD License
+- **Copyright**: © 2005-2024, NumPy Developers. All rights reserved.
+
+### Pandas
+- **License**: BSD 3-Clause License
+- **Copyright**: © 2008-2024, AQR Capital Management, LLC, Lambda Foundry, Inc. and PyData Development Team. All rights reserved.
+
+### SciPy
+- **License**: BSD License
+- **Copyright**: © 2001-2024 SciPy Developers. All rights reserved.
+
+## Data Management & Processing
+
+### SQLAlchemy
+- **License**: MIT License
+- **Copyright**: © 2005-2024 SQLAlchemy authors and contributors.
+
+### Pydantic
+- **License**: MIT License
+- **Copyright**: © 2017-2024 Samuel Colvin and other contributors.
+
+### tqdm
+- **License**: MIT/MPL-2.0 dual license
+- **Copyright**: © 2013-2024 tqdm developers.
+
+## Development Tools
+
+### IPython
+- **License**: BSD License
+- **Copyright**:
+  - © 2008-2024, IPython Development Team
+  - © 2001-2007, Fernando Perez <fernando.perez@colorado.edu>
+  - © 2001, Janko Hauser <jhauser@zscout.de>
+  - © 2001, Nathaniel Gray <n8gray@caltech.edu>
+- All rights reserved.
+
+### xlwings
+- **License**: BSD License
+- **Copyright**: © 2014-2024, Zoomer Analytics LLC. All rights reserved.
+
+---
+
+Each package retains its original license terms. Full license texts are available in their respective source distributions.

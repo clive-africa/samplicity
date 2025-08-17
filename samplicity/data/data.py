@@ -13,7 +13,7 @@ from .odbc import f_odbc_import, f_odbc_export
 from .excel import f_excel_import_data, f_excel_export, f_excel_import_pa_data
 
 # from .data_models import validate_data_models
-from .data_validation import validate_data
+#from .data_validation import validate_data
 
 from ..helper import log_decorator
 
