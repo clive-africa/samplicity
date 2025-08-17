@@ -38,7 +38,7 @@ To try make the installation as easy as possible we ahve allowed for a various i
 
    .. code-block:: console
       
-      pip install git+https://bitbucket.org/omi-it/samplicity.git
+      pip install git+https://https://github.com/clive-africa/samplicity.git
    
 --------------
 Data Inputs

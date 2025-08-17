@@ -33,5 +33,3 @@ Samplicity Index
 
    helper
    main
-
-
