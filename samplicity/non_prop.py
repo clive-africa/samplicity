@@ -4,13 +4,13 @@ A module containing the NonProp class.
 
 # A package for the display of dataframes in the console.
 # from tabulate import tabulate
-import logging
+#import logging
 
 import numpy as np
 import pandas as pd
 from typing import Optional, Union
 
-logger = logging.getLogger(__name__)
+#logger = logging.getLogger(__name__)
 
 from .helper import allocation_matrix, combins_df_col, log_decorator
 

@@ -1,14 +1,13 @@
 import pandas as pd
 import numpy as np
 import time
-import matplotlib.pyplot as plt
-import seaborn as sns
-from typing import Dict, List, Callable, Any, Tuple
+from ..helper import f_accumulate_figures_vectorized   
 import warnings
+import psutil
 
 warnings.filterwarnings("ignore")
 
-import psutil
+
 # Quick test function for smaller datasets
 def quick_test(
     dest_df,
@@ -25,7 +24,7 @@ def quick_test(
     """Quick performance comparison with minimal setup, including memory monitoring."""
 
     functions_to_test = [
-        ("Original", f_accummulate_figures),
+        #("Original", f_accummulate_figures),
         # ("Optimized", f_accumulate_figures_optimized),
         ("Vectorized", f_accumulate_figures_vectorized),
     ]
@@ -73,7 +72,7 @@ def quick_test(
 
     # Find fastest based on average time
     fastest_avg = min(results[name]["average"] for name in results)
-    print(f"\nSpeedups vs fastest (based on average time):")
+    print("\nSpeedups vs fastest (based on average time):")
     for name, stats in results.items():
         print(f"  {name}: {fastest_avg / stats['average']:.1f}x")
 

@@ -10,7 +10,7 @@ import numpy as np
 from typing import Union, Callable, Literal
 import time
 import functools
-import samplicity as sam
+#import samplicity as sam
 
 
 def combins_df_col(df: pd.DataFrame, column: str, calc_type: Literal['diversification', 'individual', 'overall']) -> list:
@@ -299,7 +299,7 @@ def f_fast_match_element(x, right_list):
 
 def f_new_match_element(x, right_list):
     # We first chekc for an exact match
-    if type(right_list) != list:
+    if type(right_list) is not list:
         if x in right_list.to_list():
             return x
     else:

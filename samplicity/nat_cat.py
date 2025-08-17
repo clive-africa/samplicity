@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from typing import Optional, Union, Literal, Tuple
+from typing import Literal
 from .helper import combins_df_col, log_decorator, allocation_matrix
 
 
@@ -516,8 +516,8 @@ class NatCat:
                         "nc_horizontal_4",
                     ]
                 ].sum(axis=1)
-        except:
-            raise ValueError(f"cannot find {data} - {sub_data}")
+        except Exception as e:
+            raise ValueError(f"cannot find {data} - {sub_data}") from e
         else:
             if df is None:
                 return None

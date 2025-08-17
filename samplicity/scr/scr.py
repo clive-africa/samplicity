@@ -1,6 +1,6 @@
 # These are the different packages that we require to run our code
 import pandas as pd
-import numpy as np
+#import numpy as np
 import venv
 from typing import Optional, Union, Literal, List
 import pickle
@@ -12,7 +12,7 @@ from tqdm import tqdm
 # A package for the display of dataframes in the console.
 # from tabulate import tabulate
 
-import logging
+#import logging
 
 from . import aggregation as agg
 
@@ -21,7 +21,7 @@ from . import aggregation as agg
 from .. import helper as hf
 from . import info
 
-logger = logging.getLogger(__name__)
+#logger = logging.getLogger(__name__)
 
 # These contain the different classes used in the SAM SCR calculation
 # Theses are helper classes for the main SCR class.
@@ -40,8 +40,8 @@ from .diversification import shapely_calc
 
 from ..helper import log_decorator
 import datetime
-import os
-import subprocess
+#import os
+#import subprocess
 import traceback
 
 
@@ -793,9 +793,9 @@ class SCR:
                 return self.classes[module].f_data(data, sub_data)
 
         except Exception as e:
-            logger.critical(
-                f"Error in f_data: {module} - {data} - {sub_data}", exc_info=True
-            )
+            # logger.critical(
+            #     f"Error in f_data: {module} - {data} - {sub_data}", exc_info=True
+            # )
             raise ValueError(
                 f"Cannot find or access data: {module} - {data} - {sub_data}"
             ) from e
