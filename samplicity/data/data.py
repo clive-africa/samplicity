@@ -11,6 +11,7 @@ import pickle
 
 from .odbc import f_odbc_import, f_odbc_export
 from .excel import f_excel_import_data, f_excel_export, f_excel_import_pa_data
+from .data_validation import f_validate_data 
 
 # from .data_models import validate_data_models
 #from .data_validation import validate_data
@@ -194,7 +195,7 @@ class Data:
         # From here on the same import process is followed.
 
         # We will generally import the meatdata from a pickle
-        if metadata_file == None:
+        if metadata_file is None:
             folder_location = os.path.dirname(
                 os.path.dirname(os.path.abspath(__file__))
             )
@@ -254,7 +255,7 @@ class Data:
         try:
             # Just some cleaning of our inputs to ensure no errors occur
             data = data.lower().strip()
-            if sub_data != None:
+            if sub_data is not None:
                 sub_data = sub_data.lower().strip()
 
             if data == "info":

@@ -28,7 +28,7 @@ sam_scr.f_import_data(
 )
 
 # Chekc to see if any of the data checks failed
-
+sam_scr.f_validate_data()
 
 # Peform the actual SCR calculation
 sam_scr.f_calculate()

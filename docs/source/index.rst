@@ -9,6 +9,7 @@ Samplicity Index
    Introduction <introduction>
    Quick Start <quickstart>
    Structure <structure>
+   Asset Mapping <assetmapping>
    Known Issues <knownissues>
 
 .. toctree::
@@ -22,7 +23,7 @@ Samplicity Index
    FactorCat <factorcat>
    NonProp <nonprop>
    ManMade <manmade>
-   Reinsurnace <reinsurance>
+   Reinsurance <reinsurance>
    Market <market>
    BOND VAL <bondval>
    OpRisk <oprisk>
