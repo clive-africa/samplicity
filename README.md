@@ -120,7 +120,7 @@ To encourage users to make use of *Samplicity* and promote their learnign and co
 ## Further Reading <a name="further_reading" id="further_reading"></a>
 Additional documentation can be found here:
 
-* [Samplicity Index](https://bitbucket.org/omi-it/samplicity/src/main/documentation/main.md)
+
 
 
 
