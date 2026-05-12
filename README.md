@@ -10,6 +10,9 @@ A python library to calculate the SAM SCR for a non-life insurer.
 * [Proofs](#proofs)
 * [Further Reading](#further_reading)
 
+## Under Development
+Expect bugs, this si still being actively development albeit a bit slowly. :)
+
 ## Introduction <a name="introduction" id="introduction"></a>
 This Python package allows for the calculation of the SAM SCR for a non-life insurer. Importantly the package allows for a multiple SCR calculations to be performed simultaneously. This allows for the easy calcualtion of diversification benefits across various business lines, divisions, insurance classes, etc.
 
